@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/migrations/Version20201201183158.php" beforeDir="false" afterPath="$PROJECT_DIR$/migrations/Version20201201183158.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/.gitignore" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +171,7 @@
       <workItem from="1606803648002" duration="621000" />
       <workItem from="1606804637387" duration="3000" />
       <workItem from="1606842542692" duration="2307000" />
-      <workItem from="1606845784784" duration="8639000" />
+      <workItem from="1606845784784" duration="9703000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -262,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606854861238</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="2020 12 01 22:07">
+      <created>1606856848877</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1606856848877</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -281,7 +290,8 @@
     <MESSAGE value="2020 12 01 21:28" />
     <MESSAGE value="2020 12 01 21:31" />
     <MESSAGE value="2020 12 01 21:34" />
-    <option name="LAST_COMMIT_MESSAGE" value="2020 12 01 21:34" />
+    <MESSAGE value="2020 12 01 22:07" />
+    <option name="LAST_COMMIT_MESSAGE" value="2020 12 01 22:07" />
   </component>
   <component name="WindowStateProjectService">
     <state x="638" y="305" key="#ESLint" timestamp="1606844652367">
@@ -296,10 +306,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606848517022" />
-    <state x="393" y="0" key="CommitChangelistDialog2" timestamp="1606854860777">
+    <state x="393" y="0" key="CommitChangelistDialog2" timestamp="1606856848436">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="393" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1606854860777" />
+    <state x="393" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1606856848436" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1606848455994">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -312,10 +322,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1606844665270" />
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1606854862287">
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1606856850075">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606854862287" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606856850075" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1606843316541">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
