@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/packages/api_platform.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/packages/nelmio_cors.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/routes/api_platform.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20201201183158.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/hunracer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hunracer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +167,7 @@
       <workItem from="1606803648002" duration="621000" />
       <workItem from="1606804637387" duration="3000" />
       <workItem from="1606842542692" duration="2307000" />
-      <workItem from="1606845784784" duration="3938000" />
+      <workItem from="1606845784784" duration="5611000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -240,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606844821060</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="2020 12 01 20:20">
+      <created>1606850418565</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1606850418565</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,7 +237,8 @@
     <MESSAGE value="2020 12 01 18:01" />
     <MESSAGE value="2020 12 01 18:14" />
     <MESSAGE value="2020 12 01 18:46" />
-    <option name="LAST_COMMIT_MESSAGE" value="2020 12 01 18:46" />
+    <MESSAGE value="2020 12 01 20:20" />
+    <option name="LAST_COMMIT_MESSAGE" value="2020 12 01 20:20" />
   </component>
   <component name="WindowStateProjectService">
     <state x="638" y="305" key="#ESLint" timestamp="1606844652367">
@@ -267,10 +253,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824@0.0.1536.824" timestamp="1606848517022" />
-    <state x="393" y="0" key="CommitChangelistDialog2" timestamp="1606844819919">
+    <state x="393" y="0" key="CommitChangelistDialog2" timestamp="1606850417573">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="393" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1606844819919" />
+    <state x="393" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1606850417573" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1606848455994">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -283,10 +269,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1606844665270" />
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1606850395666">
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2" timestamp="1606850484738">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606850395666" />
+    <state x="361" y="132" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606850484738" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1606843316541">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
