@@ -1,23 +1,28 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.31.0",
-        "bootstrap": "^4.5.3",
+        "@symfony/webpack-encore": "^0.30.2",
+        "autoprefixer": "^9.8.6",
+        "axios": "^0.21.0",
         "bootstrap-vue": "^2.19.0",
         "core-js": "^3.0.0",
+        "deepmerge": "^4.2.2",
         "eslint": "^7.14.0",
         "eslint-config-airbnb-base": "^14.2.1",
         "eslint-plugin-import": "^2.19.1",
         "eslint-plugin-vue": "^6.0.1",
-        "vee-validate": "^3.4.5",
-        "axios": "^0.21.0",
-        "jquery": "^3.5.1",
-        "popper.js": "^1.16.1",
+        "postcss-loader": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
-        "sass": "^1.29.0",
-        "sass-loader": "^7.0.1",
-        "vue": "^2.5",
+        "sass": "^1.32.0",
+        "sweetalert2": "^10.9.1",
+        "vee-validate": "^3.4.5",
+        "vue": "^2.6.12",
         "vue-loader": "^15",
+        "vue-sweetalert2": "^4.1.1",
         "vue-template-compiler": "^2.6.12",
+        "vue-uuid": "^2.0.2",
+        "vuesax": "^4.0.1-alpha.25",
+        "vuetify": "^2.4.0",
+        "vuex": "^3.6.0",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -29,6 +34,13 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "sweetalert2": "^10.10.4"
+        "@fortawesome/fontawesome-free": "^5.15.1",
+        "bootstrap": "^4.5.3",
+        "font-awesome": "^4.7.0",
+        "jquery": "^3.5.1",
+        "magnific-popup": "^1.1.0",
+        "node-sass": "^4.14.1",
+        "popper.js": "^1.16.1",
+        "sass-loader": "^8.0.0"
     }
 }

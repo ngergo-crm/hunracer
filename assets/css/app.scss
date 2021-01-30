@@ -1,0 +1,133 @@
+@import '~bootstrap';
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
+//* {
+//    box-sizing: border-box;
+//}
+
+body {
+    font-family: "Arial", serif;
+    background: #fcf8f8;
+    margin: 0;
+}
+
+.modal-backdrop {
+    background-color: rgba(69, 69, 69, 0.8) !important;
+}
+
+/* Style the top navigation bar */
+.header {
+    //overflow: hidden;
+    background-color: #bc0c06;
+    display: grid;
+    width: 100%;
+   // flex-direction: row;
+    padding: 0.5rem 0 0.5rem 1rem;
+    grid-template-columns: 40% 60%;
+}
+
+.sitename {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center;
+    //color: #474343;
+    color: white;
+}
+
+/* Footer */
+.footer {
+    padding: 3rem;
+    text-align: center;
+    background-color: #8f8a8a;
+    max-width: 100%;
+}
+
+.logos {
+    padding-left: 5%;
+    display: flex;
+    flex-flow: row;
+}
+
+.logo img {
+    max-width: 130px;
+    padding: 1rem;
+}
+
+.sitename a:link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.sitename a:visited {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 3rem;
+}
+
+.profileicon {
+    text-decoration: inherit;
+    color: white;
+}
+
+.profileicon:hover {
+    text-decoration: inherit;
+    color: white;
+}
+
+.contentcard {
+    margin: 3rem 4rem 3rem 4rem;
+}
+
+.contentcentral {
+    max-width: 100%;
+    margin-left: 35%;
+    margin-right: 35%;
+    background: white;
+    border: lightgray 0.2px solid;
+    box-shadow: 5px 8px 10px 4px lightgray;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+}
+
+.cardtitle {
+    display: flex;
+    justify-content: center;
+}
+
+.hunracerButton {
+    background: #bc0c06;
+    border: none;
+}
+
+.hunracerButton:hover {
+    background: #ef0c00;
+}
+
+.hunracerButton:focus {
+    background: #bc0c06;
+    box-shadow: none;
+    outline: none!important;
+}
+
+.hunracerButton:active  {
+    background-color: #ef0c00!important;
+    box-shadow: none!important;
+    outline: none!important;
+}
+
+.contentpanel {
+    max-width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    background: white;
+    border: lightgray 0.2px solid;
+    box-shadow: 5px 8px 10px 4px lightgray;
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+}

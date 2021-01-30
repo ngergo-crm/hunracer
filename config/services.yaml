@@ -27,5 +27,24 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Serializer\AdminGroupsContextBuilder:
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: [ '@App\Serializer\AdminGroupsContextBuilder.inner' ]
+
+    App\ApiPlatform\AutoGroupResourceMetadataFactory:
+        decorates: 'api_platform.metadata.resource.metadata_factory'
+        arguments: [ '@App\ApiPlatform\AutoGroupResourceMetadataFactory.inner' ]
+        decoration_priority: -20
+
+    App\Doctrine\UserSetIsEnabledListener:
+        tags: [ doctrine.orm.entity_listener ]
+
+    App\DataPersister\UserDataPersister:
+        bind:
+            $decoratedDataPersister: '@api_platform.doctrine.orm.data_persister'
+
+    App\DataProvider\UserDataProvider:
+        bind:
+            $collectionDataProvider: '@api_platform.doctrine.orm.default.collection_data_provider'
+            $itemDataProvider: '@api_platform.doctrine.orm.default.item_data_provider'
+

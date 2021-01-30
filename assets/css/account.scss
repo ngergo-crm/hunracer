@@ -1,0 +1,21 @@
+
+
+.isMeinfo {
+  padding-top: 1rem;
+  border-top: 1px lightgray solid;
+  padding-bottom: 1rem;
+  display: flex;
+  /*flex-flow: wrap;*/
+  flex-direction: column;
+  width: 100%;
+}
+
+.isMeField {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  width: 100%;
+}
+
+  input.vs-input {
+  width: 100% !important;
+}

@@ -12,6 +12,10 @@ class HomeController extends BaseController
      */
     public function index(): Response
     {
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            return $this->redirectToRoute('app_login');
+        }
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);

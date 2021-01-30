@@ -10,6 +10,11 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+
+    role_hierarchy:
+        ROLE_ADMIN: [ ROLE_ADMIN, ROLE_USER  ]
+        ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_SUPER_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -17,6 +22,10 @@ security:
         main:
             anonymous: lazy
             provider: app_user_provider
+#            json_login:
+#                check_path: app_login
+#                username_path: email
+#                password_path: password
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
@@ -29,7 +38,7 @@ security:
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
             # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            switch_user: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

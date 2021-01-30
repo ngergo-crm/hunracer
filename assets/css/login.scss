@@ -1,0 +1,21 @@
+
+
+.loginsubmit{
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  flex-direction: column;
+}
+
+.loginsubmit button {
+  background: #bc0c06;
+  border: none;
+}
+
+.loginsubmit button:hover {
+  background: #ef0c00;
+}
+
+form input {
+  margin-bottom: 0.7rem;
+}
