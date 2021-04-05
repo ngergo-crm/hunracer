@@ -6,6 +6,9 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\ApiPlatform\UserIsMeFilter;
 use App\Repository\UserRepository;
+use App\Validator\CheckOldPasswordBeforeChange;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
@@ -40,6 +43,12 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  *     itemOperations={
  *          "get",
  *          "put"={"access_control"="is_granted('ROLE_USER')"},
+ *          "change_passord"={
+ *               "access_control"="is_granted('ROLE_USER')",
+ *               "method"="PUT",
+ *               "validation_groups"={"Default", "changePass"},
+ *               "path"="/users/{id}/changePassword"
+ *          },
  *          "delete"={"access_control"="is_granted('ROLE_SUPER_ADMIN')"}
  *     }
  * )
@@ -66,7 +75,7 @@ class User implements UserInterface, TimestampableInterface
     /**
      * @ORM\Column(type="uuid", unique=true)
      * @ApiProperty(identifier=true)
-     * @Groups({"admin:write"})
+     * @Groups({"admin:write", "owner:read"})
      * @SerializedName("id")
      */
     private $uuid;
@@ -95,9 +104,18 @@ class User implements UserInterface, TimestampableInterface
     /**
      * @Groups({"admin:write", "user:write"})
      * @SerializedName("password")
-     * @Assert\NotBlank(groups={"create"})
+     * @Assert\NotBlank(groups={"create", "changePass"})
      */
     private $plainPassword;
+
+    /**
+     * Used only for changing password on the account page
+     * @Groups({"user:write"})
+     * @SerializedName("current_password")
+     * @Assert\NotBlank(groups={"changePass"})
+     * @CheckOldPasswordBeforeChange(groups={"changePass"})
+     */
+    private $plainOldPassword;
 
     /**
      * @ORM\Column(type="boolean")
@@ -132,9 +150,15 @@ class User implements UserInterface, TimestampableInterface
      */
     private $roleDescription;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Workouts::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $workouts;
+
     public function __construct(UuidInterface $uuid = null)
     {
         $this->uuid = $uuid?: Uuid::uuid4();
+        $this->workouts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -268,6 +292,17 @@ class User implements UserInterface, TimestampableInterface
         return $this;
     }
 
+//    public function getPlainOldPassword(): ?string
+//    {
+//        return $this->plainOldPassword;
+//    }
+
+    public function setPlainOldPassword(string $plainOldPassword): self
+    {
+        $this->plainOldPassword = $plainOldPassword;
+        return $this;
+    }
+
     /**
      * @Groups({"user:read"})
      * Returns createdAt.
@@ -303,5 +338,35 @@ class User implements UserInterface, TimestampableInterface
             }
         }
         return $description;
+    }
+
+    /**
+     * @return Collection|Workouts[]
+     */
+    public function getWorkouts(): Collection
+    {
+        return $this->workouts;
+    }
+
+    public function addWorkout(Workouts $workout): self
+    {
+        if (!$this->workouts->contains($workout)) {
+            $this->workouts[] = $workout;
+            $workout->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkout(Workouts $workout): self
+    {
+        if ($this->workouts->removeElement($workout)) {
+            // set the owning side to null (unless already changed)
+            if ($workout->getUser() === $this) {
+                $workout->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -28,6 +28,7 @@ Encore
     .addEntry('login', './assets/js/login.js')
     .addEntry('account', './assets/js/account.js')
     .addEntry('userManager', './assets/js/userManager.js')
+    .addEntry('homepage', './assets/js/homepage.js')
     //.addEntry('page2', './assets/page2.js')
     .splitEntryChunks()
 

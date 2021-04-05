@@ -61,6 +61,10 @@ class UserDataProvider implements ContextAwareCollectionDataProviderInterface, D
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = [])
     {
+        if(isset($context['fetch_data']) and $operationName = 'get') {
+            $context['fetch_data'] = true;
+        }
+       // dd($resourceClass, $id, $operationName, $context);
         /** @var User|null $item */
         $item = $this->itemDataProvider->getItem($resourceClass, $id, $operationName, $context);
         if (!$item) {

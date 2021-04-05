@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Hunracer: Jelszó helyreállítása{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+
+{% block content %}
+    <div class="contentcentral">
+        <div class="contentcard">
+            <div class="cardtitle">
+                <h1 class="h3 mb-3 font-weight-normal">Jelszó helyreállítása</h1>
+            </div>
+            <p>Egy e-mail küldtük a megadott címre, amely tartalmaz egy linket. A linkre kattintva lehetőség nyílik
+                megváltoztatni a korábbi jelszót. A link {{ tokenLifetime|date('g') }} órán belül lejár.</p>
+            <p>Ha nem érkezett meg az e-mail, nézd meg a spam mappádat vagy <a
+                        href="{{ path('app_forgot_password_request') }}">próbálkozz újra</a>.</p>
+            <p><a href="{{ path('home') }}">Vissza a főoldalra</a>.</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('login') }}
+{% endblock %}

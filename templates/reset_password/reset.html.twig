@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Hunracer: Elfelejtett jelszó{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+
+{% block content %}
+    <div class="contentcentral">
+        <div class="contentcard">
+            <div class="cardtitle">
+                <h1 class="h3 mb-3 font-weight-normal">Jelszó helyreállítása</h1>
+            </div>
+
+            {{ form_start(resetForm) }}
+            {{ form_row(resetForm.plainPassword) }}
+
+            <div class="loginsubmit">
+                <button class="btn btn-lg btn-primary" type="submit">
+                    Küldés
+                </button>
+            </div>
+            {{ form_end(resetForm) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('login') }}
+{% endblock %}

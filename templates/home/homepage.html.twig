@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('homepage') }}
+{% endblock %}
+
+{% block content %}
+    <div class="homepage">
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.tokenAvailable = {{ tokenAvailable|tojson }};
+        window.user = {{ app.user|tojson }};
+        window.autoRefresh = {{ autoRefresh|tojson }};
+        window.hasWorkouts = {{ hasWorkouts|tojson }};
+    </script>
+    {{ encore_entry_script_tags('homepage') }}
+{% endblock %}

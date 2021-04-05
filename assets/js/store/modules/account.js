@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Axios from 'axios';
 
 const state = () => ({
@@ -13,13 +12,19 @@ const getters = {
 
 const actions = {
     async initializeUser({ commit }) {
-        await axios.get('/api/users/me').then((res) => {
+        await Axios.get('/api/users/me').then((res) => {
             commit('setUser', res.data);
         });
     },
     modifyUser({ state }) {
         const param = { name: state.user.name, phone: state.user.phone };
         Axios.put(state.user['@id'], param);
+    },
+    changeUserPassword({ state }, { newPassword, currentPassword }) {
+        const param = { password: newPassword, current_password: currentPassword };
+        Axios.put(`${state.user['@id']}/changePassword`, param).then(() => {
+            //todo validation
+        });
     },
 };
 

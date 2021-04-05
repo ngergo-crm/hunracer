@@ -18,15 +18,8 @@ class UserSetIsEnabledListener
 
     public function prePersist(User $user)
     {
-        if ($user->getIsEnabled()) {
-            return;
-        }
-
-        if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
-            $user->setIsEnabled(true)
-//                ->setCreatedAt(new \DateTime())
-//                ->setUpdatedAt(new \DateTime())
-            ;
+        if ($this->security->getUser() and $this->security->isGranted('ROLE_SUPER_ADMIN')) {
+            $user->setIsEnabled(true);
         }
     }
 }

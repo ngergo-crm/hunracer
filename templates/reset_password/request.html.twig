@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Hunracer: elfelejtett jelszó{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+
+{% block content %}
+    <div class="contentcentral">
+        <div class="contentcard">
+            {% for flashError in app.flashes('reset_password_error') %}
+                <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+            {% endfor %}
+            <div class="cardtitle">
+                <h1 class="h3 mb-3 font-weight-normal">Jelszó helyreállítása</h1>
+            </div>
+
+            {{ form_start(requestForm) }}
+            {{ form_row(requestForm.email) }}
+            <div class="password_reminder_description">
+                <small>
+                    A megadott e-mail címre egy linket fogunk küldeni.<br>
+                    Ha rákattint, lehetősége lesz új jelszót beállítani.
+                </small>
+            </div>
+
+            <div class="loginsubmit">
+                <button class="btn btn-lg btn-primary" type="submit">
+                    Elküld
+                </button>
+            </div>
+            {{ form_end(requestForm) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {{ encore_entry_script_tags('login') }}
+{% endblock %}

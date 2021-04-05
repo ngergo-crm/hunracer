@@ -1,0 +1,13 @@
+<h1>Kedves Felhasználó!</h1>
+
+<p>Hogy visszaállítsd a jelszavad, kérlek kattints az alábbi linkre:</p>
+
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+<p>A link  {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}  időn belül lejár.</p>
+<p>
+    Üdvözlettel,
+</p>
+<p>
+    Listakészítő
+</p>

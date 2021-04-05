@@ -4,8 +4,6 @@ namespace App\Factory;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
