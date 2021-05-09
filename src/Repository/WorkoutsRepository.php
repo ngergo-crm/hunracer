@@ -19,18 +19,30 @@ class WorkoutsRepository extends ServiceEntityRepository
         parent::__construct($registry, Workouts::class);
     }
 
-    public function getWorkoutDays($user, array $timeRange)
+    public function getWorkoutDays($user, array $timeRange, $onlyWorkoutDays = true)
     {
-        return $this->createQueryBuilder('w')
-            ->select('w.workoutDay')->distinct()
-            ->andWhere('w.user = :user')
+        if(isset($timeRange['before'])) {
+            $before = $timeRange['before'];
+        } else if (isset($timeRange['start'])) {
+            $before = $timeRange['start'];
+        }
+        if(isset($timeRange['after'])) {
+            $after = $timeRange['after'];
+        }else if (isset($timeRange['end'])) {
+            $after = $timeRange['end'];
+        }
+
+        $q = $this->createQueryBuilder('w');
+        if($onlyWorkoutDays) {
+            $q->select('w.workoutDay')->distinct();
+        }
+        $q->andWhere('w.user = :user')
             ->andWhere('w.workoutDay BETWEEN :after AND :before')
             ->setParameter('user', $user)
-            ->setParameter('after', $timeRange['after'])
-            ->setParameter('before', $timeRange['before'])
-            ->orderBy('w.workoutDay', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->setParameter('after', $after)
+            ->setParameter('before', $before)
+            ->orderBy('w.workoutDay', 'ASC');
+        return $q->getQuery()->getResult();
     }
 
     public function getLastInsertedWorkoutTime($user)

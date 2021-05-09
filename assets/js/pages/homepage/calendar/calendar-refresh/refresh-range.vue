@@ -1,15 +1,19 @@
 <template>
     <div>
         <b-button
-            v-b-toggle.collapse-3
             v-b-popover.hover.right="'Add meg a kezdő- és záródátumot az Training Peaks-edzések szinkronizálásához. A kezdődátum nem lehet nagyobb a záródátumnál! A funkciót akkor is használhatod, ha a Training Peaks-en utólag frissítettél egy korábban létrehozott edzést, de a változás nem jelent meg a Hunracer-en.'"
             class="m-1"
             pill
+            :class="visible ? null : 'collapsed'"
+            :aria-expanded="visible ? 'true' : 'false'"
+            aria-controls="refresh-collapse"
+            @click="collapseVisible"
         >
             Adatok szinkronizálása
         </b-button>
         <b-collapse
-            id="collapse-3"
+            id="refresh-collapse"
+            :visible="visible"
             style="width: 38rem;"
         >
             <b-card>
@@ -60,13 +64,20 @@
                             @context="startDateIsValid(startDate)"
                         />
                     </b-form-group>
-                    <b-button
-                        variant="primary"
-                        type="submit"
-                        :disabled="formValid"
-                    >
-                        Frissítés indítása
-                    </b-button>
+                    <div class="refreshSubmit">
+                        <b-button
+                            variant="primary"
+                            type="submit"
+                            :disabled="formValid"
+                            style="width: 9rem;"
+                        >
+                            <span v-if="!detailedRefreshWorking">Frissítés indítása</span>
+                            <b-spinner
+                                v-else-if="detailedRefreshWorking"
+                                small
+                            />
+                        </b-button>
+                    </div>
                 </b-form>
             </b-card>
         </b-collapse>
@@ -79,15 +90,24 @@ import { mapState } from 'vuex';
 
 export default {
     name: 'RefreshRange',
+    props: {
+        hasWorkouts: {
+            type: Boolean,
+            required: true,
+        },
+    },
     data() {
         return {
             startDate: moment().format('YYYY-MM-DD'),
             endDate: '',
             startDateState: true,
             endDateState: false,
+            detailedRefreshWorking: false,
+            visible: !this.hasWorkouts,
         };
     },
     computed: {
+
         ...mapState({
             selectedTime: (state) => state.trainingPeaksHandler.selectedTime,
         }),
@@ -104,8 +124,11 @@ export default {
     methods: {
         workoutSync(event) {
             event.preventDefault();
+            this.detailedRefreshWorking = true;
             this.$store.dispatch('trainingPeaksHandler/detailedRefresh', { start: this.startDate, end: this.endDate }).then(() => {
                 this.$root.$emit('getWorkoutWeek', moment(this.selectedTime));
+                this.detailedRefreshWorking = false;
+                this.collapseVisible();
             });
         },
         startDateIsValid(date) {
@@ -128,6 +151,9 @@ export default {
                 this.startDateState = moment(date).format('Y-MM-DD') <= this.startDate;
             }
         },
+        collapseVisible() {
+            this.visible = !this.visible;
+        },
     },
 };
 </script>
@@ -135,5 +161,9 @@ export default {
 <style scoped>
 .detailedRefreshForm{
   max-width: 21rem;
+}
+.refreshSubmit {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

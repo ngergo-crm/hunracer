@@ -37,6 +37,19 @@
                         class="isMeField"
                         label-placeholder="Telefonszám"
                     />
+                    <vs-input
+                        v-if="account.roleDescription === 'edző'"
+                        v-model="trainerCode"
+                        class="isMeField"
+                        label-placeholder="Edző-kód"
+                        readonly
+                    />
+                    <vs-input
+                        v-else-if="account.roleDescription === 'sportoló'"
+                        v-model="trainerCode"
+                        class="isMeField"
+                        label-placeholder="Edző-kód"
+                    />
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <b-button
@@ -86,6 +99,14 @@ export default {
             },
             set(value) {
                 this.$store.commit('account/updateUser', { key: 'phone', value });
+            },
+        },
+        trainerCode: {
+            get() {
+                return this.$store.state.account.trainerCode;
+            },
+            set(value) {
+                this.$store.commit('account/setTrainerCode', value);
             },
         },
     },

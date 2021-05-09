@@ -1,68 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="2021 01 30 13:26">
-      <change afterPath="$PROJECT_DIR$/assets/css/homepage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/components/helper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/components/trainingPeaks-service.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/homepage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutSummary.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/store/homepageVuex.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/store/modules/trainingPeaksHandler.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/packages/localparams.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/packages/reset_password.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210131101824.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Command/WorkoutsImporterCommand.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/ResetPasswordController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataProvider/WorkoutsDataProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/ResetPasswordRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/ChangePasswordFormType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/ResetPasswordRequestFormType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/ResetPasswordRequestRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Services/Helper.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Twig/SerializerExtension.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Validator/CheckOldPasswordBeforeChange.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Validator/CheckOldPasswordBeforeChangeValidator.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/email/registration.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/home/homepage.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/reset_password/check_email.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/reset_password/email.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/reset_password/request.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/reset_password/reset.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeek.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/trainer/noAthletes.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/trainer/trainerUserSelection.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/trainingPeaksAuth.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/hunracer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hunracer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/account.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/account.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/login.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/account/changePassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/account/changePassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/homepage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/homepage.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/components/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/components/helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/components/trainingPeaks-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/components/trainingPeaks-service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/account/account.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/account/account.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh/refresh-range.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh/refresh-range.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutSummary.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutSummary.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/userManager/newUser.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/userManager/newUser.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/userManager/userManager.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/userManager/userManager.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/store/modules/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/framework.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/framework.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/app" beforeDir="false" afterPath="$PROJECT_DIR$/docs/app" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AccountController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/trainingPeaksHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/trainingPeaksHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataPersister/UserDataPersister.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataPersister/UserDataPersister.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataProvider/UserDataProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataProvider/UserDataProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Doctrine/UserSetIsEnabledListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Doctrine/UserSetIsEnabledListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataProvider/WorkoutsDataProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataProvider/WorkoutsDataProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Factory/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Factory/UserFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Factory/Components/workoutTestData.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Factory/Components/workoutTestData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/WorkoutsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/WorkoutsRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/homepage.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/homepage.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,11 +226,11 @@
       <recent name="C:\xampp\htdocs\hunracer" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\hunracer\assets\js\pages\homepage\trainer" />
       <recent name="C:\xampp\htdocs\hunracer\docs" />
       <recent name="C:\xampp\htdocs\hunracer" />
       <recent name="C:\xampp\htdocs\hunracer\src" />
       <recent name="C:\xampp\htdocs\hunracer\assets\plugins" />
-      <recent name="C:\xampp\htdocs\hunracer\assets\js" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -371,7 +341,37 @@
       <workItem from="1617372908199" duration="2427000" />
       <workItem from="1617431918242" duration="4857000" />
       <workItem from="1617512334042" duration="29898000" />
-      <workItem from="1617601691471" duration="2741000" />
+      <workItem from="1617601691471" duration="14511000" />
+      <workItem from="1617683749322" duration="75000" />
+      <workItem from="1617722916023" duration="1355000" />
+      <workItem from="1617785948901" duration="1219000" />
+      <workItem from="1617815799880" duration="4027000" />
+      <workItem from="1617857730040" duration="18000" />
+      <workItem from="1618725938751" duration="12834000" />
+      <workItem from="1618809960879" duration="13000" />
+      <workItem from="1618857813461" duration="4967000" />
+      <workItem from="1618894308615" duration="598000" />
+      <workItem from="1618925014545" duration="593000" />
+      <workItem from="1618981548393" duration="15000" />
+      <workItem from="1619026604509" duration="3553000" />
+      <workItem from="1619074480083" duration="11000" />
+      <workItem from="1619119901297" duration="4982000" />
+      <workItem from="1619362856343" duration="9700000" />
+      <workItem from="1619415521174" duration="602000" />
+      <workItem from="1619454355881" duration="5542000" />
+      <workItem from="1619506311639" duration="597000" />
+      <workItem from="1619634471744" duration="12242000" />
+      <workItem from="1619678716583" duration="100000" />
+      <workItem from="1619793029613" duration="14443000" />
+      <workItem from="1619848366496" duration="17979000" />
+      <workItem from="1619937590303" duration="624000" />
+      <workItem from="1619942854641" duration="14131000" />
+      <workItem from="1620019443171" duration="1374000" />
+      <workItem from="1620149522034" duration="13114000" />
+      <workItem from="1620413048865" duration="680000" />
+      <workItem from="1620456394757" duration="19624000" />
+      <workItem from="1620493305886" duration="1000" />
+      <workItem from="1620546340114" duration="25544000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -499,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612009597628</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="2021 04 08 08:38">
+      <created>1617604749277</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1617604749278</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,18 +530,8 @@
     <MESSAGE value="2020 12 01 22:28" />
     <MESSAGE value="2020 12 01 22:34" />
     <MESSAGE value="2021 01 30 13:26" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 01 30 13:26" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar.vue</url>
-          <line>16</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="2021 04 08 08:38" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 04 08 08:38" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

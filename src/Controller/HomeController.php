@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\WorkoutsRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,12 +20,27 @@ class HomeController extends BaseController
         if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
-        $hasWorkouts = $workoutsRepository->findOneBy(['user' => $this->getUser()]);
+        /** @var User $user */
+        $user = $this->getUser();
+        $athletes = [];
+        if ($this->isGranted('ROLE_TRAINER')) {
+            $athletes = $this->getAthletesByTrainercode($user->getTrainerCode());
+            $defaultAthlete = $athletes[0]['uuid'] ?? null;
+            $user = $defaultAthlete? $this->getDoctrine()->getRepository(User::class)->findOneBy(['uuid' => $defaultAthlete]) : null;
+        }
+        $athleteHasWorkout = $workoutsRepository->findOneBy(['user' => $user]);
         //dd($request->cookies->get($this->getParameter("cookieName")));
         return $this->render('home/homepage.html.twig', [
-            'tokenAvailable' => $request->cookies->get($this->getParameter("cookieName"))? true : false,
+            'tokenAvailable' => $request->cookies->get($this->getParameter("cookieName")) ? true : false,
             'autoRefresh' => $request->getSession()->get('autoTpQuickRefresh'),
-            'hasWorkouts' => $hasWorkouts? true : false,
+            'hasWorkouts' => (bool)$athleteHasWorkout,
+            'athletes' => $athletes
         ]);
     }
+
+    private function getAthletesByTrainercode(string $trainerCode): array
+    {
+        return $this->getDoctrine()->getRepository(User::class)->getAthletesByTrainer($trainerCode);
+    }
+
 }

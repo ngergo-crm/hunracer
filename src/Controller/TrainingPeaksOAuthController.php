@@ -208,16 +208,17 @@ class TrainingPeaksOAuthController extends AbstractController
         $startDate = $request->request->get('start');
         $endDate = $request->request->get('end');
         $detailedRefresh = ($startDate and $endDate);
-        if(!$detailedRefresh) {
+        if (!$detailedRefresh) {
             $startDate = date("Y-m-d", strtotime('now', strtotime(date('Y-m-d'))));
             $endDate = date("Y-m-d", strtotime($workoutRepo->getLastInsertedWorkoutTime($this->getUser()), strtotime(date('Y-m-d'))));
         }
-         $sameDay = $startDate === $endDate; //ez mindig az aznapit nézi csak
+        $sameDay = $startDate === $endDate; //ez mindig az aznapit nézi csak
 
         $periods = $this->getWorkoutPeriods($startDate, $endDate);
         $test = [];
         foreach ($periods as $period) {
             $endpoint = sprintf('v1/workouts/%s/%s', $period['end'], $period['start']);
+            $existingWorkouts = $workoutRepo->getWorkoutDays($this->getUser(), $period, false);
             $response = $this->tpService->apiRequest($endpoint, $token, $this->test);
             $workouts = $response['response'];
             $test[] = $workouts;
@@ -232,19 +233,20 @@ class TrainingPeaksOAuthController extends AbstractController
                     if ($sameDay or $workoutData['WorkoutDay'] === $endDate or $detailedRefresh) {
                         $checkIfExists = true;
                     }
-                    if ($checkIfExists) {
-                        $isExist = $workoutRepo->findOneBy(['workoutId' => $workoutData['Id']]);
+                    if ($checkIfExists and $existingWorkouts) {
+                        $isExist = $this->checkWorkoutExistence($existingWorkouts, $workoutData);
                     }
                     if (!$isExist and $workoutData['Completed']) {
                         $this->insertWorkout($manager, $workoutData);
                     } else if ($detailedRefresh and $isExist) {
                         $this->updateWorkout($manager, $isExist, $workoutData);
                     }
-                    //todo delete orphaned workouts
+
                 }
+                $this->deleteOrphanedWorkouts($manager, $existingWorkouts, $workouts);
             }
         }
-        if($autoRefresh) {
+        if ($autoRefresh) {
             $request->getSession()->set('autoTpQuickRefresh', false);
         }
         $jsonResponse->setData($test);
@@ -418,12 +420,13 @@ class TrainingPeaksOAuthController extends AbstractController
     }
 
 
-
     private function updateWorkout(EntityManagerInterface $manager, Workouts $existingWorkout, $workoutData): void
     {
+        if ($existingWorkout->getData()['LastModifiedDate'] < $workoutData['LastModifiedDate']) {
             $workout = $this->constructWorkout($workoutData, $existingWorkout);
             $manager->persist($workout);
             $manager->flush();
+        }
     }
 
     private function constructWorkout(array $workoutData, $existingWorkout = null): Workouts
@@ -436,7 +439,7 @@ class TrainingPeaksOAuthController extends AbstractController
         $tssActual = $workoutData['TssActual'];
         $elevationGain = $workoutData['ElevationGain'];
         $workoutType = $workoutData['WorkoutType'];
-        $workout =  $existingWorkout? $existingWorkout :  new Workouts();
+        $workout = $existingWorkout ? $existingWorkout : new Workouts();
         $workout->setUser($this->getUser())
             ->setWorkoutId($workoutId)
             ->setWorkoutDay(new \DateTime(date("Y-m-d", strtotime($workoutDay))))
@@ -448,5 +451,41 @@ class TrainingPeaksOAuthController extends AbstractController
             ->setElevation($elevationGain)
             ->setType($workoutType);
         return $workout;
+    }
+
+    private function checkWorkoutExistence(array $existingWorkouts, array $workoutData)
+    {
+        $isExist = false;
+        $index = 0;
+        $N = count($existingWorkouts);
+        while ($index < $N && !($existingWorkouts[$index]->getWorkoutId() == $workoutData['Id'])) {
+            $index++;
+        }
+        if ($index < $N) {
+            $isExist = $existingWorkouts[$index];
+        }
+        return $isExist;
+    }
+
+    private function deleteOrphanedWorkouts(EntityManagerInterface $manager, array  $existingWorkouts, array $newWorkouts):void
+    {
+        /** @var Workouts $workout */
+        foreach ($existingWorkouts as $workout)
+        {
+            if($newWorkouts) {
+                $index = 0;
+                $N = count($newWorkouts);
+                while ($index < $N && !($workout->getWorkoutId() == $newWorkouts[$index]['Id'])) {
+                    $index++;
+                }
+                $delete = $index >= $N;
+            } else {
+                $delete = true;
+            }
+            if($delete) {
+                $manager->remove($workout);
+                $manager->flush();
+            }
+        }
     }
 }

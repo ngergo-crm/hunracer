@@ -16,15 +16,22 @@ const state = () => ({
     workoutWeek: [],
     showAllWorkouts: false,
     calendarFilter: 'tss',
-    selectedTime: '',
-    workoutDays: {},
+    selectedTime: moment().format(DATE_FORMAT),
+    workoutDays: [],
     autoRefresh: false,
     hasWorkouts: false,
-    //debug: false,
+    workoutWeekPeriod: [],
+    workoutPeriodStart: '',
+    workoutPeriodEnd: '',
+    athletes: '',
+    selectedAthlete: {},
 });
 
 const getters = {
-
+    getAthleteSelection: (state) => state.athletes.map((athlete) => ({
+        value: athlete.uuid,
+        text: athlete.name,
+    })),
 };
 
 const actions = {
@@ -42,11 +49,11 @@ const actions = {
             }
         });
     },
-    detailedRefresh({ commit, state }, { start, end }) {
+    async detailedRefresh({ commit, state }, { start, end }) {
         const params = new URLSearchParams();
         params.append('start', start);
         params.append('end', end);
-        Axios.post('/workout_refresh', params).then((res) => {
+        await Axios.post('/workout_refresh', params).then((res) => {
             if (!state.hasWorkouts && res.data.length > 0) {
                 commit('setHasWorkouts', true);
             }
@@ -59,12 +66,16 @@ const actions = {
             commit('setTrainingPeaksLink', res.data.tpLoginUrl);
         });
     },
-    async checkAvailableToken({ commit }) {
+    async checkAvailableToken({ state, commit }) {
         const response = await fetchHomepageData();
         commit('setTrainingPeaksTokenAvailable', response.data.tokenAvailable);
         commit('setUser', response.data.user);
         commit('setAutoRefresh', response.data.autoRefresh);
         commit('setHasWorkouts', response.data.hasWorkouts);
+        commit('setAthletes', response.data.athletes);
+        if (state.athletes.length > 0) {
+            commit('setSelectedAthlete', response.data.athletes[0].uuid);
+        }
     },
     async deauthorizeTpProfile({ commit }) {
         await Axios.post('/tpDeauthorize').then((res) => {
@@ -78,32 +89,56 @@ const actions = {
         return data;
     },
     async getWorkoutWeek({ commit, state }, { time }) {
+        let { id } = state.user;
+        if (state.user.roleDescription === 'edző') {
+            id = state.selectedAthlete.uuid;
+        }
         const start = time.startOf('isoWeek').format(DATE_FORMAT);
         const end = time.endOf('isoWeek').format(DATE_FORMAT);
         await Axios.get('/api/workouts/', {
             params: {
                 'workoutDay[after]': start,
                 'workoutDay[before]': end,
-                'user.uuid': state.user.id,
+                'user.uuid': id,
             },
         }).then((res) => {
-            console.log(res.data['hydra:member']);
             commit('setWorkoutWeek', res.data['hydra:member']);
         });
-        return 1;
+    },
+    async getWorkoutPeriod({ commit, state }, { start, end }) {
+        let { id } = state.user;
+        if (state.user.roleDescription === 'edző') {
+            id = state.selectedAthlete.uuid;
+        }
+        const endPeriod = end ? moment(end).format(DATE_FORMAT) : moment().format(DATE_FORMAT);
+        const startPeriod = start ? moment(start).format(DATE_FORMAT) : moment(endPeriod).subtract(30, 'days').startOf('isoWeek').format(DATE_FORMAT);
+        commit('setWorkoutPeriodStart', startPeriod);
+        commit('setWorkoutPeriodEnd', endPeriod);
+        await Axios.get('/api/workouts/', {
+            params: {
+                'workoutDay[after]': startPeriod,
+                'workoutDay[before]': endPeriod,
+                'user.uuid': id,
+            },
+        }).then((res) => {
+            commit('setWorkoutWeekPeriod', res.data['hydra:member']);
+        });
     },
     async getWorkoutDays({ commit, state }, { time }) {
+        let { id } = state.user;
+        if (state.user.roleDescription === 'edző') {
+            id = state.selectedAthlete.uuid;
+        }
         commit('setSelectedTime', time);
         const start = moment(time).startOf('month').format(DATE_FORMAT);
         const end = moment(time).endOf('month').format(DATE_FORMAT);
-        console.log(start, end, state.user.id);
         await Axios.get('/api/workouts/workoutdays/', {
             params: {
                 'workoutDay[after]': start,
                 'workoutDay[before]': end,
+                user: id,
             },
         }).then((res) => {
-            console.log(res.data['hydra:member']);
             commit('setWorkoutDays', res.data['hydra:member']);
         });
     },
@@ -133,6 +168,16 @@ const actions = {
                 }
                 commit('setCalendar', weeks);
             }
+        });
+    },
+
+    async refreshHasWorkouts({ state, commit }) {
+        await Axios.get('/api/workouts/', {
+            params: {
+                'user.uuid': state.selectedAthlete.uuid,
+            },
+        }).then((res) => {
+            commit('setHasWorkouts', Boolean(res.data['hydra:member'].length));
         });
     },
 };
@@ -174,6 +219,21 @@ const mutations = {
     },
     setHasWorkouts(state, payload) {
         state.hasWorkouts = payload;
+    },
+    setWorkoutWeekPeriod(state, payload) {
+        state.workoutWeekPeriod = payload;
+    },
+    setWorkoutPeriodStart(state, payload) {
+        state.workoutPeriodStart = payload;
+    },
+    setWorkoutPeriodEnd(state, payload) {
+        state.workoutPeriodEnd = payload;
+    },
+    setAthletes(state, payload) {
+        state.athletes = payload;
+    },
+    setSelectedAthlete(state, payload) {
+        state.selectedAthlete = state.athletes.filter(({ uuid }) => uuid === payload)[0];
     },
 };
 

@@ -1,3 +1,21 @@
 @import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 @import '../../node_modules/bootstrap-vue/dist/bootstrap-vue.css';
 
+.calendar-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  padding-top: 2rem;
+}
+
+.spinnerPlace {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.calendarSpinner {
+  width: 3rem;
+  height: 3rem;
+}

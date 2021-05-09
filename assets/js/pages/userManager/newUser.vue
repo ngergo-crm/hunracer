@@ -42,10 +42,16 @@
                                 label-placeholder="Rang*"
                             >
                                 <vs-option
-                                    label="Felhasználó"
+                                    label="Sportoló"
                                     value="ROLE_USER"
                                 >
-                                    Felhasználó
+                                    Sportoló
+                                </vs-option>
+                                <vs-option
+                                    label="Edző"
+                                    value="ROLE_TRAINER"
+                                >
+                                    Edző
                                 </vs-option>
                                 <vs-option
                                     label="Admin"
@@ -84,8 +90,6 @@
 </template>
 
 <script>
-import Axios from 'axios';
-import { mapState, mapGetters } from 'vuex';
 
 export default {
     name: 'NewUser',

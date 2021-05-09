@@ -148,10 +148,16 @@
                             @input="changeUserRole(edit, $event)"
                         >
                             <vs-option
-                                label="Felhasználó"
-                                value="felhasználó"
+                                label="Sportoló"
+                                value="sportoló"
                             >
-                                Felhasználó
+                                Sportoló
+                            </vs-option>
+                            <vs-option
+                                label="Edző"
+                                value="edző"
+                            >
+                                Edző
                             </vs-option>
                             <vs-option
                                 label="Admin"
@@ -215,8 +221,10 @@ export default {
         },
         changeUserRole(user, value) {
             const newRole = [];
-            if (value === 'felhasználó') {
+            if (value === 'sportoló') {
                 newRole.push('ROLE_USER');
+            } else if (value === 'edző') {
+                newRole.push('ROLE_TRAINER');
             } else if (value === 'admin') {
                 newRole.push('ROLE_ADMIN');
             } else {

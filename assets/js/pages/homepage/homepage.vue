@@ -2,31 +2,10 @@
     <div>
         <div class="contentpanel">
             <div class="contentcard">
-                <div
-                    v-if="!tokenAvailable"
-                    class="loginTP"
-                >
-                    <b-button
-
-                        variant="primary"
-                        @click="loginTP"
-                    >
-                        Training Peaks bejelentkezés
-                    </b-button>
-                </div>
-                <div
-                    v-else
-                    class="tpauth"
-                >
-                    <b-button
-                        @click="deauthorizeTpProfile"
-                    >
-                        Training Peaks kijelentkezés
-                    </b-button>
-                </div>
-
+                <training-peaks-auth-component v-if="user.roleDescription === 'sportoló'" />
+                <trainer-user-selection-component v-if="user.roleDescription === 'edző'" />
                 <calendar-refresh-component v-if="tokenAvailable" />
-                <calendar-component v-if="hasWorkouts" />
+                <calendar-component v-show="hasWorkouts" />
             </div>
         </div>
     </div>
@@ -37,14 +16,18 @@ import { mapState } from 'vuex';
 import CalendarComponent from '@/pages/homepage/calendar/calendar';
 import moment from 'moment';
 import CalendarRefreshComponent from '@/pages/homepage/calendar/calendar-refresh';
+import TrainingPeaksAuthComponent from '@/pages/homepage/trainingPeaksAuth';
+import TrainerUserSelectionComponent from '@/pages/homepage/trainer/trainerUserSelection';
 
 export default {
     name: 'Homepage',
-    components: { CalendarRefreshComponent, CalendarComponent },
+    components: {
+        TrainerUserSelectionComponent, TrainingPeaksAuthComponent, CalendarRefreshComponent, CalendarComponent,
+    },
     computed: {
         ...mapState({
             tokenAvailable: (state) => state.trainingPeaksHandler.tokenAvailable,
-            trainingPeaksLink: (state) => state.trainingPeaksHandler.trainingPeaksLink,
+            user: (state) => state.trainingPeaksHandler.user,
             autoRefresh: (state) => state.trainingPeaksHandler.autoRefresh,
             hasWorkouts: (state) => state.trainingPeaksHandler.hasWorkouts,
         }),
@@ -52,6 +35,13 @@ export default {
     mounted() {
         this.$root.$on('getWorkoutWeek', (time) => {
             this.getWorkoutWeek(time);
+        });
+        this.$root.$on('getWorkoutPeriod', ({ start, end }) => {
+            this.getWorkoutPeriod(start, end, true);
+        });
+        this.$root.$on('getWorkoutPeriod2', ({ start, end }) => {
+            console.log(start, end);
+            this.getWorkoutPeriod2(start, end, true);
         });
     },
     created() {
@@ -63,25 +53,37 @@ export default {
             }
             if (this.hasWorkouts) {
                 this.getWorkoutWeek(moment());
+                this.getWorkoutPeriod(null, null, true);
+                this.getWorkoutPeriod2(null, null, true);
             }
         });
     },
     methods: {
-        loginTP() {
-            window.open(this.trainingPeaksLink, '_blank');
-        },
-        deauthorizeTpProfile() {
-            this.$store.dispatch('trainingPeaksHandler/deauthorizeTpProfile').then(() => {
-                this.$store.dispatch('trainingPeaksHandler/getTrainingPeaksLoginLink');
-            });
-        },
         getCalendar() {
             this.$store.dispatch('trainingPeaksHandler/loadCalendar', { start: null, end: null });
         },
         /** time: moment() object */
         async getWorkoutWeek(time) {
+            if (time === null) {
+                time = moment();
+            }
             await this.$store.dispatch('trainingPeaksHandler/getWorkoutWeek', { time }).then(() => {
                 this.$root.$emit('reloadCalendar');
+            });
+        },
+        async getWorkoutPeriod(start, end, init = false) {
+            await this.$store.dispatch('trainingPeaksHandler/getWorkoutPeriod', { start, end }).then(() => {
+                if (init) {
+                    this.$root.$emit('reloadCalendar2');
+                }
+            });
+        },
+        async getWorkoutPeriod2(start, end, init = false) {
+            await this.$store.dispatch('trainingPeaksHandler/getWorkoutPeriod', { start, end }).then(() => {
+                if (init) {
+                    console.log('meg lett hivva');
+                    this.$root.$emit('reloadCalendar3');
+                }
             });
         },
     },
@@ -89,12 +91,5 @@ export default {
 </script>
 
 <style scoped>
-.tpauth {
-  display: flex;
-  justify-content: flex-start;
-}
-.loginTP {
-  display: flex;
-  justify-content: flex-start;
-}
+
 </style>

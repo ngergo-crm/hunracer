@@ -9,6 +9,7 @@ export function fetchHomepageData() {
                 user: window.user,
                 autoRefresh: window.autoRefresh,
                 hasWorkouts: window.hasWorkouts,
+                athletes: window.athletes,
             },
         });
     });

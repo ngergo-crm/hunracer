@@ -151,13 +151,19 @@ class User implements UserInterface, TimestampableInterface
     private $roleDescription;
 
     /**
+     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Groups({"admin:read", "owner:read", "user:write"})
+     */
+    private $trainerCode;
+
+    /**
      * @ORM\OneToMany(targetEntity=Workouts::class, mappedBy="user", orphanRemoval=true)
      */
     private $workouts;
 
     public function __construct(UuidInterface $uuid = null)
     {
-        $this->uuid = $uuid?: Uuid::uuid4();
+        $this->uuid = $uuid ?: Uuid::uuid4();
         $this->workouts = new ArrayCollection();
     }
 
@@ -185,7 +191,7 @@ class User implements UserInterface, TimestampableInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -195,7 +201,7 @@ class User implements UserInterface, TimestampableInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        if(!$roles) {
+        if (!$roles) {
             $roles[] = 'ROLE_USER';
         }
         return array_unique($roles);
@@ -213,7 +219,7 @@ class User implements UserInterface, TimestampableInterface
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -327,10 +333,12 @@ class User implements UserInterface, TimestampableInterface
     public function getRoleDescription(): ?string
     {
         $description = null;
-        if(isset($this->roles[0])) {
+        if (isset($this->roles[0])) {
             $role = $this->roles[0];
             if ($role === 'ROLE_USER') {
-                $description = 'felhasználó';
+                $description = 'sportoló';
+            } elseif ($role === 'ROLE_TRAINER') {
+                $description = 'edző';
             } elseif ($role === 'ROLE_ADMIN') {
                 $description = 'admin';
             } else {
@@ -340,15 +348,28 @@ class User implements UserInterface, TimestampableInterface
         return $description;
     }
 
+    public function setTrainerCode(?string $trainerCode = null): self
+    {
+        $this->trainerCode = $trainerCode;
+        return $this;
+    }
+
+    public function getTrainerCode(): ?string
+    {
+        return $this->trainerCode;
+    }
+
     /**
      * @return Collection|Workouts[]
      */
-    public function getWorkouts(): Collection
+    public
+    function getWorkouts(): Collection
     {
         return $this->workouts;
     }
 
-    public function addWorkout(Workouts $workout): self
+    public
+    function addWorkout(Workouts $workout): self
     {
         if (!$this->workouts->contains($workout)) {
             $this->workouts[] = $workout;
@@ -358,7 +379,8 @@ class User implements UserInterface, TimestampableInterface
         return $this;
     }
 
-    public function removeWorkout(Workouts $workout): self
+    public
+    function removeWorkout(Workouts $workout): self
     {
         if ($this->workouts->removeElement($workout)) {
             // set the owning side to null (unless already changed)

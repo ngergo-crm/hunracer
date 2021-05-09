@@ -31,11 +31,11 @@ class WorkoutsDataProvider implements ContextAwareCollectionDataProviderInterfac
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = [])
     {
-        /** @var User $currentUser */
-        $currentUser = $this->security->getUser();
         if (($context['collection_operation_name'] ?? null) === 'getWorkoutDays') {
+            /** @var User $user */
+            $user = $this->entityManager->getRepository(User::class)->findOneBy(['uuid' => $context['filters']['user']]);
             $timeRange = $context['filters']['workoutDay'];
-            return $this->entityManager->getRepository(Workouts::class)->getWorkoutDays($currentUser, $timeRange);
+            return $this->entityManager->getRepository(Workouts::class)->getWorkoutDays($user, $timeRange);
         }
 
         /** @var Workouts[] $workouts */

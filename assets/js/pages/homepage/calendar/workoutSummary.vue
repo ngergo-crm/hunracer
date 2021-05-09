@@ -2,7 +2,7 @@
     <div>
         <h4>
             <b-badge variant="primary">
-                {{ summary }} {{ measurement }}
+                {{ summary }}
             </b-badge>
         </h4>
     </div>
@@ -10,6 +10,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import { getUnit } from '@/components/helper';
 
 export default {
     name: 'WorkoutSummary',
@@ -36,22 +37,8 @@ export default {
             if (!Number.isInteger(count)) {
                 count = count.toFixed(2);
             }
+            count = `${count} ${getUnit(this.calendarFilter)}`;
             return count;
-        },
-        measurement() {
-            let measurement = '';
-            if (this.calendarFilter === 'distance') {
-                measurement = 'km';
-            } else if (this.calendarFilter === 'elevation') {
-                measurement = 'm';
-            } else if (this.calendarFilter === 'totalTime') {
-                measurement = 'h';
-            } else if (this.calendarFilter === 'energy') {
-                measurement = 'kJ';
-            } else if (this.calendarFilter === 'tss') {
-                measurement = 'tss';
-            }
-            return measurement;
         },
     },
 };

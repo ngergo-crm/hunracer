@@ -49,6 +49,9 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
             $email_body = 'email/registration.html.twig';
             $context = ['username' => $data->getEmail(), 'password' => $data->getPlainPassword()];
             $this->helper->sendEmail($email_from, $email_to, $email_subject, $email_body, $context);
+            if (in_array('ROLE_TRAINER', $data->getRoles())) {
+                $data->setTrainerCode($this->generateTrainerCode());
+            }
         }
 
         if (($context['item_operation_name'] ?? null) === 'put') {
@@ -56,19 +59,18 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
             //todo ez lehet collection_operation_name = post is akär!!!
         }
 
-        if(!$data->getId()) {
+        if (!$data->getId()) {
             //new user has been created
-            //todo do our own logic for example sending email
         }
 
-        if($data->getPlainPassword()) {
+        if ($data->getPlainPassword()) {
             $data->setPassword(
                 $this->userPasswordEncoder->encodePassword($data, $data->getPlainPassword())
             );
             $data->eraseCredentials();
         }
 
-       // $data->setIsMe($this->security->getUser() === $data);
+        // $data->setIsMe($this->security->getUser() === $data);
         return $this->decoratedDataPersister->persist($data);
     }
 
@@ -77,5 +79,11 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
         $this->decoratedDataPersister->remove($data);
     }
 
+    private function generateTrainerCode(): string
+    {
+        $length = 10;
+        $str = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcefghijklmnopqrstuvwxyz';
+        return substr(str_shuffle($str), 0, $length);
+    }
 
 }

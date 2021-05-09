@@ -22,3 +22,44 @@ export function getRange(startDate, endDate, type, format) {
     }
     return weeks;
 }
+
+/**
+ *
+ * @param unit
+ * @return {string}
+ */
+export function getUnit(unit, axis = false) {
+    let measurement = '';
+    if (unit === 'distance') {
+        measurement = 'km';
+        if (axis) {
+            measurement = 'Távolság (km)';
+        }
+    } else if (unit === 'elevation') {
+        measurement = 'm';
+        if (axis) {
+            measurement = 'Szintemelkedés (m)';
+        }
+    } else if (unit === 'totalTime') {
+        measurement = 'h';
+        if (axis) {
+            measurement = 'Idő (h)';
+        }
+    } else if (unit === 'energy') {
+        measurement = 'kJ';
+        if (axis) {
+            measurement = 'Energia (kJ)';
+        }
+    } else if (unit === 'tss') {
+        measurement = 'tss';
+    }
+    return measurement;
+}
+
+export function calendarMaxDate() {
+    return moment().endOf('isoWeek').format('YYYY-MM-DD');
+}
+
+export function initialDate() {
+    return moment().format('YYYY-MM-DD');
+}

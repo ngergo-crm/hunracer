@@ -1,7 +1,9 @@
 <template>
     <div class="refresh">
         <div class="detailedrefresh">
-            <refresh-range-component />
+            <refresh-range-component
+                :has-workouts="hasWorkouts"
+            />
         </div>
         <div
             v-if="hasWorkouts"

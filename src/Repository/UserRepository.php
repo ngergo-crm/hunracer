@@ -30,28 +30,27 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
-
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getAthletesByTrainer(string $trainerCode)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+            ->select( 'u.uuid', 'u.name')
+            ->andWhere('u.isEnabled = :enabled')
+            ->andWhere('u.trainerCode = :trainercode')
+            ->andWhere('u.roles LIKE :role')
+           ->setParameter('role', '%ROLE_USER%')
+            ->setParameter('trainercode', $trainerCode)
+            ->setParameter('enabled', 1)
+            ->orderBy('u.name', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?User
