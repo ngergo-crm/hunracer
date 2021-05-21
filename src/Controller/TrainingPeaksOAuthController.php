@@ -68,8 +68,8 @@ class TrainingPeaksOAuthController extends AbstractController
      */
     public function returnTrainingPeaksLoginUrl(Request $request): JsonResponse
     {
-        $test = json_decode($request->request->get('test', false), true);
-        $url = !$test ? self::AUTHORIZE_URL : self::AUTHORIZE_URL_TEST;
+        //$test = json_decode($request->request->get('test', false), true);
+        $url = !$this->test ? self::AUTHORIZE_URL : self::AUTHORIZE_URL_TEST;
         $responseType = "code";
         $redirectUri = urlencode($this->getRedirectUri());
         $url = sprintf("%s?response_type=%s&client_id=%s&scope=%s&redirect_uri=%s", $url, $responseType, self::CLIENT_ID, urlencode(self::CLIENT_SCOPE), $redirectUri);

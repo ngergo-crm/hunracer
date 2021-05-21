@@ -60,9 +60,9 @@ const actions = {
         });
     },
     async getTrainingPeaksLoginLink({ commit, state }) {
-        const params = new URLSearchParams();
-        params.append('test', state.debug);
-        await Axios.post('/getTPLoginUrl', params).then((res) => {
+        //const params = new URLSearchParams();
+        // params.append('test', state.debug);
+        await Axios.post('/getTPLoginUrl').then((res) => {
             commit('setTrainingPeaksLink', res.data.tpLoginUrl);
         });
     },
