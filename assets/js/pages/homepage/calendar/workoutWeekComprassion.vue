@@ -86,7 +86,7 @@
             <div class="period-chart">
                 <div id="periodChartPlace">
                     <GChart
-                        :settings="{packages: ['corechart'], language: 'hu', callback: drawChart }"
+                        :settings="{packages: ['corechart'], 'language': 'hu', callback: drawChart }"
                         type="ColumnChart"
                     />
                 </div>

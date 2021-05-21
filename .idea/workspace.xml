@@ -2,37 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeek.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/trainer/noAthletes.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/trainer/trainerUserSelection.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/trainingPeaksAuth.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/hunracer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/hunracer.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/homepage.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/homepage.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/components/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/components/helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/components/trainingPeaks-service.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/components/trainingPeaks-service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/account/account.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/account/account.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh/refresh-range.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh/refresh-range.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutSummary.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutSummary.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/userManager/newUser.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/userManager/newUser.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/userManager/userManager.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/userManager/userManager.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/trainingPeaksHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/trainingPeaksHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataPersister/UserDataPersister.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataPersister/UserDataPersister.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataProvider/WorkoutsDataProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataProvider/WorkoutsDataProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Factory/Components/workoutTestData.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Factory/Components/workoutTestData.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/WorkoutsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/WorkoutsRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/LoginFormAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/homepage.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/homepage.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +170,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../portal.kfe-service.de" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -371,7 +343,12 @@
       <workItem from="1620413048865" duration="680000" />
       <workItem from="1620456394757" duration="19624000" />
       <workItem from="1620493305886" duration="1000" />
-      <workItem from="1620546340114" duration="25544000" />
+      <workItem from="1620546340114" duration="26429000" />
+      <workItem from="1620625070984" duration="32000" />
+      <workItem from="1620629702857" duration="492000" />
+      <workItem from="1620634986785" duration="4381000" />
+      <workItem from="1621319939740" duration="824000" />
+      <workItem from="1621409234369" duration="186000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -506,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617604749278</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="2021 05 09 21:40">
+      <created>1620589237690</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1620589237690</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -531,7 +515,8 @@
     <MESSAGE value="2020 12 01 22:34" />
     <MESSAGE value="2021 01 30 13:26" />
     <MESSAGE value="2021 04 08 08:38" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 04 08 08:38" />
+    <MESSAGE value="2021 05 09 21:40" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 05 09 21:40" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
