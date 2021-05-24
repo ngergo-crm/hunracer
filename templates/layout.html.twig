@@ -47,6 +47,10 @@
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
                                 <a class="dropdown-item" href="{{ path('userManager') }}"><i class="fas fa-users"></i> Felhasználók</a>
                             {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('sections') }}">Szakágak</a>
+                                <a class="dropdown-item" href="{{ path('teams') }}">Csapatok</a>
+                            {% endif %}
                             <a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Kijelentkezés</a>
                         </div>
                     </li>

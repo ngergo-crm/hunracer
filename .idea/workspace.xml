@@ -2,7 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/sections/sections.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/teams/teams.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/sections.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/store/modules/sections.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/store/sectionsVuex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/teams.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/sections.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/teams.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/components/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/components/helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210521174055.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Section.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Section.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Team.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Team.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +33,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="SCSS File" />
-        <option value="JavaScript File" />
+        <option value="HTML File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -166,9 +183,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../portal.kfe-service.de" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -189,18 +207,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\hunracer\templates\admin" />
       <recent name="C:\xampp\htdocs\hunracer\src\Twig" />
       <recent name="C:\xampp\htdocs\hunracer\templates\email" />
       <recent name="C:\xampp\htdocs\hunracer\src\Validator" />
       <recent name="C:\xampp\htdocs\hunracer\config\packages" />
-      <recent name="C:\xampp\htdocs\hunracer" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\hunracer\public" />
       <recent name="C:\xampp\htdocs\hunracer\assets\js\pages\homepage\trainer" />
       <recent name="C:\xampp\htdocs\hunracer\docs" />
       <recent name="C:\xampp\htdocs\hunracer" />
       <recent name="C:\xampp\htdocs\hunracer\src" />
-      <recent name="C:\xampp\htdocs\hunracer\assets\plugins" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -347,7 +365,11 @@
       <workItem from="1620634986785" duration="4381000" />
       <workItem from="1621319939740" duration="824000" />
       <workItem from="1621409234369" duration="186000" />
-      <workItem from="1621618773829" duration="1068000" />
+      <workItem from="1621618773829" duration="2844000" />
+      <workItem from="1621662775065" duration="1186000" />
+      <workItem from="1621752114355" duration="4992000" />
+      <workItem from="1621818493755" duration="19283000" />
+      <workItem from="1621871335755" duration="3484000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -496,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621619087138</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="2021 05 21 20:15">
+      <created>1621620972292</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1621620972292</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -523,7 +552,8 @@
     <MESSAGE value="2021 04 08 08:38" />
     <MESSAGE value="2021 05 09 21:40" />
     <MESSAGE value="2021 05 21 19:44" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 05 21 19:44" />
+    <MESSAGE value="2021 05 21 20:15" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 05 21 20:15" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

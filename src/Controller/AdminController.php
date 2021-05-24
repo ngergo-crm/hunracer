@@ -21,4 +21,26 @@ class AdminController extends AbstractController
 
         ]);
     }
+
+    /**
+     * @Route("/szakagak", name="sections")
+     */
+    public function sections(): Response
+    {
+        return $this->render('admin/sections.html.twig', [
+
+        ]);
+    }
+
+    /**
+     * @Route("/csapatok", name="teams")
+     */
+    public function teams(): Response
+    {
+        return $this->render('admin/teams.html.twig', [
+
+        ]);
+    }
+
+
 }

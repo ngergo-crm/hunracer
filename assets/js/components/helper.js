@@ -63,3 +63,11 @@ export function calendarMaxDate() {
 export function initialDate() {
     return moment().format('YYYY-MM-DD');
 }
+
+export function findIndex(array, object, arrayoffset = 'hydra:member', offsetname = '@id') {
+    return array.findIndex((element) => {
+        if (element[offsetname] === object[offsetname]) {
+            return true;
+        }
+    });
+}
