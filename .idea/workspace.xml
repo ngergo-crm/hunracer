@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/sections/sections.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/teams/teams.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/sections.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/store/modules/sections.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/store/sectionsVuex.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/teams.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/sections.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/teams.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/components/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/components/helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210521174055.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Section.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Section.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Team.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Team.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20210524155817.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20210524160706.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -369,7 +354,7 @@
       <workItem from="1621662775065" duration="1186000" />
       <workItem from="1621752114355" duration="4992000" />
       <workItem from="1621818493755" duration="19283000" />
-      <workItem from="1621871335755" duration="3484000" />
+      <workItem from="1621871335755" duration="3834000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -525,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621620972292</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="2021 05 21 20:15">
+      <created>1621874882967</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1621874882967</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
