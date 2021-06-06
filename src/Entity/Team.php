@@ -5,9 +5,22 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TeamRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     accessControl="is_granted('ROLE_USER')",
+ *     collectionOperations={
+ *          "get"={
+ *              "access_control"="is_granted('ROLE_ADMIN')",
+ *              "pagination_enabled"=false
+ *          },
+ *          "post"={
+ *              "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *              "validation_groups"={"Default", "create"}
+ *          }
+ *     }
+ * )
  * @ORM\Entity(repositoryClass=TeamRepository::class)
  */
 class Team
@@ -21,26 +34,31 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"admin:read", "admin:write"})
      */
     private $fullname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"admin:read", "admin:write"})
      */
     private $shortname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"admin:read", "admin:write"})
      */
     private $contactname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"admin:read", "admin:write"})
      */
     private $contactmail;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"admin:read", "admin:write"})
      */
     private $contactphone;
 

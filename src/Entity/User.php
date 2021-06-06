@@ -303,11 +303,6 @@ class User implements UserInterface, TimestampableInterface
         return $this;
     }
 
-//    public function getPlainOldPassword(): ?string
-//    {
-//        return $this->plainOldPassword;
-//    }
-
     public function setPlainOldPassword(string $plainOldPassword): self
     {
         $this->plainOldPassword = $plainOldPassword;

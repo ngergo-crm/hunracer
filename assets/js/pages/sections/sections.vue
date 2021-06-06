@@ -198,9 +198,10 @@ export default {
 }
 
 .con-footer {
-  display: inline-flex;
+  display: flex;
   float: right;
 }
+
 /deep/ .vs-input {
   width: 100%;
 }
@@ -209,7 +210,7 @@ export default {
   /*float: right;*/
   max-width: 100%;
   display: flex;
-  justify-content: end;
+  flex-direction: row-reverse;
 }
 
 </style>
