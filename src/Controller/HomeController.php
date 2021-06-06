@@ -23,6 +23,7 @@ class HomeController extends BaseController
         /** @var User $user */
         $user = $this->getUser();
         $athletes = [];
+       // $isTrainer = $this->getUser()->getRoles()[0] === 'ROLE_TRAINER'?? false;
         if ($this->isGranted('ROLE_TRAINER')) {
             $athletes = $this->getAthletesByTrainercode($user->getTrainerCode());
             $defaultAthlete = $athletes[0]['uuid'] ?? null;
