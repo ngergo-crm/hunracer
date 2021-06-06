@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="2021 05 24 18:53">
-      <change afterPath="$PROJECT_DIR$/assets/css/teams.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/store/modules/teams.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/store/teamsVuex.js" afterDir="false" />
+    <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="2021 06 06 08:33">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/sections/sections.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/sections/sections.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/teams/teams.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/teams/teams.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/teams.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/teams.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Team.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Team.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh/refresh-range.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh/refresh-range.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion2.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion2.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -373,7 +369,7 @@
       <workItem from="1622717324735" duration="951000" />
       <workItem from="1622883252594" duration="207000" />
       <workItem from="1622883541531" duration="15164000" />
-      <workItem from="1622960107956" duration="1074000" />
+      <workItem from="1622960107956" duration="5574000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -543,7 +539,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621875248339</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="2021 06 06 08:33">
+      <created>1622961246010</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1622961246010</updated>
+    </task>
+    <task id="LOCAL-00026" summary="2021 06 06 10:42">
+      <created>1622968940704</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1622968940704</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -572,7 +582,9 @@
     <MESSAGE value="2021 05 21 19:44" />
     <MESSAGE value="2021 05 21 20:15" />
     <MESSAGE value="2021 05 24 18:53" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 05 24 18:53" />
+    <MESSAGE value="2021 06 06 08:33" />
+    <MESSAGE value="2021 06 06 10:42" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 06 06 10:42" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

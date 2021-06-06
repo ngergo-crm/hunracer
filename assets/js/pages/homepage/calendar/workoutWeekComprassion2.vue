@@ -120,7 +120,6 @@ export default {
             ],
             selectedFilter: 'tss',
             chartData: [],
-            chartData2: null,
             loading: false,
             chartOptions: {
                 legend: 'none',
@@ -146,9 +145,9 @@ export default {
         },
     },
     mounted() {
-        this.$root.$on('reloadCalendar3', () => {
-            this.reloadPeriodCalendar();
-        });
+        // this.$root.$on('reloadCalendar3', () => {
+        //     this.reloadPeriodCalendar();
+        // });
         this.$root.$on('reloadWorkoutComprassion', () => {
             this.reloadPeriodCalendar();
         });
@@ -181,15 +180,8 @@ export default {
                     }
                 });
                 const labelCountFormatted = count === Math.floor(count) ? count : count.toFixed(2);
-                // const test = moment(period.start).format('YYYYMMDDTHH:MM:SS').toString();
-                // console.log(test);
-                //period.start.toDate()
                 chartData.push([moment(period.start).format('MM.DD'), count, `${period.start.format('Y.MM.DD')} - ${period.end.format('Y.MM.DD')}: ${labelCountFormatted}`]);
             });
-            // chartData.push({ cols: [{ label: 'Date', type: 'date' }, { label: 'Systolic', type: 'number' }, { label: 'Diastolic', type: 'number' }, { label: 'Heart Rate', type: 'number' }], rows: [{ c: [{ v: 'new Date(2017, 12, 13)' }, { v: 25 }, { v: 55 }, { v: 66 }] }, { c: [{ v: 'new Date(2017, 12, 14)' }, { v: 10 }, { v: 23 }, { v: 65 }] }] });
-            //console.log(new Date(1994, 12, 10).getTime());
-            // chartData.push([{ label: 'Date', type: 'string' }, { label: 'Systolic', type: 'number' }, { label: 'Diastolic', type: 'number' }, { label: 'Heart Rate', type: 'number' }]);
-            // chartData.push([{ v: moment(period.start).format('Y.MM.DD') }, { v: 25 }, { v: 55 }, { v: 66 }]);
             this.chartData = chartData;
         },
         getPeriods() {

@@ -127,6 +127,7 @@ export default {
             this.detailedRefreshWorking = true;
             this.$store.dispatch('trainingPeaksHandler/detailedRefresh', { start: this.startDate, end: this.endDate }).then(() => {
                 this.$root.$emit('getWorkoutWeek', moment(this.selectedTime));
+                this.$root.$emit('getWorkoutPeriod', { start: null, end: null });
                 this.detailedRefreshWorking = false;
                 this.collapseVisible();
             });

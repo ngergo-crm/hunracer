@@ -39,10 +39,10 @@ export default {
         this.$root.$on('getWorkoutPeriod', ({ start, end }) => {
             this.getWorkoutPeriod(start, end, true);
         });
-        this.$root.$on('getWorkoutPeriod2', ({ start, end }) => {
-            console.log(start, end);
-            this.getWorkoutPeriod2(start, end, true);
-        });
+        // this.$root.$on('getWorkoutPeriod2', ({ start, end }) => {
+        //     console.log(start, end);
+        //     this.getWorkoutPeriod2(start, end, true);
+        // });
     },
     created() {
         this.$store.dispatch('trainingPeaksHandler/checkAvailableToken').then(() => {
@@ -54,7 +54,7 @@ export default {
             if (this.hasWorkouts) {
                 this.getWorkoutWeek(moment());
                 this.getWorkoutPeriod(null, null, true);
-                this.getWorkoutPeriod2(null, null, true);
+                //this.getWorkoutPeriod2(null, null, true);
             }
         });
     },
@@ -74,18 +74,18 @@ export default {
         async getWorkoutPeriod(start, end, init = false) {
             await this.$store.dispatch('trainingPeaksHandler/getWorkoutPeriod', { start, end }).then(() => {
                 if (init) {
-                    this.$root.$emit('reloadCalendar2');
+                    this.$root.$emit('reloadWorkoutComprassion');
                 }
             });
         },
-        async getWorkoutPeriod2(start, end, init = false) {
-            await this.$store.dispatch('trainingPeaksHandler/getWorkoutPeriod', { start, end }).then(() => {
-                if (init) {
-                    console.log('meg lett hivva');
-                    this.$root.$emit('reloadCalendar3');
-                }
-            });
-        },
+        // async getWorkoutPeriod2(start, end, init = false) {
+        //     await this.$store.dispatch('trainingPeaksHandler/getWorkoutPeriod', { start, end }).then(() => {
+        //         if (init) {
+        //             console.log('meg lett hivva');
+        //             this.$root.$emit('reloadCalendar3');
+        //         }
+        //     });
+        // },
     },
 };
 </script>
