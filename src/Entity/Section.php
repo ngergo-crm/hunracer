@@ -37,7 +37,7 @@ class Section
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"admin:write", "user:read", "section:read", "user:write"})
+     * @Groups({"user:read", "section:read", "user:write"})
      * @Assert\NotBlank()
      */
     private $description;
