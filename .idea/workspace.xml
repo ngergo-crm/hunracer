@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="2021 06 020 20:35">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Section.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Section.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Serializer/Normalizer/UserNormalizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Serializer/Normalizer/UserNormalizer.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -376,7 +377,7 @@
       <workItem from="1623913264082" duration="1172000" />
       <workItem from="1623993878661" duration="1308000" />
       <workItem from="1624131654249" duration="6642000" />
-      <workItem from="1624203462256" duration="14926000" />
+      <workItem from="1624203462256" duration="15922000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -616,14 +617,20 @@
       <option name="project" value="LOCAL" />
       <updated>1624219924332</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="2021 06 20 22:19">
+      <created>1624220363983</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1624220363983</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2020 12 01 20:51" />
     <MESSAGE value="2020 12 01 21:24" />
     <MESSAGE value="2020 12 01 21:28" />
     <MESSAGE value="2020 12 01 21:31" />
@@ -648,7 +655,8 @@
     <MESSAGE value="2021 06 020 22:00" />
     <MESSAGE value="2021 06 20 22:04" />
     <MESSAGE value="2021 06 20 22:11" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 06 20 22:11" />
+    <MESSAGE value="2021 06 20 22:19" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 06 20 22:19" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -30,6 +30,7 @@ class UserNormalizer implements ContextAwareNormalizerInterface, CacheableSuppor
         $isOwner = $this->userIsOwner($object);
         if ($isOwner) {
             $context['groups'][] = 'owner:read';
+//            $context['groups'][] = 'owner:write';
         }
 
         $context[self::ALREADY_CALLED] = true;
