@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @IsGranted("ROLE_SUPER_ADMIN")
+ * @IsGranted("ROLE_ADMIN")
  */
 class AdminController extends AbstractController
 {

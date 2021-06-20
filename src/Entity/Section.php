@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *              "normalizationContext"={"groups"={"section:read"}}
  *      },
  *          "post"={
- *              "access_control"="is_granted('ROLE_SUPER_ADMIN')",
+ *              "access_control"="is_granted('ROLE_ADMIN')",
  *              "validation_groups"={"Default", "create"}
  *          }
  *     }
