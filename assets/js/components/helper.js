@@ -71,3 +71,25 @@ export function findIndex(array, object, arrayoffset = 'hydra:member', offsetnam
         }
     });
 }
+
+export function calculateURating(birthdate) {
+    let URating;
+    if (moment(birthdate).format('YYYY-MM-DD') === 'Invalid date') {
+        URating = 'nincs';
+    } else {
+        const change = moment().format('YYYY-10-20');
+        const age = moment(change).diff(birthdate, 'years');
+        if (age === 10 || age === 11) {
+            URating = 'U-11';
+        } else if (age === 12 || age === 13) {
+            URating = 'U-13';
+        } else if (age === 14 || age === 15) {
+            URating = 'U-15';
+        } else if (age === 16 || age === 17) {
+            URating = 'U-17';
+        } else if (age === 18 || age === 19) {
+            URating = 'U-19';
+        }
+    }
+    return URating;
+}

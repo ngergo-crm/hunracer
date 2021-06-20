@@ -163,13 +163,27 @@ class User implements UserInterface, TimestampableInterface
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Groups({"admin:read", "owner:read", "user:write"})
      */
     private $birthday;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Section::class, inversedBy="users")
+     * @Groups({"admin:read", "owner:read", "user:write"})
+     */
+    private $sections;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="users")
+     * @Groups({"admin:read", "owner:read", "user:write"})
+     */
+    private $team;
 
     public function __construct(UuidInterface $uuid = null)
     {
         $this->uuid = $uuid ?: Uuid::uuid4();
         $this->workouts = new ArrayCollection();
+        $this->sections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -403,6 +417,42 @@ class User implements UserInterface, TimestampableInterface
     public function setBirthday(?\DateTimeInterface $birthday): self
     {
         $this->birthday = $birthday;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Section[]
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections[] = $section;
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        $this->sections->removeElement($section);
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): self
+    {
+        $this->team = $team;
 
         return $this;
     }

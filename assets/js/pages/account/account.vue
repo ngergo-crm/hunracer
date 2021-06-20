@@ -1,7 +1,9 @@
 <template>
     <div>
         <div class="contentcentral">
-            <div class="contentcard">
+            <div
+                class="contentcard"
+            >
                 <div class="cardtitle">
                     <h4>
                         Felhasználói adatok
@@ -33,6 +35,16 @@
                         label-placeholder="Név*"
                     />
                     <vs-input
+                        v-if="account.roleDescription === 'sportoló'"
+                        v-model="birthday"
+                        type="date"
+                        class="isMeField"
+                        label-placeholder="Születési idő"
+                    />
+                    <p v-if="account.roleDescription === 'sportoló'">
+                        Besorolás: {{ uRating }}
+                    </p>
+                    <vs-input
                         v-model="phone"
                         class="isMeField"
                         label-placeholder="Telefonszám"
@@ -50,6 +62,44 @@
                         class="isMeField"
                         label-placeholder="Edző-kód"
                     />
+                    <multiselect
+                        v-if="sections.length > 0 && account.roleDescription === 'sportoló'"
+                        v-model="userSections"
+                        style="margin-bottom: 1rem;"
+                        :options="sections"
+                        track-by="description"
+                        label="description"
+                        :taggable="true"
+                        :multiple="true"
+                        placeholder="Szakág választása..."
+                        selected-label="kiválasztva"
+                        deselect-label="Szakág eltávolítása"
+                        select-label="kiválasztás"
+                        tag-placeholder=""
+                    />
+                    <p
+                        v-if="account.roleDescription === 'edző' && !account.team"
+                        style="color: red"
+                    >
+                        Edzőként kötelező csapatot megadni!
+                    </p>
+                    <multiselect
+                        v-if="teams.length > 0 && (account.roleDescription === 'sportoló' || account.roleDescription === 'edző')"
+                        v-model="userTeam"
+                        style="margin-bottom: 1rem;"
+                        :options="teams"
+                        track-by="shortname"
+                        label="shortname"
+                        placeholder="Csapat választása..."
+                        selected-label="kiválasztva"
+                        deselect-label="eltávolítás"
+                        select-label="kiválasztás"
+                        no-result="Nincs találat."
+                    >
+                        <template>
+                            <span slot="noResult">Nincs találat.</span>
+                        </template>
+                    </multiselect>
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <b-button
@@ -73,17 +123,32 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import changePasswordComponent from '@/pages/account/changePassword';
+import moment from 'moment';
+import { calculateURating } from '@/components/helper';
+import multiselect from 'vue-multiselect';
 
 export default {
     name: 'Account',
     components: {
         changePasswordComponent,
+        multiselect,
+    },
+    data() {
+        return {
+            selectedTeam: null,
+        };
     },
     computed: {
         ...mapGetters({
+            // sections: 'account/getSections',
             account: 'account/getUser',
+            // teams: 'account/getTeams',
+        }),
+        ...mapState({
+            teams: (state) => state.account.teams,
+            sections: (state) => state.account.sections,
         }),
         name: {
             get() {
@@ -101,6 +166,18 @@ export default {
                 this.$store.commit('account/updateUser', { key: 'phone', value });
             },
         },
+        birthday: {
+            get() {
+                let birtday = null;
+                if (moment(this.$store.state.account.user.birthday).format('YYYY-MM-DD') !== 'Invalid date') {
+                    birtday = moment(this.$store.state.account.user.birthday).format('YYYY-MM-DD');
+                }
+                return birtday;
+            },
+            set(value) {
+                this.$store.commit('account/updateUser', { key: 'birthday', value });
+            },
+        },
         trainerCode: {
             get() {
                 return this.$store.state.account.trainerCode;
@@ -108,6 +185,25 @@ export default {
             set(value) {
                 this.$store.commit('account/setTrainerCode', value);
             },
+        },
+        userSections: {
+            get() {
+                return this.$store.state.account.user.sections;
+            },
+            set(value) {
+                this.$store.commit('account/updateUser', { key: 'sections', value });
+            },
+        },
+        userTeam: {
+            get() {
+                return this.$store.state.account.user.team;
+            },
+            set(value) {
+                this.$store.commit('account/updateUser', { key: 'team', value });
+            },
+        },
+        uRating() {
+            return calculateURating(this.birthday);
         },
     },
     async created() {
@@ -129,5 +225,14 @@ export default {
 </script>
 
 <style scoped>
-
+/*https://vue-multiselect.js.org/#sub-getting-started*/
+/deep/ .multiselect__tag {
+  background-color: gray;
+}
+/deep/ .multiselect__tag-icon:hover {
+  background-color: red;
+}
+/deep/ .multiselect__tag-icon {
+  color: white;
+}
 </style>

@@ -1,3 +1,4 @@
+
 .isMeinfo {
   padding-top: 1rem;
   border-top: 1px lightgray solid;
@@ -14,6 +15,7 @@
   width: 100%;
 }
 
-  input.vs-input {
+  input.vs-input, .vs-select-content {
   width: 100% !important;
+    max-width: 100%;
 }

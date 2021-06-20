@@ -3,23 +3,47 @@ import Axios from 'axios';
 const state = () => ({
     user: {},
     trainerCode: '',
+    sections: [],
+    teams: [],
 });
 
 const getters = {
     getUser: (state) => (
         state.user
     ),
+    getSections: (state) => (
+        state.sections
+    ),
+    getTeams: (state) => (
+        state.teams
+    ),
+    getSectionIds: (state) => state.user.sections.map((section) => (
+        section['@id']
+    )),
 };
 
 const actions = {
     async initializeUser({ commit, state }) {
-        await Axios.get('/api/users/me').then((res) => {
+        Axios.get('/api/users/me').then((res) => {
             commit('setUser', res.data);
             commit('setTrainerCode', state.user.trainerCode);
         });
+        Axios.get('/api/sections').then((res) => {
+            commit('setSections', res.data['hydra:member']);
+        });
+        Axios.get('/api/teams').then((res) => {
+            commit('setTeams', res.data['hydra:member']);
+        });
     },
-    modifyUser({ state }) {
-        const param = { name: state.user.name, phone: state.user.phone, trainerCode: state.trainerCode };
+    modifyUser({ state, getters }) {
+        const param = {
+            name: state.user.name,
+            phone: state.user.phone,
+            birthday: state.user.birthday ? state.user.birthday : '0000-00-00',
+            trainerCode: state.trainerCode,
+            sections: getters.getSectionIds,
+            team: state.user.team ? state.user.team['@id'] : null,
+        };
         Axios.put(state.user['@id'], param);
     },
     changeUserPassword({ state }, { newPassword, currentPassword }) {
@@ -39,6 +63,12 @@ const mutations = {
     },
     updateUser(state, { key, value }) {
         state.user[key] = value;
+    },
+    setSections(state, payload) {
+        state.sections = payload;
+    },
+    setTeams(state, payload) {
+        state.teams = payload;
     },
 };
 

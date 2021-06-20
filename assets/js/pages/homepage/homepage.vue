@@ -4,7 +4,7 @@
             <div class="contentcard">
                 <training-peaks-auth-component v-if="user.roleDescription === 'sportoló'" />
                 <trainer-user-selection-component v-if="user.roleDescription === 'edző'" />
-                <calendar-refresh-component v-if="tokenAvailable" />
+                <calendar-refresh-component v-if="tokenAvailable && user.roleDescription === 'sportoló'" />
                 <calendar-component v-show="hasWorkouts" />
             </div>
         </div>

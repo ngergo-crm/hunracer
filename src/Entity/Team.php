@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TeamRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -12,7 +14,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     accessControl="is_granted('ROLE_USER')",
  *     collectionOperations={
  *          "get"={
- *              "access_control"="is_granted('ROLE_ADMIN')",
+ *              "access_control"="is_granted('ROLE_USER')",
+ *              "normalizationContext"={"groups"={"team:read"}},
  *              "pagination_enabled"=false
  *          },
  *          "post"={
@@ -34,13 +37,13 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"admin:read", "admin:write"})
+     * @Groups({"team:read", "admin:write",  "user:read"})
      */
     private $fullname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"admin:read", "admin:write"})
+     * @Groups({"team:read", "admin:read", "admin:write",  "user:read"})
      */
     private $shortname;
 
@@ -68,9 +71,15 @@ class Team
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="team")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->setUpdatedAt(new \DateTime('now'));
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,6 +155,36 @@ class Team
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getTeam() === $this) {
+                $user->setTeam(null);
+            }
+        }
 
         return $this;
     }
