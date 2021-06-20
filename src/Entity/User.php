@@ -175,7 +175,7 @@ class User implements UserInterface, TimestampableInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="users")
-     * @Groups({"user:read", "owner:read", "user:write"})
+     * @Groups({"user:read","owner:write"})
      */
     private $team;
 
