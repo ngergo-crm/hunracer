@@ -41,7 +41,7 @@ const actions = {
             phone: state.user.phone,
             birthday: state.user.birthday ? state.user.birthday : '0000-00-00',
             trainerCode: state.trainerCode,
-            // sections: getters.getSectionIds,
+            sections: getters.getSectionIds,
             // team: state.user.team ? state.user.team['@id'] : null,
         };
         Axios.put(state.user['@id'], param);

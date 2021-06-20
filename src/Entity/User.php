@@ -169,7 +169,7 @@ class User implements UserInterface, TimestampableInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Section::class, inversedBy="users")
-     * @Groups({"user:read", "owner:read", "user:write"})
+     * @Groups({"user:read", "owner:write"})
      */
     private $sections;
 
