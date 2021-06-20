@@ -44,7 +44,6 @@ const actions = {
             sections: getters.getSectionIds,
             team: state.user.team ? state.user.team['@id'] : null,
         };
-        console.log(state.user['@id'], param);
         Axios.put(state.user['@id'], param);
     },
     changeUserPassword({ state }, { newPassword, currentPassword }) {

@@ -43,7 +43,7 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"team:read", "admin:read", "admin:write",  "user:read"})
+     * @Groups({"team:read", "admin:write",  "user:read"})
      */
     private $shortname;
 

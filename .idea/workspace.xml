@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="2021 06 06 08:33">
+    <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh/refresh-range.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/calendar-refresh/refresh-range.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion2.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion2.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Team.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Team.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -369,7 +369,17 @@
       <workItem from="1622717324735" duration="951000" />
       <workItem from="1622883252594" duration="207000" />
       <workItem from="1622883541531" duration="15164000" />
-      <workItem from="1622960107956" duration="5574000" />
+      <workItem from="1622960107956" duration="7623000" />
+      <workItem from="1623042505420" duration="315000" />
+      <workItem from="1623184865173" duration="2233000" />
+      <workItem from="1623215157167" duration="856000" />
+      <workItem from="1623568918261" duration="10334000" />
+      <workItem from="1623647776568" duration="13000" />
+      <workItem from="1623856834110" duration="4953000" />
+      <workItem from="1623913264082" duration="1172000" />
+      <workItem from="1623993878661" duration="1308000" />
+      <workItem from="1624131654249" duration="6642000" />
+      <workItem from="1624203462256" duration="11312000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -553,15 +563,34 @@
       <option name="project" value="LOCAL" />
       <updated>1622968940704</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="2021 06 06 11:09">
+      <created>1622970572513</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1622970572513</updated>
+    </task>
+    <task id="LOCAL-00028" summary="2021 06 020 20:23">
+      <created>1624213434481</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1624213434481</updated>
+    </task>
+    <task id="LOCAL-00029" summary="2021 06 020 20:35">
+      <created>1624214153685</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1624214153685</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test" />
-    <MESSAGE value="test 2" />
     <MESSAGE value="2020 12 01 18:01" />
     <MESSAGE value="2020 12 01 18:14" />
     <MESSAGE value="2020 12 01 18:46" />
@@ -584,7 +613,10 @@
     <MESSAGE value="2021 05 24 18:53" />
     <MESSAGE value="2021 06 06 08:33" />
     <MESSAGE value="2021 06 06 10:42" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 06 06 10:42" />
+    <MESSAGE value="2021 06 06 11:09" />
+    <MESSAGE value="2021 06 020 20:23" />
+    <MESSAGE value="2021 06 020 20:35" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 06 020 20:35" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
