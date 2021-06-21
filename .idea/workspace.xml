@@ -4,6 +4,7 @@
     <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/store/modules/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -380,7 +381,7 @@
       <workItem from="1624251935649" duration="3094000" />
       <workItem from="1624273027852" duration="86000" />
       <workItem from="1624275396496" duration="3775000" />
-      <workItem from="1624295690722" duration="1394000" />
+      <workItem from="1624295690722" duration="2583000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -711,14 +712,20 @@
       <option name="project" value="LOCAL" />
       <updated>1624296654262</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="2021 06 21 19:42">
+      <created>1624297387259</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1624297387259</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2021 05 21 20:15" />
     <MESSAGE value="2021 05 24 18:53" />
     <MESSAGE value="2021 06 06 08:33" />
     <MESSAGE value="2021 06 06 10:42" />
@@ -743,7 +750,8 @@
     <MESSAGE value="2021 06 21 14:34" />
     <MESSAGE value="2021 06 21 14:38" />
     <MESSAGE value="2021 06 21 19:30" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 06 21 19:30" />
+    <MESSAGE value="2021 06 21 19:42" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 06 21 19:42" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

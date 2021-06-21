@@ -412,11 +412,13 @@ class User implements UserInterface, TimestampableInterface
 
     public function getBirthday(): ?\DateTimeInterface
     {
+        //dd('get');
         return $this->birthday;
     }
 
     public function setBirthday(?\DateTimeInterface $birthday): self
     {
+        //dd($birthday);
         $this->birthday = $birthday;
 
         return $this;

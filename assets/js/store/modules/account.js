@@ -37,12 +37,10 @@ const actions = {
         });
     },
     modifyUser({ state, getters }) {
-        //"0000-00-00T00:00:00+00:00"
-        //console.log(moment('2010-06-11T00:00:00+00:00'));
         const param = {
             name: state.user.name,
             phone: state.user.phone,
-            birthday: state.user.birthday ? state.user.birthday : '0000-00-00T00:00:00+00:00',
+            birthday: moment(state.user.birthday).format('YYYY-MM-DD') !== 'Invalid date' ? moment(state.user.birthday).format('YYYY-MM-DD') : null,
             trainerCode: state.trainerCode,
             sections: getters.getSectionIds,
             team: state.user.team ? state.user.team['@id'] : null,
