@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import moment from 'moment/moment';
 
 const state = () => ({
     user: {},
@@ -36,10 +37,12 @@ const actions = {
         });
     },
     modifyUser({ state, getters }) {
+        //"0000-00-00T00:00:00+00:00"
+        //console.log(moment('2010-06-11T00:00:00+00:00'));
         const param = {
             name: state.user.name,
             phone: state.user.phone,
-            //birthday: state.user.birthday ? state.user.birthday : '0000-00-00',
+            birthday: state.user.birthday ? state.user.birthday : '0000-00-00T00:00:00+00:00',
             trainerCode: state.trainerCode,
             sections: getters.getSectionIds,
             team: state.user.team ? state.user.team['@id'] : null,
