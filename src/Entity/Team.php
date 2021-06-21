@@ -37,13 +37,13 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"team:read", "user:read", "user:write"})
+     * @Groups({"user:read", "section:collection:get", "admin:read", "admin:write"})
      */
     private $fullname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"team:read", "user:read", "user:write"})
+     * @Groups({"user:read", "team:collection:get", "admin:read", "admin:write"})
      */
     private $shortname;
 
