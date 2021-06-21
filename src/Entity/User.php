@@ -168,7 +168,7 @@ class User implements UserInterface, TimestampableInterface
     private $birthday;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Section::class, inversedBy="users", cascade={"persist"}, fetch="EAGER")
+     * @ORM\ManyToMany(targetEntity=Section::class, inversedBy="users")
      * @Groups({"user:read", "user:write"})
      */
     private $sections;
