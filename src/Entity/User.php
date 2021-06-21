@@ -168,13 +168,13 @@ class User implements UserInterface, TimestampableInterface
     private $birthday;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Section::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Section::class, inversedBy="users", cascade={"persist"})
      * @Groups({"user:read", "user:write", "admin:write"})
      */
     private $sections;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="users", cascade={"persist"})
      * @Groups({"user:read","user:write", "admin:write"})
      */
     private $team;

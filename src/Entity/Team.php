@@ -37,13 +37,13 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"team:read", "admin:write",  "user:read", "user:write"})
+     * @Groups({"team:read", "user:read", "user:write"})
      */
     private $fullname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"team:read", "admin:write",  "user:read", "user:write"})
+     * @Groups({"team:read", "user:read", "user:write"})
      */
     private $shortname;
 
@@ -72,7 +72,7 @@ class Team
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="team")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="user")
      */
     private $users;
 
