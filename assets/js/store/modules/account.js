@@ -39,7 +39,7 @@ const actions = {
         const param = {
             name: state.user.name,
             phone: state.user.phone,
-            birthday: state.user.birthday ? state.user.birthday : '0000-00-00',
+            //birthday: state.user.birthday ? state.user.birthday : '0000-00-00',
             trainerCode: state.trainerCode,
             //sections: getters.getSectionIds,
             // team: state.user.team ? state.user.team['@id'] : null,
