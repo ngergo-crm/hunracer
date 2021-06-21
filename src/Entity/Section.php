@@ -16,7 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     collectionOperations={
  *          "get"={
  *              "access_control"="is_granted('ROLE_USER')",
- *              "normalizationContext"={"groups"={"section:read"}}
+ *              "normalizationContext"={"groups"={"section:read"}},
+ *              "denormalizationContext"={"groups"={"section:write"}},
  *      },
  *          "post"={
  *              "access_control"="is_granted('ROLE_ADMIN')",
@@ -37,7 +38,7 @@ class Section
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"user:read", "section:read", "user:write"})
+     * @Groups({"user:read", "user:write", "section:read", "section:write"})
      * @Assert\NotBlank()
      */
     private $description;

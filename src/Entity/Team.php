@@ -71,6 +71,7 @@ class Team
      */
     private $updatedAt;
 
+    //itt team volt a mappedBy
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="user")
      */

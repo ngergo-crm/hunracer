@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
+    <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="2021 06 21 07:58">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ApiPlatform/AutoGroupResourceMetadataFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiPlatform/AutoGroupResourceMetadataFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Section.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Section.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Team.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Team.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
@@ -173,7 +175,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../portal.kfe-service.de" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -379,7 +381,9 @@
       <workItem from="1623993878661" duration="1308000" />
       <workItem from="1624131654249" duration="6642000" />
       <workItem from="1624203462256" duration="17649000" />
-      <workItem from="1624251935649" duration="2237000" />
+      <workItem from="1624251935649" duration="3094000" />
+      <workItem from="1624273027852" duration="86000" />
+      <workItem from="1624275396496" duration="965000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1606766999638</created>
@@ -661,14 +665,20 @@
       <option name="project" value="LOCAL" />
       <updated>1624253588979</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="2021 06 21 07:57">
+      <created>1624255071982</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1624255071982</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2020 12 01 22:26" />
     <MESSAGE value="2020 12 01 22:28" />
     <MESSAGE value="2020 12 01 22:34" />
     <MESSAGE value="2021 01 30 13:26" />
@@ -693,7 +703,8 @@
     <MESSAGE value="2021 06 20 22:58" />
     <MESSAGE value="2021 06 21 07:05" />
     <MESSAGE value="2021 06 21 07:33" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 06 21 07:33" />
+    <MESSAGE value="2021 06 21 07:57" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 06 21 07:57" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
