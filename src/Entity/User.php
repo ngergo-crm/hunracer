@@ -363,7 +363,7 @@ class User implements UserInterface, TimestampableInterface
         return $description;
     }
 
-    public function setTrainerCode(string $trainerCode = ''): self
+    public function setTrainerCode(?string $trainerCode = ''): self
     {
         $this->trainerCode = $trainerCode;
         return $this;

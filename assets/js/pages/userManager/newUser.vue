@@ -59,20 +59,7 @@
                                 >
                                     Admin
                                 </vs-option>
-                                <vs-option
-                                    label="Szuperadmin"
-                                    value="ROLE_SUPER_ADMIN"
-                                >
-                                    Szuperadmin*
-                                </vs-option>
                             </vs-select>
-                        </div>
-                        <div>
-                            <vs-input
-                                v-model="phone"
-                                class="isMeField"
-                                label-placeholder="Telefonszám"
-                            />
                         </div>
                         <div>
                             <b-button
@@ -123,21 +110,14 @@ export default {
                 this.$store.commit('usermanager/updateUser', { key: 'roles', value });
             },
         },
-        phone: {
-            get() {
-                return this.$store.state.usermanager.user.phone;
-            },
-            set(value) {
-                this.$store.commit('usermanager/updateUser', { key: 'phone', value });
-            },
-        },
     },
     methods: {
         collapsed() {
             this.registrationVisible = !this.registrationVisible;
         },
         createUser() {
-            this.$store.dispatch('usermanager/registerUser').then(() => {
+            this.$store.dispatch('usermanager/post').then(() => {
+                this.$root.$emit('registerTableEffect');
                 this.collapsed();
                 this.$swal.fire({
                     icon: 'success',

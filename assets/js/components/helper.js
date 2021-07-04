@@ -72,10 +72,10 @@ export function findIndex(array, object, arrayoffset = 'hydra:member', offsetnam
     });
 }
 
-export function calculateURating(birthdate) {
+export function calculateURating(birthdate, noURation = 'nincs') {
     let URating;
     if (moment(birthdate).format('YYYY-MM-DD') === 'Invalid date') {
-        URating = 'nincs';
+        URating = noURation;
     } else {
         const change = moment().format('YYYY-10-20');
         const age = moment(change).diff(birthdate, 'years');
@@ -89,7 +89,37 @@ export function calculateURating(birthdate) {
             URating = 'U-17';
         } else if (age === 18 || age === 19) {
             URating = 'U-19';
+        } else if (age > 19) {
+            URating = 'U-besorolás alatt';
+        } else if (age < 11) {
+            URating = 'U-besorolás fölött';
         }
     }
     return URating;
+}
+
+export function formatRole(roleDescription) {
+    let formattedRole = '';
+    if (roleDescription === 'szuperAdmin') {
+        formattedRole = 'Szuperadmin';
+    } else if (roleDescription === 'admin') {
+        formattedRole = 'Admin';
+    } else if (roleDescription === 'edző') {
+        formattedRole = 'Edző';
+    } else if (roleDescription === 'sportoló') {
+        formattedRole = 'Sportoló';
+    }
+    return formattedRole;
+}
+
+export function getRoleByRoleDescription(roleDescription) {
+    let formattedRole = '';
+    if (roleDescription === 'admin') {
+        formattedRole = 'ROLE_ADMIN';
+    } else if (roleDescription === 'edző') {
+        formattedRole = 'ROLE_TRAINER';
+    } else if (roleDescription === 'sportoló') {
+        formattedRole = 'ROLE_USER';
+    }
+    return formattedRole;
 }

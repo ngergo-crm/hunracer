@@ -55,8 +55,19 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
         }
 
         if (($context['item_operation_name'] ?? null) === 'put') {
-            //todo ez csak akkor fut le, ha valaki update-l egy user-t
-            //todo ez lehet collection_operation_name = post is akär!!!
+            if(in_array('ROLE_TRAINER', $data->getRoles())) {
+                if(!$data->getTrainerCode()) {
+                    $data->setTrainerCode($this->generateTrainerCode());
+                }
+            } else {
+                $data->setTrainerCode(null);
+            }
+            if(in_array('ROLE_ADMIN', $data->getRoles()) or in_array('ROLE_SUPER_ADMIN', $data->getRoles())) {
+                //todo az adminnak nincs csapata, szülnap értéke, szakágai, ahogy az edzőnél se fontosak ezek
+                //todo állítsuk ezeket nullára role váltásnál?
+                //todo töröljük az edzéseket is?
+                //todo valszeg ez nem életszerű szituáció (pl. sportolóban admin), de rá kellene kérdezni később
+            }
         }
 
         if (!$data->getId()) {

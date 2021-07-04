@@ -205,8 +205,7 @@
 
 <script>
 import spinnerComponent from '@/pages/common/spinner';
-import { mapGetters, mapState } from 'vuex';
-import { findIndex } from '@/components/helper';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'Teams',
@@ -310,7 +309,8 @@ export default {
                         });
                     });
                 }
-            }).catch(() => {});
+            }).catch(() => {
+            });
         },
         editTeam(team) {
             this.$store.dispatch('teams/edit', team).then(() => {
@@ -370,7 +370,7 @@ export default {
 }
 
 .newTeam {
-padding-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 .newTeamForm {
@@ -379,7 +379,7 @@ padding-bottom: 2rem;
 }
 
 .newTeamForm input {
- margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .editCard {
@@ -387,6 +387,7 @@ padding-bottom: 2rem;
   flex-direction: column;
 
 }
+
 .editGroup {
   display: flex;
   flex-direction: row;
@@ -396,6 +397,7 @@ padding-bottom: 2rem;
   margin: 1rem;
   max-width: 30%;
 }
+
 .newTeamSubmit {
   width: 20%;
   align-self: end;
