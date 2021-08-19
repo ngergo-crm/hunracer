@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -419,14 +417,7 @@
       <workItem from="1628658263571" duration="107000" />
       <workItem from="1629223697256" duration="1471000" />
       <workItem from="1629310906598" duration="2255000" />
-      <workItem from="1629358136023" duration="12143000" />
-    </task>
-    <task id="LOCAL-00003" summary="test">
-      <created>1606767877386</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1606767877386</updated>
+      <workItem from="1629358136023" duration="12600000" />
     </task>
     <task id="LOCAL-00004" summary="test 2">
       <created>1606768348696</created>
@@ -764,14 +755,20 @@
       <option name="project" value="LOCAL" />
       <updated>1629388440567</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="2021 08 19 18:33">
+      <created>1629390836115</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1629390836116</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2021 06 06 11:09" />
     <MESSAGE value="2021 06 020 20:23" />
     <MESSAGE value="2021 06 020 20:35" />
     <MESSAGE value="2021 06 020 21:19" />
@@ -796,7 +793,8 @@
     <MESSAGE value="2021 06 21 20:02" />
     <MESSAGE value="2021 07 04 12:25" />
     <MESSAGE value="2021 08 19 17:53" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 08 19 17:53" />
+    <MESSAGE value="2021 08 19 18:33" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 08 19 18:33" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
