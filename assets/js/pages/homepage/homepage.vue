@@ -3,11 +3,13 @@
         <div class="contentpanel">
             <div class="contentcard">
                 <training-peaks-auth-component v-if="user.roleDescription === 'sportoló'" />
-                <training-peaks-auth-component />
                 <trainer-user-selection-component v-if="user.roleDescription === 'edző'" />
                 <calendar-refresh-component v-if="tokenAvailable && user.roleDescription === 'sportoló'" />
                 <admin-panel v-if="user.roleDescription === 'admin' || user.roleDescription === 'szuperAdmin'" />
-                <calendar-component v-show="hasWorkouts" />
+                <calendar-component
+                    v-if="!(user.roleDescription === 'admin' || user.roleDescription === 'szuperAdmin')"
+                    v-show="hasWorkouts"
+                />
             </div>
         </div>
     </div>
