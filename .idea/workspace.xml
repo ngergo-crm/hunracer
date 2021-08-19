@@ -2,47 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/admin/adminFilters.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/admin/adminPanel.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/homepage/admin/athletePerformanceChart.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/pages/settings/settings.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/settings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/store/modules/adminHomepage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/store/modules/settings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/store/settings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210706165213.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210717062558.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210717063643.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210718132510.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20210807165139.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Config.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Gender.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Performance.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/URating.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/ConfigRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/GenderRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/PerformanceRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Repository/URatingRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/settings.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/components/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/components/helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/account/account.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/account/account.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion2.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion2.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/trainer/trainerUserSelection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/trainer/trainerUserSelection.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/userManager/userManager.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/userManager/userManager.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/store/homepageVuex.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/homepageVuex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/usermanager.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/usermanager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiPlatform/UserIsMeFilter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiPlatform/UserIsMeFilter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataProvider/UserDataProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataProvider/UserDataProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Workouts.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Workouts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/WorkoutsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/WorkoutsRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -459,14 +419,7 @@
       <workItem from="1628658263571" duration="107000" />
       <workItem from="1629223697256" duration="1471000" />
       <workItem from="1629310906598" duration="2255000" />
-      <workItem from="1629358136023" duration="11109000" />
-    </task>
-    <task id="LOCAL-00002" summary="test">
-      <created>1606767771884</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1606767771884</updated>
+      <workItem from="1629358136023" duration="12143000" />
     </task>
     <task id="LOCAL-00003" summary="test">
       <created>1606767877386</created>
@@ -804,14 +757,20 @@
       <option name="project" value="LOCAL" />
       <updated>1625394381853</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="2021 08 19 17:53">
+      <created>1629388440566</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1629388440567</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2021 06 06 10:42" />
     <MESSAGE value="2021 06 06 11:09" />
     <MESSAGE value="2021 06 020 20:23" />
     <MESSAGE value="2021 06 020 20:35" />
@@ -836,7 +795,8 @@
     <MESSAGE value="2021 06 21 19:42" />
     <MESSAGE value="2021 06 21 20:02" />
     <MESSAGE value="2021 07 04 12:25" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 07 04 12:25" />
+    <MESSAGE value="2021 08 19 17:53" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 08 19 17:53" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
