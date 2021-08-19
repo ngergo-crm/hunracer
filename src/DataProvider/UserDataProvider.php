@@ -50,11 +50,6 @@ class UserDataProvider implements ContextAwareCollectionDataProviderInterface, D
             $user->setIsMe($currentUser === $user);
         }
 
-//        $IsMeFilter = $context[UserIsMeFilter::ISME_FILTER_CONTEXT] ?? null;
-//        if ($IsMeFilter) {
-//            return $currentUser;
-//        }
-
 
         return $users;
     }

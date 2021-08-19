@@ -3,8 +3,10 @@
         <div class="contentpanel">
             <div class="contentcard">
                 <training-peaks-auth-component v-if="user.roleDescription === 'sportoló'" />
+                <training-peaks-auth-component />
                 <trainer-user-selection-component v-if="user.roleDescription === 'edző'" />
                 <calendar-refresh-component v-if="tokenAvailable && user.roleDescription === 'sportoló'" />
+                <admin-panel v-if="user.roleDescription === 'admin' || user.roleDescription === 'szuperAdmin'" />
                 <calendar-component v-show="hasWorkouts" />
             </div>
         </div>
@@ -18,11 +20,16 @@ import moment from 'moment';
 import CalendarRefreshComponent from '@/pages/homepage/calendar/calendar-refresh';
 import TrainingPeaksAuthComponent from '@/pages/homepage/trainingPeaksAuth';
 import TrainerUserSelectionComponent from '@/pages/homepage/trainer/trainerUserSelection';
+import AdminPanel from '@/pages/homepage/admin/adminPanel';
 
 export default {
     name: 'Homepage',
     components: {
-        TrainerUserSelectionComponent, TrainingPeaksAuthComponent, CalendarRefreshComponent, CalendarComponent,
+        AdminPanel,
+        TrainerUserSelectionComponent,
+        TrainingPeaksAuthComponent,
+        CalendarRefreshComponent,
+        CalendarComponent,
     },
     computed: {
         ...mapState({
@@ -54,7 +61,6 @@ export default {
             if (this.hasWorkouts) {
                 this.getWorkoutWeek(moment());
                 this.getWorkoutPeriod(null, null, true);
-                //this.getWorkoutPeriod2(null, null, true);
             }
         });
     },

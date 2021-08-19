@@ -34,6 +34,18 @@
                         class="isMeField"
                         label-placeholder="Név*"
                     />
+                    <multiselect
+                        v-if="genders.length > 0 && account.roleDescription === 'sportoló'"
+                        v-model="userGender"
+                        style="margin-bottom: 1rem;"
+                        :options="genders"
+                        track-by="description"
+                        label="description"
+                        placeholder="Fiú/ lány..."
+                        selected-label="kiválasztva"
+                        deselect-label="Nem eltávolítása"
+                        select-label="kiválasztás"
+                    />
                     <vs-input
                         v-if="account.roleDescription === 'sportoló'"
                         v-model="birthday"
@@ -147,6 +159,7 @@ export default {
             // teams: 'account/getTeams',
         }),
         ...mapState({
+            genders: (state) => state.account.genders,
             teams: (state) => state.account.teams,
             sections: (state) => state.account.sections,
         }),
@@ -202,6 +215,14 @@ export default {
                 this.$store.commit('account/updateUser', { key: 'team', value });
             },
         },
+        userGender: {
+            get() {
+                return this.$store.state.account.user.gender;
+            },
+            set(value) {
+                this.$store.commit('account/updateUser', { key: 'gender', value });
+            },
+        },
         uRating() {
             return calculateURating(this.birthday);
         },
@@ -235,4 +256,9 @@ export default {
 /deep/ .multiselect__tag-icon {
   color: white;
 }
+
+/deep/ .multiselect__tag-icon::after {
+  color: white;
+}
+
 </style>

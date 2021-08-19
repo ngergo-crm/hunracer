@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserIsMeFilter implements FilterInterface
 {
-    public const ISME_FILTER_CONTEXT = "user_isMe";
+//    public const ISME_FILTER_CONTEXT = "user_isMe";
+    public const ISME_FILTER_CONTEXT = "isMe";
 
     public function apply(Request $request, bool $normalization, array $attributes, array &$context)
     {
@@ -29,7 +30,7 @@ class UserIsMeFilter implements FilterInterface
         return [
             'isMe' => [
                 'property' => null,
-                'type' => 'Boolean',
+                'type' => 'bool',
                 'required' => false,
                 'openapi' => [
                     'description' => 'Returns the current user',

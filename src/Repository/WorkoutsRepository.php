@@ -54,4 +54,28 @@ class WorkoutsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function getAthletePerformance($athletes, $periodStart, $periodEnd) {
+        $q = $this->createQueryBuilder('w');
+        $q->select(
+           // 'u.name',
+            "u.uuid",
+            'SUM(w.distance) as distance',
+            'SUM(w.totalTime) as totalTime'
+        )
+            ->join('w.user', 'u')
+            ->andWhere('u.uuid IN (:athletes)')
+            ->andWhere('w.workoutDay >= :periodStart')
+            ->andWhere('w.workoutDay < :periodEnd')
+            ->andWhere('w.type = :workoutType')
+            ->setParameter('athletes', $athletes)
+            ->setParameter('periodStart', $periodStart)
+            ->setParameter('periodEnd', $periodEnd)
+            ->setParameter('workoutType', 'Bike')
+            ->orderBy('distance', 'desc')
+            ->orderBy('totalTime', 'desc')
+            ->groupBy("w.user")
+        ;
+        return $q->getQuery()->getResult();
+    }
 }

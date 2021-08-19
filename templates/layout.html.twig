@@ -45,6 +45,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{{ path('account') }}"><i class="fas fa-user"></i> Profil</a>
                             {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <a class="dropdown-item" href="{{ path('settings') }}"><i class="fas fa-cog"></i> Beállítások</a>
                                 <a class="dropdown-item" href="{{ path('userManager') }}"><i class="fas fa-users"></i> Felhasználók</a>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}

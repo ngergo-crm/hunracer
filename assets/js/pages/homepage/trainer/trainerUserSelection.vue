@@ -66,7 +66,7 @@ export default {
                 this.$store.commit('trainingPeaksHandler/setWorkoutWeekPeriod', []);
                 if (this.hasWorkouts) {
                     this.$root.$emit('getWorkoutWeek', moment(this.selectedTime));
-                    this.$root.$emit('getWorkoutPeriod2', { start: this.workoutPeriodStart, end: this.workoutPeriodEnd });
+                    this.$root.$emit('getWorkoutPeriod', { start: this.workoutPeriodStart, end: this.workoutPeriodEnd });
                     this.$root.$emit('changeWorkoutDays', moment(this.selectedTime));
                 }
             });

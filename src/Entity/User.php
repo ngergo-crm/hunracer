@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\ApiPlatform\UserIsMeFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
 use App\Repository\UserRepository;
 use App\Validator\CheckOldPasswordBeforeChange;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -53,15 +54,23 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  *     }
  * )
  * @ApiFilter(PropertyFilter::class)
- * @ApiFilter(UserIsMeFilter::class)
  * @ApiFilter(BooleanFilter::class, properties={"isEnabled"})
+ * @ApiFilter(DateFilter::class, properties={"birthday"})
+ * @ApiFilter(SearchFilter::class, properties={
+ *     "roles",
+ *     "team",
+ *     "sections",
+ *     "gender"
+ * })
+ * @ApiFilter(DateFilter::class, properties={
+ *     "workouts.workoutDay"
+ * })
  * @UniqueEntity(fields={"email"})
  * @UniqueEntity(fields={"uuid"})
  * @ORM\EntityListeners({"App\Doctrine\UserSetIsEnabledListener"})
  */
 class User implements UserInterface, TimestampableInterface
 {
-
     use TimestampableTrait;
 
     /**
@@ -75,7 +84,7 @@ class User implements UserInterface, TimestampableInterface
     /**
      * @ORM\Column(type="uuid", unique=true)
      * @ApiProperty(identifier=true)
-     * @Groups({"admin:write", "owner:read"})
+     * @Groups({"admin:write", "admin:read", "owner:read"})
      * @SerializedName("id")
      */
     private $uuid;
@@ -173,12 +182,17 @@ class User implements UserInterface, TimestampableInterface
      */
     private $sections;
 
-
     /**
      * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="users")
      * @Groups({"user:read", "user:write"})
      */
     private $team;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Gender::class, inversedBy="users")
+     * @Groups({"user:read", "user:write"})
+     */
+    private $gender;
 
     public function __construct(UuidInterface $uuid = null)
     {
@@ -456,6 +470,18 @@ class User implements UserInterface, TimestampableInterface
     public function setTeam(?Team $team): self
     {
         $this->team = $team;
+
+        return $this;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }

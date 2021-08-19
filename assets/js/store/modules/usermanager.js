@@ -44,6 +44,7 @@ const getters = {
         roleDescription: user.roleDescription,
         sections: user.sections.length > 0 ? user.sections.map((section) => (section.description)) : '',
         team: user.team ? user.team.shortname : null,
+        gender: user.gender ? user.gender.description : null,
         trainerCode: user.trainerCode,
         // contactname: team.contactname ? team.contactname : '',
         _showDetails: false,

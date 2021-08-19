@@ -6,6 +6,7 @@ const state = () => ({
     trainerCode: '',
     sections: [],
     teams: [],
+    genders: [],
 });
 
 const getters = {
@@ -35,6 +36,9 @@ const actions = {
         Axios.get('/api/teams').then((res) => {
             commit('setTeams', res.data['hydra:member']);
         });
+        Axios.get('/api/genders').then((res) => {
+            commit('setGenders', res.data['hydra:member']);
+        });
     },
     modifyUser({ state, getters }) {
         const param = {
@@ -44,6 +48,7 @@ const actions = {
             trainerCode: state.trainerCode,
             sections: getters.getSectionIds,
             team: state.user.team ? state.user.team['@id'] : null,
+            gender: state.user.gender ? state.user.gender['@id'] : null,
         };
         Axios.put(state.user['@id'], param);
     },
@@ -70,6 +75,9 @@ const mutations = {
     },
     setTeams(state, payload) {
         state.teams = payload;
+    },
+    setGenders(state, payload) {
+        state.genders = payload;
     },
 };
 

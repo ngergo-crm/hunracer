@@ -23,6 +23,14 @@ export function getRange(startDate, endDate, type, format) {
     return weeks;
 }
 
+export function containsObject(array, field, value) {
+    return array.some((o) => o[field] === value);
+}
+
+export function getSetting(source, key) {
+    return source.find((config) => config.settingKey === key);
+}
+
 /**
  *
  * @param unit

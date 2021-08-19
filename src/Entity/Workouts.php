@@ -17,7 +17,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     accessControl="is_granted('IS_AUTHENTICATED_FULLY')",
  *     collectionOperations={
  *          "get"={
- *              "normaliyation_context"={"groups"={"workouts:read", "user:item:read"}},
+ *              "normalization_context"={"groups"={"workouts:read", "user:item:read"}},
  *              "pagination_enabled"=false,
  *          },
  *          "getWorkoutDays"={

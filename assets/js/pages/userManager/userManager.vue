@@ -209,6 +209,11 @@ export default {
                       sortable: true,
                   },
                   {
+                      key: 'gender',
+                      label: 'Nem',
+                      sortable: true,
+                  },
+                  {
                       key: 'roleDescription',
                       label: 'Rang',
                       sortable: true,

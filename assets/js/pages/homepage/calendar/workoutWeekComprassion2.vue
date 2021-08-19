@@ -84,10 +84,6 @@
 
             <div class="period-chart">
                 <div id="periodChartPlace">
-                    <!--                    <GChart-->
-                    <!--                        :settings="{packages: ['corechart'], language: 'hu', callback: drawChart }"-->
-                    <!--                        type="ColumnChart"-->
-                    <!--                    />-->
                     <GChart
                         type="ColumnChart"
                         :data="chartData"
@@ -127,9 +123,7 @@ export default {
                 title: 'Edzéshetek összegzése',
                 hAxis: {
                     format: 'y.MM.dd',
-                    // minValue: new Date(this.workoutPeriodStart),
                     maxValue: new Date(this.workoutPeriodEnd),
-                    // gridlines: { count: this.chartData.length },
                 },
             },
         };
