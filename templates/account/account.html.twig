@@ -13,6 +13,8 @@
 
 {% block javascripts %}
     {{ parent() }}
-
+    <script>
+        window.workoutYearStart = {{ workoutYearStart|tojson }};
+    </script>
     {{ encore_entry_script_tags('account') }}
 {% endblock %}

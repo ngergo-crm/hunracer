@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { fetchSettings } from '@/components/settings';
 
 /**
  * @param {date|moment} start The start date
@@ -81,11 +82,16 @@ export function findIndex(array, object, arrayoffset = 'hydra:member', offsetnam
 }
 
 export function calculateURating(birthdate, noURation = 'nincs') {
+    //workoutYearStart should be sent by controller
+    let workoutYearBegins = window.workoutYearStart ? window.workoutYearStart : '2020-11-01';
+    workoutYearBegins = `YYYY-${moment(workoutYearBegins).format('MM-DD').toString()}`;
+    console.log(window.workoutYearStart);
+    console.log(workoutYearBegins);
     let URating;
     if (moment(birthdate).format('YYYY-MM-DD') === 'Invalid date') {
         URating = noURation;
     } else {
-        const change = moment().format('YYYY-10-20');
+        const change = moment().format(workoutYearBegins);
         const age = moment(change).diff(birthdate, 'years');
         if (age === 10 || age === 11) {
             URating = 'U-11';

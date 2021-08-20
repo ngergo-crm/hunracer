@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Config;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,9 @@ class AccountController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('account/account.html.twig');
+        $workoutYearStart = $this->getDoctrine()->getRepository(Config::class)->findOneBy(["settingKey" => 'workoutYearStart']);
+        return $this->render('account/account.html.twig', [
+            'workoutYearStart' => $workoutYearStart->getSettingValue()
+        ]);
     }
 }

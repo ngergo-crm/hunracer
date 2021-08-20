@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Config;
 use App\Entity\Workouts;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,8 +21,10 @@ class AdminController extends AbstractController
      */
     public function userManager(): Response
     {
+        /** @var Config $workoutYearStart */
+        $workoutYearStart = $this->getDoctrine()->getRepository(Config::class)->findOneBy(["settingKey" => 'workoutYearStart']);
         return $this->render('admin/users.html.twig', [
-
+            'workoutYearStart' => $workoutYearStart->getSettingValue()
         ]);
     }
 

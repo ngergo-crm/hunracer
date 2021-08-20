@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { calculateURating, containsObject } from '@/components/helper';
+import { calculateURating } from '@/components/helper';
 import moment from 'moment';
 
 const state = () => ({
@@ -47,14 +47,6 @@ const getters = {
         }
         return init;
     },
-    //     {
-    //     team: state.teamFilters,
-    //     sections: state.sectionFilters,
-    //     'birthday[before]': state.uRatingFilters ? moment().subtract(state.uRatingFilters.ageInterval[0], 'years').format('Y-MM-DD') : null,
-    //     'birthday[after]': state.uRatingFilters ? moment().subtract(state.uRatingFilters.ageInterval[1], 'years').format('Y-MM-DD') : null,
-    //     gender: state.genderFilters,
-    // }
-
     getAthletes: (state) => state.athletes.map((user) => ({
         '@id': user['@id'],
         '@type': user['@type'],
@@ -63,23 +55,10 @@ const getters = {
         birthday: user.birthday,
         uRating: calculateURating(user.birthday, ''),
         name: user.name,
-        // phone: user.phone,
-        // isMe: user.isMe,
-        // isEnabled: user.isEnabled,
-        // roles: user.roles,
-        // roleDescription: user.roleDescription,
         sections: user.sections.length > 0 ? user.sections.map((section) => (section.description)) : '',
         team: user.team ? user.team.shortname : null,
         gender: user.gender ? user.gender.description : null,
         trainerCode: user.trainerCode,
-        // contactname: team.contactname ? team.contactname : '',
-        // _showDetails: false,
-        // edit: {
-        //     '@id': user['@id'],
-        //     isEnabled: user.isEnabled,
-        //     roles: user.roles,
-        //     roleDescription: user.roleDescription,
-        // },
     })),
 };
 

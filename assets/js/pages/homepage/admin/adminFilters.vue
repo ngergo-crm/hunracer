@@ -103,13 +103,6 @@
                     />
                 </div>
             </div>
-            <!--            <div style="margin-top: 1rem;">-->
-            <!--                <b-button-->
-            <!--                    @click="filterAthletes"-->
-            <!--                >-->
-            <!--                    Szűrés-->
-            <!--                </b-button>-->
-            <!--            </div>-->
         </div>
     </div>
 </template>

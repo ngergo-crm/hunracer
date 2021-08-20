@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/homepage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/components/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/components/helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/account/account.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/account/account.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/admin/adminFilters.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/admin/adminFilters.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/admin/adminPanel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/admin/adminPanel.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/userManager/userManager.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/userManager/userManager.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/store/accountVuex.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/accountVuex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/adminHomepage.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/adminHomepage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/settings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/usermanager.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/usermanager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/store/usermanagerVuex.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/usermanagerVuex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AccountController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/account/account.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/users.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/users.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home/homepage.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/homepage.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +187,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../portal.kfe-service.de" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -419,14 +436,8 @@
       <workItem from="1628658263571" duration="107000" />
       <workItem from="1629223697256" duration="1471000" />
       <workItem from="1629310906598" duration="2255000" />
-      <workItem from="1629358136023" duration="13352000" />
-    </task>
-    <task id="LOCAL-00005" summary="2020 12 01 18:01">
-      <created>1606842658016</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1606842658016</updated>
+      <workItem from="1629358136023" duration="18652000" />
+      <workItem from="1629434351403" duration="10111000" />
     </task>
     <task id="LOCAL-00006" summary="2020 12 01 18:14">
       <created>1606842861530</created>
@@ -764,14 +775,20 @@
       <option name="project" value="LOCAL" />
       <updated>1629391212810</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="2021 08 19 18:59">
+      <created>1629392355682</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1629392355682</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2021 06 020 20:35" />
     <MESSAGE value="2021 06 020 21:19" />
     <MESSAGE value="2021 06 020 21:30" />
     <MESSAGE value="2021 06 020 22:00" />
@@ -796,7 +813,8 @@
     <MESSAGE value="2021 08 19 17:53" />
     <MESSAGE value="2021 08 19 18:33" />
     <MESSAGE value="2021 08 19 18:40" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 08 19 18:40" />
+    <MESSAGE value="2021 08 19 18:59" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 08 19 18:59" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

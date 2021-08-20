@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Config;
 use App\Entity\User;
 use App\Repository\WorkoutsRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,12 +31,14 @@ class HomeController extends BaseController
             $user = $defaultAthlete? $this->getDoctrine()->getRepository(User::class)->findOneBy(['uuid' => $defaultAthlete]) : null;
         }
         $athleteHasWorkout = $workoutsRepository->findOneBy(['user' => $user]);
+        $workoutYearStart = $this->getDoctrine()->getRepository(Config::class)->findOneBy(["settingKey" => 'workoutYearStart']);
         //dd($request->cookies->get($this->getParameter("cookieName")));
         return $this->render('home/homepage.html.twig', [
             'tokenAvailable' => $request->cookies->get($this->getParameter("cookieName")) ? true : false,
             'autoRefresh' => $request->getSession()->get('autoTpQuickRefresh'),
             'hasWorkouts' => (bool)$athleteHasWorkout,
-            'athletes' => $athletes
+            'athletes' => $athletes,
+            'workoutYearStart' => $workoutYearStart->getSettingValue()
         ]);
     }
 

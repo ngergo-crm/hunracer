@@ -269,7 +269,7 @@ export default {
         },
     },
     async created() {
-        await this.$store.dispatch('usermanager/loadUsers');
+        this.$store.dispatch('usermanager/loadUsers');
         this.loading = false;
         this.totalRows = this.users.length;
     },

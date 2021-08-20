@@ -81,6 +81,9 @@ const actions = {
             commit('editUser', { index: findIndex(state.users, user), data: newUser });
         });
     },
+    test() {
+        return 'test';
+    },
 };
 
 const mutations = {
@@ -107,6 +110,7 @@ const mutations = {
     resetUserForm(state) {
         Object.assign(state.user, getDefaultState().user);
     },
+
 };
 
 export default {

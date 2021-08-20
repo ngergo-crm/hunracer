@@ -8,14 +8,14 @@ const state = () => ({
 });
 
 const getters = {
-    // getUser: (state) => (
-    //     state.user
-    // ),
+    getWorkoutYearStart: (state) => (
+        state.workoutYearStart
+    ),
 };
 
 const actions = {
     async initializeSettings({ commit, state }) {
-        Axios.get('/api/configs').then((res) => {
+        await Axios.get('/api/configs').then((res) => {
             commit('setAllSettings', res.data['hydra:member']);
             commit('setWorkoutYearStart', getSetting(res.data['hydra:member'], 'workoutYearStart'));
         });

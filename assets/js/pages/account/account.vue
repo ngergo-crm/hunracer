@@ -162,6 +162,7 @@ export default {
             genders: (state) => state.account.genders,
             teams: (state) => state.account.teams,
             sections: (state) => state.account.sections,
+            startWorkoutYear: (state) => state.settings.workoutYearStart.settingValue,
         }),
         name: {
             get() {
@@ -224,7 +225,7 @@ export default {
             },
         },
         uRating() {
-            return calculateURating(this.birthday);
+            return calculateURating(this.birthday, 'nincs');
         },
     },
     async created() {
