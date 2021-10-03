@@ -53,6 +53,7 @@ class TrainingPeaksOAuthController extends AbstractController
     private $test;
     private $session;
     private $tpService;
+    private $workoutDetailEndpoint;
 
     public function __construct(SessionInterface $session, ParameterBagInterface $bag, TrainingPeaksService $tpService)
     {
@@ -198,7 +199,7 @@ class TrainingPeaksOAuthController extends AbstractController
     /**
      * @Route("/workout_refresh", name="workout_refresh", methods={"POST"})
      */
-    public function workoutQuickRefresh(Request $request, EntityManagerInterface $manager)
+    public function workoutRefresh(Request $request, EntityManagerInterface $manager)
     {
         $jsonResponse = new JsonResponse();
         $workoutRepo = $manager->getRepository(Workouts::class);
@@ -237,11 +238,16 @@ class TrainingPeaksOAuthController extends AbstractController
                         $isExist = $this->checkWorkoutExistence($existingWorkouts, $workoutData);
                     }
                     if (!$isExist and $workoutData['Completed']) {
+                        //dump($workoutData);
                         $this->insertWorkout($manager, $workoutData);
                     } else if ($detailedRefresh and $isExist) {
                         $this->updateWorkout($manager, $isExist, $workoutData);
                     }
-
+                }
+                if($this->workoutDetailEndpoint) {
+//                    2266m 1db
+//                    6424ms 1db
+                    //$this->importWorkoutDetail($token);
                 }
                 $this->deleteOrphanedWorkouts($manager, $existingWorkouts, $workouts);
             }
@@ -417,6 +423,7 @@ class TrainingPeaksOAuthController extends AbstractController
         $workout = $this->constructWorkout($workoutData);
         $manager->persist($workout);
         $manager->flush();
+        $this->workoutDetailEndpoint[$workout->getId()] = sprintf('v1/workouts/id/%d/details', $workoutData['Id']);
     }
 
 
@@ -487,5 +494,46 @@ class TrainingPeaksOAuthController extends AbstractController
                 $manager->flush();
             }
         }
+    }
+
+    private function importWorkoutDetail($token)
+    {
+//        $response = $this->tpService->apiRequest($endpoint, $token, $this->test);
+//        dd($response);
+//        $processes = ['import:workoutDetail'];
+
+        //FILTER SUB-PROCESSES START
+        $processes = ['importworkoutDetail'];
+        //generating and starting processes
+        $processIndex = 1;
+        $root = $this->getParameter('kernel.project_dir'); #todo ezt törölhetem, ha elég a bin/console
+        $phpexec = (new PhpExecutableFinder)->find();
+
+        foreach ($processes as $process) {
+                ${'process' . $processIndex} = new Process([$phpexec, $root . '/bin/console', $process, json_encode($this->workoutDetailEndpoint, true), json_encode($token, true), $this->test]);
+                ${'process' . $processIndex}->setTimeout(null);
+//                ${'process' . $processIndex}->run();
+            ${'process' . $processIndex}->start();
+                ++$processIndex;
+        }
+//        for ($processNumber = 1; $processNumber < $processIndex; $processNumber++) {
+//            $isRunning = ${'process' . $processNumber}->isRunning() ? true : false;
+//            if ($isRunning) {
+//                // $output->writeln(sprintf('process %d is running...', $processNumber));
+//            }
+//        }
+//
+//        for ($processNumber = 1; $processNumber < $processIndex; $processNumber++) {
+//            ${'process' . $processNumber}->wait(
+//                function ($type, $buffer) {
+//                    if (Process::ERR === $type) {
+//                        echo 'ERR > ' . $buffer;
+//                    } else {
+//                        echo 'OUT > ' . $buffer;
+//                    }
+//                }
+//            );
+//        }
+
     }
 }

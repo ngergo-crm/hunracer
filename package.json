@@ -19,6 +19,7 @@
         "vee-validate": "^3.4.5",
         "vue": "^2.6.12",
         "vue-google-charts": "^0.3.3",
+        "vue-html2pdf": "^1.8.0",
         "vue-loader": "^15",
         "vue-multiselect": "^2.1.6",
         "vue-sweetalert2": "^4.1.1",
@@ -40,11 +41,13 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
         "bootstrap": "^4.5.3",
+        "file-loader": "^6.2.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.5.1",
         "magnific-popup": "^1.1.0",
         "node-sass": "^4.14.1",
         "popper.js": "^1.16.1",
-        "sass-loader": "^8.0.0"
+        "sass-loader": "^8.0.0",
+        "url-loader": "^4.1.1"
     }
 }

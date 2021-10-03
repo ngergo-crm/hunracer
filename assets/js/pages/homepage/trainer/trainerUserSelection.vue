@@ -4,11 +4,22 @@
             v-if="athletes.length > 0"
             class="atheteSelect"
         >
-            <b-form-select
-                v-model="selectedAthlete"
-                :options="athletes"
-                @change="changeAthlete"
-            />
+            <div>
+                <b-form-select
+                    v-model="selectedAthlete"
+                    :options="athletes"
+                    @change="changeAthlete"
+                />
+            </div>
+            <div style="align-self: center;">
+                <b-link
+                    target="_blank"
+                    :href="'/adatlap/'+selectedAthlete"
+                    style="margin-left: 2rem;"
+                >
+                    >>> Tovább az adatlaphoz
+                </b-link>
+            </div>
         </div>
         <no-athletes-component v-else />
         <div
@@ -77,7 +88,8 @@ export default {
 
 <style scoped>
 .atheteSelect {
-  max-width: 20%;
+  max-width: 100%;
+  display: flex;
 }
 .noWorkoutsForUser {
   padding-top: 2rem;

@@ -2,24 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7439b17b-0db8-4a6c-a1c2-54da708a0b36" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/js/components/settings.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/athleteDataSheet.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/css/metricsCompare.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/athleteDataSheet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/datasheet-service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/components/metricsCompare-service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/metricsCompare.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/athleteDataSheet/athleteDataSheet.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/athleteDataSheet/metricEditorModal.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/metricsCompare/metricsCompare.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/pages/metricsCompare/metricsCompareCharts.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/store/athleteDataSheetVuex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/store/metricsCompareVuex.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/store/modules/athleteDataSheet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/store/modules/metricsCompare.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/account/athleteDataSheet.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/metricsCompare.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/components/helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/components/helper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/pages/account/account.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/account/account.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/admin/adminFilters.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/admin/adminFilters.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/admin/adminPanel.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/admin/adminPanel.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/pages/userManager/userManager.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/userManager/userManager.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/store/accountVuex.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/accountVuex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/admin/athletePerformanceChart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/admin/athletePerformanceChart.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion2.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/calendar/workoutWeekComprassion2.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/pages/homepage/trainer/trainerUserSelection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/pages/homepage/trainer/trainerUserSelection.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/store/homepageVuex.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/homepageVuex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/account.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/store/modules/adminHomepage.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/adminHomepage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/store/modules/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/settings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/store/modules/usermanager.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/modules/usermanager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/store/usermanagerVuex.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/store/usermanagerVuex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AccountController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/account/account.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/account/account.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/users.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/users.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home/homepage.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/homepage.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TrainingPeaksOAuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataPersister/UserDataPersister.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataPersister/UserDataPersister.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Performance.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Performance.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Workouts.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Workouts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,10 +55,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="SCSS File" />
         <option value="HTML File" />
-        <option value="Vue Single File Component" />
+        <option value="SCSS File" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -187,7 +209,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../portal.kfe-service.de" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../connect.kfe-service.de" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -209,10 +231,10 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\hunracer\templates\admin" />
-      <recent name="C:\xampp\htdocs\hunracer\src\ApiPlatform" />
-      <recent name="C:\xampp\htdocs\hunracer\src\Twig" />
-      <recent name="C:\xampp\htdocs\hunracer\templates\email" />
-      <recent name="C:\xampp\htdocs\hunracer\src\Validator" />
+      <recent name="C:\xampp\htdocs\hunracer\public\images\accountPhoto" />
+      <recent name="C:\xampp\htdocs\hunracer\public\images\accountPicture" />
+      <recent name="C:\xampp\htdocs\hunracer\assets\js\pages\athleteDataSheet" />
+      <recent name="C:\xampp\htdocs\hunracer\assets\js\store\modules" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\hunracer\public" />
@@ -437,14 +459,42 @@
       <workItem from="1629223697256" duration="1471000" />
       <workItem from="1629310906598" duration="2255000" />
       <workItem from="1629358136023" duration="18652000" />
-      <workItem from="1629434351403" duration="10111000" />
-    </task>
-    <task id="LOCAL-00006" summary="2020 12 01 18:14">
-      <created>1606842861530</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1606842861530</updated>
+      <workItem from="1629434351403" duration="15114000" />
+      <workItem from="1629554589109" duration="8523000" />
+      <workItem from="1629618763143" duration="4818000" />
+      <workItem from="1629623644529" duration="18948000" />
+      <workItem from="1629695278130" duration="43000" />
+      <workItem from="1629739794906" duration="7206000" />
+      <workItem from="1629784987234" duration="212000" />
+      <workItem from="1629829166870" duration="10242000" />
+      <workItem from="1629868044983" duration="490000" />
+      <workItem from="1630134487720" duration="13047000" />
+      <workItem from="1630216573793" duration="20019000" />
+      <workItem from="1630299791738" duration="2852000" />
+      <workItem from="1630337808847" duration="19558000" />
+      <workItem from="1630388236312" duration="164000" />
+      <workItem from="1630751018352" duration="3666000" />
+      <workItem from="1630821610391" duration="19607000" />
+      <workItem from="1630905451142" duration="1071000" />
+      <workItem from="1631168233164" duration="680000" />
+      <workItem from="1631371032573" duration="18046000" />
+      <workItem from="1631422713176" duration="5575000" />
+      <workItem from="1631508767996" duration="1197000" />
+      <workItem from="1631548652734" duration="6887000" />
+      <workItem from="1631601528644" duration="330000" />
+      <workItem from="1631637368456" duration="10749000" />
+      <workItem from="1631683951464" duration="3037000" />
+      <workItem from="1631692426211" duration="14000" />
+      <workItem from="1631824388196" duration="4990000" />
+      <workItem from="1631855590956" duration="7000" />
+      <workItem from="1631900135088" duration="9617000" />
+      <workItem from="1632062296432" duration="3596000" />
+      <workItem from="1632114873995" duration="1684000" />
+      <workItem from="1632331649316" duration="5159000" />
+      <workItem from="1632375532120" duration="147000" />
+      <workItem from="1632993364115" duration="696000" />
+      <workItem from="1633030912410" duration="1350000" />
+      <workItem from="1633241188331" duration="22019000" />
     </task>
     <task id="LOCAL-00007" summary="2020 12 01 18:46">
       <created>1606844821060</created>
@@ -782,14 +832,20 @@
       <option name="project" value="LOCAL" />
       <updated>1629392355682</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="2021 08 20 14:16">
+      <created>1629461834159</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1629461834160</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2021 06 020 21:19" />
     <MESSAGE value="2021 06 020 21:30" />
     <MESSAGE value="2021 06 020 22:00" />
     <MESSAGE value="2021 06 20 22:04" />
@@ -814,7 +870,19 @@
     <MESSAGE value="2021 08 19 18:33" />
     <MESSAGE value="2021 08 19 18:40" />
     <MESSAGE value="2021 08 19 18:59" />
-    <option name="LAST_COMMIT_MESSAGE" value="2021 08 19 18:59" />
+    <MESSAGE value="2021 08 20 14:16" />
+    <option name="LAST_COMMIT_MESSAGE" value="2021 08 20 14:16" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/assets/js/store/modules/adminHomepage.js</url>
+          <line>48</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -81,9 +81,6 @@ const actions = {
             commit('editUser', { index: findIndex(state.users, user), data: newUser });
         });
     },
-    test() {
-        return 'test';
-    },
 };
 
 const mutations = {

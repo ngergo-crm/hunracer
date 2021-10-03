@@ -97,7 +97,7 @@
 
 <script>
 import moment from 'moment';
-import { getUnit, initialDate } from '@/components/helper';
+import { initialDate } from '@/components/helper';
 import { mapState } from 'vuex';
 
 export default {

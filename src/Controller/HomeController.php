@@ -24,11 +24,11 @@ class HomeController extends BaseController
         /** @var User $user */
         $user = $this->getUser();
         $athletes = [];
-       // $isTrainer = $this->getUser()->getRoles()[0] === 'ROLE_TRAINER'?? false;
-        if ($this->isGranted('ROLE_TRAINER')) {
+        // $isTrainer = $this->getUser()->getRoles()[0] === 'ROLE_TRAINER'?? false;
+        if ($this->isGranted('ROLE_TRAINER') and !$this->isGranted('ROLE_ADMIN')) {
             $athletes = $this->getAthletesByTrainercode($user->getTrainerCode());
             $defaultAthlete = $athletes[0]['uuid'] ?? null;
-            $user = $defaultAthlete? $this->getDoctrine()->getRepository(User::class)->findOneBy(['uuid' => $defaultAthlete]) : null;
+            $user = $defaultAthlete ? $this->getDoctrine()->getRepository(User::class)->findOneBy(['uuid' => $defaultAthlete]) : null;
         }
         $athleteHasWorkout = $workoutsRepository->findOneBy(['user' => $user]);
         $workoutYearStart = $this->getDoctrine()->getRepository(Config::class)->findOneBy(["settingKey" => 'workoutYearStart']);
@@ -45,6 +45,20 @@ class HomeController extends BaseController
     private function getAthletesByTrainercode(string $trainerCode): array
     {
         return $this->getDoctrine()->getRepository(User::class)->getAthletesByTrainer($trainerCode);
+    }
+
+    /**
+     * @Route("/getSource/{sourceName}", name="getPicture", options={"expose"=true})
+     * sourceName: name of the file
+     */
+    public function fileHandler(Request $request, $sourceName)
+    {
+        $sourceName = urldecode($sourceName);
+        $destination = "images/accountPhoto/";
+        if(is_file($destination.$sourceName)) {
+            return $this->file($destination.$sourceName);
+        }
+        return new Response('error', 404);
     }
 
 }

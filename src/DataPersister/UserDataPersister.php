@@ -55,14 +55,22 @@ class UserDataPersister implements ContextAwareDataPersisterInterface
         }
 
         if (($context['item_operation_name'] ?? null) === 'put') {
-            if(in_array('ROLE_TRAINER', $data->getRoles())) {
-                if(!$data->getTrainerCode()) {
+
+            //save img
+            if ($data->getPhotoSrc()) {
+                $path = "../public/images/accountPhoto/"; //todo global var somehow
+                $path = $path . $data->getPhoto();
+                file_put_contents($path, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $data->getPhotoSrc()))); //todo img src
+            }
+
+            if (in_array('ROLE_TRAINER', $data->getRoles())) {
+                if (!$data->getTrainerCode()) {
                     $data->setTrainerCode($this->generateTrainerCode());
                 }
             } else {
                 $data->setTrainerCode(null);
             }
-            if(in_array('ROLE_ADMIN', $data->getRoles()) or in_array('ROLE_SUPER_ADMIN', $data->getRoles())) {
+            if (in_array('ROLE_ADMIN', $data->getRoles()) or in_array('ROLE_SUPER_ADMIN', $data->getRoles())) {
                 //todo az adminnak nincs csapata, szülnap értéke, szakágai, ahogy az edzőnél se fontosak ezek
                 //todo állítsuk ezeket nullára role váltásnál?
                 //todo töröljük az edzéseket is?

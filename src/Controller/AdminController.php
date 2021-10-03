@@ -65,7 +65,6 @@ class AdminController extends AbstractController
      */
     public function getAthletePerformance(Request $request)
     {
-        //todo make periods dynamic
         $userIds = json_decode($request->request->get('athleteIds'), true);
         $year = $request->request->get('year');
         $year = date("$year-m-d", strtotime($year));
@@ -102,10 +101,10 @@ class AdminController extends AbstractController
         $noData = [];
         foreach ($userIds as $userId) {
             $result = false;
-            if($hasData) {
+            if ($hasData) {
                 $result = $this->findUser($userId, $data);
             }
-            if(!$result) {
+            if (!$result) {
                 $noData[] = [
                     'uuid' => $userId,
                     "distance" => "0",

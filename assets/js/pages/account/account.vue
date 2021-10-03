@@ -112,6 +112,32 @@
                             <span slot="noResult">Nincs találat.</span>
                         </template>
                     </multiselect>
+                    <div v-if="account.roleDescription === 'sportoló'">
+                        <label>Profilkép:</label>
+                        <b-form-file
+                            v-if="!photo"
+                            v-model="img"
+                            size="sm"
+                            :placeholder="img? selectedImgName : 'Profilkép feltöltése...'"
+                            browse-text="Kiválaszt"
+                            accept="image/*"
+                            @change="insertImg"
+                        />
+                        <div
+                            v-else
+                            style="display: flex; justify-content: space-between;"
+                        >
+                            <p>
+                                Kép: {{ photo }}
+                            </p>
+                            <b-button
+                                size="sm"
+                                @click="deletePhoto"
+                            >
+                                Fájl törlése
+                            </b-button>
+                        </div>
+                    </div>
                 </div>
                 <div style="display: flex; flex-direction: column;">
                     <b-button
@@ -149,7 +175,10 @@ export default {
     },
     data() {
         return {
+            img: null,
             selectedTeam: null,
+            selectedImgName: null,
+            selectedImgValue: null,
         };
     },
     computed: {
@@ -224,6 +253,14 @@ export default {
                 this.$store.commit('account/updateUser', { key: 'gender', value });
             },
         },
+        photo: {
+            get() {
+                return this.$store.state.account.user.photo;
+            },
+            set(value) {
+                this.$store.commit('account/updateUser', { key: 'photo', value });
+            },
+        },
         uRating() {
             return calculateURating(this.birthday, 'nincs');
         },
@@ -234,6 +271,9 @@ export default {
     methods: {
         saveUserData() {
             this.$store.dispatch('account/modifyUser').then(() => {
+                this.img = null;
+                this.selectedImgName = null;
+                this.selectedImgValue = null;
                 this.$swal.fire({
                     icon: 'success',
                     title: 'Változások elmentve!',
@@ -241,6 +281,42 @@ export default {
                     showConfirmButton: false,
                 });
             });
+        },
+        deletePhoto() {
+            this.$swal.fire({
+                text: 'Biztosan ki szeretné a képet törölni?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#FF0000',
+                confirmButtonText: 'Igen',
+                cancelButtonText: 'Mégsem',
+            }).then((choice) => {
+                if (choice.isConfirmed === true) {
+                    this.$store.dispatch('account/deletePhoto').then(() => {
+                        this.$swal.fire({
+                            icon: 'success',
+                            title: 'Fájl sikeresen eltávolítva!',
+                            timer: 1500,
+                            showConfirmButton: false,
+                        });
+                    });
+                }
+            }).catch(() => {});
+        },
+        insertImg(img) {
+            if (img.target.files[0]) {
+                this.selectedImgName = img.target.files[0].name;
+                const reader = new FileReader();
+                reader.onload = (res) => {
+                    this.selectedImgValue = res.target.result;
+                    this.$store.commit('account/setNewImages', {
+                        img: this.selectedImgValue,
+                        imgName: this.selectedImgName,
+                    });
+                };
+                reader.onerror = (err) => console.log(err);
+                reader.readAsDataURL(img.target.files[0]);
+            }
         },
     },
 };

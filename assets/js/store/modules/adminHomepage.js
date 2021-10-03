@@ -59,6 +59,7 @@ const getters = {
         team: user.team ? user.team.shortname : null,
         gender: user.gender ? user.gender.description : null,
         trainerCode: user.trainerCode,
+        metricRecords: user.metricRecords,
     })),
 };
 
@@ -79,6 +80,23 @@ const actions = {
         Axios.get('/api/performances').then((res) => {
             commit('setPerformanceExpectations', res.data['hydra:member']);
         });
+    },
+    async initAthletes({ commit }, { user = {} }) {
+        const parameters = {
+            isEnabled: 1,
+            roles: '["ROLE_USER"]',
+        };
+        if (Object.keys(user).length > 0 && user.roleDescription === 'edző') {
+            parameters.trainerCode = user.trainerCode;
+        }
+        Axios.get('/api/users', {
+            params: parameters,
+        }).then((res) => {
+            commit('setAthletes', res.data['hydra:member']);
+            // commit('setSelectedAthletes', res.data['hydra:member']);
+        });
+    },
+    async initTrainers({ commit }) {
         Axios.get('/api/users', {
             params: {
                 isEnabled: 1,
@@ -86,15 +104,6 @@ const actions = {
             },
         }).then((res) => {
             commit('setTrainers', res.data['hydra:member']);
-        });
-        Axios.get('/api/users', {
-            params: {
-                isEnabled: 1,
-                roles: '["ROLE_USER"]',
-            },
-        }).then((res) => {
-            commit('setAthletes', res.data['hydra:member']);
-            // commit('setSelectedAthletes', res.data['hydra:member']);
         });
     },
     async getAthletePerformance({ state, commit }, { athletes = null, year = null }) {

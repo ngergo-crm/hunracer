@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('metricsCompare') }}
+{% endblock %}
+
+{% block content %}
+    <div class="metricsCompare">
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.user = {{ user|tojson }};
+        window.workoutYearStart = {{ workoutYearStart|tojson }};
+    </script>
+    {{ encore_entry_script_tags('metricsCompare') }}
+{% endblock %}
+

@@ -213,16 +213,10 @@ export default {
                 //todo new part
             });
         },
-        onChartReady(chart, google) {
-            this.chartsLib = google;
-        },
         changeFilter(filter) {
             this.chartOptions.chart.title = `${getUnit(filter, true)}`;
             this.reloadPerformanceChart();
             this.setTableData();
-        //this.$store.commit('trainingPeaksHandler/setCalendarFilter', filter);
-        //this.reloadCalendar();
-        //     this.chartOptions.vAxes['0'].title = `${getUnit(filter, true)}`;
         },
         changeYear() {
             this.$store.dispatch('adminHomepage/getAthletePerformance', { athletes: null, year: this.selectedYear }).then(() => {

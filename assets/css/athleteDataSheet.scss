@@ -1,0 +1,34 @@
+.athleteDetails {
+  display: grid;
+  grid-template-columns:  50% 50%;
+}
+
+.athleteMetrics {
+  display: grid;
+  grid-template-columns:  25% 30% 45%;
+  border: 1px solid black;
+}
+
+.headline {
+  margin: 3rem 2rem 2rem 3rem;
+}
+
+.antropofields {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3rem;
+  width: 100%;
+}
+
+.antropofield {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  margin-bottom: 1rem;
+}
+
+.antopoinput {
+  //padding-left: 1rem;
+  margin-left: 1rem;
+  margin-right: 10px;
+  width: 35%;
+}

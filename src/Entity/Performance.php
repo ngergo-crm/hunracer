@@ -11,10 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  *  @ORM\Entity(repositoryClass=PerformanceRepository::class)
  *  @ApiResource(
- *     accessControl="is_granted('ROLE_ADMIN')",
+ *     accessControl="is_granted('ROLE_TRAINER')",
  *     collectionOperations={
  *          "get"={
- *              "access_control"="is_granted('ROLE_ADMIN')",
+ *              "access_control"="is_granted('ROLE_TRAINER')",
  *              "normalizationContext"={"groups"={"performance:read"}},
  *              "denormalizationContext"={"groups"={"performance:write"}},
  *              "pagination_enabled"=false

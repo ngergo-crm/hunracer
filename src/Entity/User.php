@@ -29,7 +29,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ApiResource(
  *     accessControl="is_granted('ROLE_USER')",
  *     collectionOperations={
- *          "get"={"access_control"="is_granted('ROLE_ADMIN')"},
+ *          "get"={"access_control"="is_granted('ROLE_TRAINER')"},
  *          "post"={
  *              "access_control"="is_granted('ROLE_SUPER_ADMIN')",
  *              "validation_groups"={"Default", "create"}
@@ -60,7 +60,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  *     "roles",
  *     "team",
  *     "sections",
- *     "gender"
+ *     "gender",
+ *     "trainerCode":"exact"
  * })
  * @ApiFilter(DateFilter::class, properties={
  *     "workouts.workoutDay"
@@ -172,7 +173,7 @@ class User implements UserInterface, TimestampableInterface
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"admin:read", "owner:read", "user:write"})
+     * @Groups({"user:read", "owner:read", "user:write"})
      */
     private $birthday;
 
@@ -183,7 +184,7 @@ class User implements UserInterface, TimestampableInterface
     private $sections;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Team::class, inversedBy="users", fetch="EAGER")
      * @Groups({"user:read", "user:write"})
      */
     private $team;
@@ -194,11 +195,36 @@ class User implements UserInterface, TimestampableInterface
      */
     private $gender;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user:read", "owner:read", "user:write"})
+     */
+    private $uciNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user:read", "owner:read", "user:write"})
+     */
+    private $photo;
+
+    /**
+     * @SerializedName("photoSrc")
+     * @Groups({"user:write", "user:read"})
+     */
+    private $photoSrc;
+
+    /**
+     * @ORM\OneToMany(targetEntity=MetricRecord::class, mappedBy="user", orphanRemoval=true)
+     * @Groups({"user:read", "owner:read", "user:write"})
+     */
+    private $metricRecords;
+
     public function __construct(UuidInterface $uuid = null)
     {
         $this->uuid = $uuid ?: Uuid::uuid4();
         $this->workouts = new ArrayCollection();
         $this->sections = new ArrayCollection();
+        $this->metricRecords = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -482,6 +508,70 @@ class User implements UserInterface, TimestampableInterface
     public function setGender(?Gender $gender): self
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getUciNumber(): ?string
+    {
+        return $this->uciNumber;
+    }
+
+    public function setUciNumber(?string $uciNumber): self
+    {
+        $this->uciNumber = $uciNumber;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getPhotoSrc()
+    {
+        return $this->photoSrc;
+    }
+
+    public function setPhotoSrc($photoSrc)
+    {
+        $this->photoSrc = $photoSrc;
+    }
+
+    /**
+     * @return Collection|MetricRecord[]
+     */
+    public function getMetricRecords(): Collection
+    {
+        return $this->metricRecords;
+    }
+
+    public function addMetricRecord(MetricRecord $metricRecord): self
+    {
+        if (!$this->metricRecords->contains($metricRecord)) {
+            $this->metricRecords[] = $metricRecord;
+            $metricRecord->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMetricRecord(MetricRecord $metricRecord): self
+    {
+        if ($this->metricRecords->removeElement($metricRecord)) {
+            // set the owning side to null (unless already changed)
+            if ($metricRecord->getUser() === $this) {
+                $metricRecord->setUser(null);
+            }
+        }
 
         return $this;
     }

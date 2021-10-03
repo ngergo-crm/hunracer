@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { fetchSettings } from '@/components/settings';
 
 /**
  * @param {date|moment} start The start date
@@ -24,8 +23,20 @@ export function getRange(startDate, endDate, type, format) {
     return weeks;
 }
 
+export function containsDate(array, field, value) {
+    return array.some((o) => moment(o[field]).format('YYYY-MM-DD') === moment(value).format('YYYY-MM-DD'));
+}
+
 export function containsObject(array, field, value) {
     return array.some((o) => o[field] === value);
+}
+
+export function findDateIndex(array, field, value) {
+    return array.findIndex((o) => moment(o[field]).format('YYYY-MM-DD') === moment(value).format('YYYY-MM-DD'));
+}
+
+export function findObjectIndex(array, field, value) {
+    return array.findIndex((o) => o[field] === value);
 }
 
 export function getSetting(source, key) {
@@ -136,4 +147,12 @@ export function getRoleByRoleDescription(roleDescription) {
         formattedRole = 'ROLE_USER';
     }
     return formattedRole;
+}
+
+export function getMetricTypeDescription(selectedMetricType) {
+    let { description } = selectedMetricType.X;
+    if (selectedMetricType.Y !== null) {
+        description = `${description}/ ${selectedMetricType.Y.description}`;
+    }
+    return description;
 }

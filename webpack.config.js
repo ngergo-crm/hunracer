@@ -32,6 +32,8 @@ Encore
     .addEntry('sections', './assets/js/sections.js')
     .addEntry('homepage', './assets/js/homepage.js')
     .addEntry('settings', './assets/js/settings.js')
+    .addEntry('athleteDataSheet', './assets/js/athleteDataSheet.js')
+    .addEntry('metricsCompare', './assets/js/metricsCompare.js')
     //.addEntry('page2', './assets/page2.js')
     .splitEntryChunks()
 
@@ -54,6 +56,10 @@ Encore
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
 
+    .configureBabel((config) => {
+        config.plugins.push('@babel/plugin-proposal-class-properties');
+    })
+
     // enables @babel/preset-env polyfills
     .configureBabelPresetEnv((config) => {
         config.useBuiltIns = 'usage';
@@ -70,8 +76,8 @@ Encore
         '@': path.resolve(__dirname, 'assets', 'js'),
         styles: path.resolve(__dirname, 'assets', 'scss'),
     })
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+// uncomment if you use TypeScript
+//.enableTypeScriptLoader()
 
 // uncomment to get integrity="..." attributes on your script & link tags
 // requires WebpackEncoreBundle 1.4 or higher

@@ -67,7 +67,10 @@
                         </template>
                     </multiselect>
                 </div>
-                <div class="adminfilter">
+                <div
+                    v-if="Object.keys(user).length === 0 || user.roleDescription === 'szuperAdmin' || user.roleDescription === 'admin'"
+                    class="adminfilter"
+                >
                     <div>Edző:</div>
                     <multiselect
                         v-model="trainerFilters"
@@ -128,6 +131,7 @@ export default {
             genders: (state) => state.adminHomepage.genders,
             athletes: (state) => state.adminHomepage.athletes,
             trainers: (state) => state.adminHomepage.trainers,
+            user: (state) => state.metricsCompare.user,
         }),
         uRatingFilters: {
             get() {
@@ -172,7 +176,14 @@ export default {
 
     },
     async created() {
-        await this.$store.dispatch('adminHomepage/initializeFilters');
+        await this.$store.dispatch('adminHomepage/initializeFilters').then(() => {
+            console.log(this.user);
+
+            if (Object.keys(this.user) === 0 || this.user.roleDescription !== 'edző') {
+                this.$store.dispatch('adminHomepage/initTrainers');
+            }
+            this.$store.dispatch('adminHomepage/initAthletes', { user: this.user });
+        });
     },
     methods: {
         filterAthletes() {

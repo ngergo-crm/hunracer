@@ -114,6 +114,11 @@ class Workouts
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToOne(targetEntity=WorkoutDetail::class, mappedBy="workout", cascade={"persist", "remove"})
+     */
+    private $workoutDetail;
+
     public function __construct()
     {
         $this->setUpdatedAt(new \DateTime('now'));
@@ -252,6 +257,23 @@ class Workouts
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getWorkoutDetail(): ?WorkoutDetail
+    {
+        return $this->workoutDetail;
+    }
+
+    public function setWorkoutDetail(WorkoutDetail $workoutDetail): self
+    {
+        // set the owning side of the relation if necessary
+        if ($workoutDetail->getWorkout() !== $this) {
+            $workoutDetail->setWorkout($this);
+        }
+
+        $this->workoutDetail = $workoutDetail;
 
         return $this;
     }
