@@ -105,7 +105,6 @@ const mutations = {
         state.datasheetDates = payload;
     },
     addDatasheetDate(state, payload) {
-        console.log(state.datasheetDates, payload);
         state.datasheetDates.push({ date: payload });
         state.datasheetDates.sort((a, b) => moment(b.date, 'YYYY-MM-DD').toDate() - moment(a.date, 'YYYY-MM-DD').toDate());
     },
