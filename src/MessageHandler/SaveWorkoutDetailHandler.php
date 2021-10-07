@@ -36,7 +36,9 @@ class SaveWorkoutDetailHandler implements MessageHandlerInterface
         $response = $this->tpService->apiRequest($workoutDetail->getEndpoint(), $workoutDetail->getToken(), $workoutDetail->getIsTest());
         /** @var Workouts $workout */
         $workout = $this->workoutsRepository->findOneBy(['id' => $workoutDetail->getWishlistId()]);
-
+        if(!is_array($response)) {
+            $response['response'] = $response;
+        }
 //        $id = $workoutDetail->getWishlistId();
 //        $str = print_r($response, true);
 //        file_put_contents("data_$id.txt", $str);
