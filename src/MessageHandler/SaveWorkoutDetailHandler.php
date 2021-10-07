@@ -37,7 +37,9 @@ class SaveWorkoutDetailHandler implements MessageHandlerInterface
         /** @var Workouts $workout */
         $workout = $this->workoutsRepository->findOneBy(['id' => $workoutDetail->getWishlistId()]);
         if(!is_array($response)) {
-            $response['response'] = $response;
+            $error = $response;
+            $response=[];
+            $response['response'] = $error;
         }
 //        $id = $workoutDetail->getWishlistId();
 //        $str = print_r($response, true);
