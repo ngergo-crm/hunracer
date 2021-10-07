@@ -5,8 +5,10 @@ namespace App\Controller;
 
 
 use App\Entity\Workouts;
+use App\Message\WorkoutDetailForDownload;
 use App\Services\TrainingPeaksService;
 use Doctrine\ORM\EntityManagerInterface;
+use http\Message;
 use Nette\Utils\Json;
 use phpDocumentor\Reflection\Types\Mixed_;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -18,6 +20,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Messenger\Envelope;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Routing\Annotation\Route;
@@ -50,6 +54,7 @@ class TrainingPeaksOAuthController extends AbstractController
     public const DEAUTHORIZE_URL = "https://oauth.trainingpeaks.com/oauth/deauthorize";
     public const API_HOST = "https://api.trainingpeaks.com/";
 
+    private $token;
     private $test;
     private $session;
     private $tpService;
@@ -199,11 +204,11 @@ class TrainingPeaksOAuthController extends AbstractController
     /**
      * @Route("/workout_refresh", name="workout_refresh", methods={"POST"})
      */
-    public function workoutRefresh(Request $request, EntityManagerInterface $manager)
+    public function workoutRefresh(Request $request, EntityManagerInterface $manager, MessageBusInterface $messageBus)
     {
         $jsonResponse = new JsonResponse();
         $workoutRepo = $manager->getRepository(Workouts::class);
-        $token = json_decode($request->cookies->get(self::COOKIE_TOKEN_NAME), true);
+        $this->token = json_decode($request->cookies->get(self::COOKIE_TOKEN_NAME), true);
 
         $autoRefresh = $request->request->get('autoRefresh', false);
         $startDate = $request->request->get('start');
@@ -220,12 +225,13 @@ class TrainingPeaksOAuthController extends AbstractController
         foreach ($periods as $period) {
             $endpoint = sprintf('v1/workouts/%s/%s', $period['end'], $period['start']);
             $existingWorkouts = $workoutRepo->getWorkoutDays($this->getUser(), $period, false);
-            $response = $this->tpService->apiRequest($endpoint, $token, $this->test);
+            $response = $this->tpService->apiRequest($endpoint, $this->token, $this->test);
             $workouts = $response['response'];
             $test[] = $workouts;
             $responseToken = $response['token'];
-            if ($responseToken !== $token) {
+            if ($responseToken !== $this->token) {
                 $jsonResponse->headers->setCookie($this->tpService->createTpCookie($responseToken));
+                $this->token = $responseToken;
             }
             if (isset($workouts) and is_array($workouts)) {
                 foreach ($workouts as $workoutData) {
@@ -239,16 +245,16 @@ class TrainingPeaksOAuthController extends AbstractController
                     }
                     if (!$isExist and $workoutData['Completed']) {
                         //dump($workoutData);
-                        $this->insertWorkout($manager, $workoutData);
+                        $this->insertWorkout($manager, $messageBus, $workoutData);
                     } else if ($detailedRefresh and $isExist) {
                         $this->updateWorkout($manager, $isExist, $workoutData);
                     }
                 }
-                if($this->workoutDetailEndpoint) {
+               // if($this->workoutDetailEndpoint) {
 //                    2266m 1db
 //                    6424ms 1db
                     //$this->importWorkoutDetail($token);
-                }
+              //  }
                 $this->deleteOrphanedWorkouts($manager, $existingWorkouts, $workouts);
             }
         }
@@ -417,13 +423,23 @@ class TrainingPeaksOAuthController extends AbstractController
         return $token;
     }
 
-    private function insertWorkout(EntityManagerInterface $manager, array $workoutData): void
+    private function insertWorkout(EntityManagerInterface $manager, MessageBusInterface $messageBus, array $workoutData): void
     {
         /** @var Workouts $workout */
         $workout = $this->constructWorkout($workoutData);
         $manager->persist($workout);
         $manager->flush();
-        $this->workoutDetailEndpoint[$workout->getId()] = sprintf('v1/workouts/id/%d/details', $workoutData['Id']);
+
+        //GET WORKOUT DETAIL
+        $message = new WorkoutDetailForDownload(
+            $workout->getId(),
+            sprintf('v1/workouts/id/%d/details', $workoutData['Id']),
+            $this->token,
+            $this->test
+        );
+        $messageBus->dispatch($message);
+
+        //$this->workoutDetailEndpoint[$workout->getId()] = sprintf('v1/workouts/id/%d/details', $workoutData['Id']);
     }
 
 

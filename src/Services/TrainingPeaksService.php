@@ -97,7 +97,7 @@ class TrainingPeaksService
             die(curl_error($curl));
         }
         curl_close($curl);
-        return $response = json_decode($response, true);
+        return json_decode($response, true);
     }
 
     /**
@@ -147,7 +147,7 @@ class TrainingPeaksService
             die(curl_error($curl));
         }
         curl_close($curl);
-        return $response = json_decode($response, true);
+        return json_decode($response, true);
     }
 
 }
