@@ -46,6 +46,7 @@ const getters = {
         team: user.team ? user.team.shortname : null,
         gender: user.gender ? user.gender.description : null,
         trainerCode: user.trainerCode,
+        logs: user.logs,
         // contactname: team.contactname ? team.contactname : '',
         _showDetails: false,
         edit: {

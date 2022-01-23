@@ -71,8 +71,9 @@ export default {
             selectedData: [],
             chartOptions: {
                 chart: {
-                    title: 'zzzzzz',
-                    subtitle: 'xxxx',
+                    title: '',
+                    subtitle: '',
+                    subtitle: '',
                 },
             },
         };

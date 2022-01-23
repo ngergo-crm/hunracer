@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="performanceBanner">
+            <h4>Teljesítményadatok elemzése</h4>
+        </div>
         <admin-filters />
         <admin-user-selection :using-place="'home'" />
         <athlete-performance-chart-component v-if="performanceData.length > 0" />
@@ -24,4 +27,8 @@ export default {
 </script>
 
 <style scoped>
+.performanceBanner{
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
 </style>

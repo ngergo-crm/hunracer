@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\User;
 use App\Entity\Workouts;
 use App\Message\WorkoutDetailForDownload;
 use App\Services\TrainingPeaksService;
@@ -32,14 +33,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
-class TrainingPeaksOAuthController extends AbstractController
+class TrainingPeaksOAuthController extends BaseController
 {
     #CLIENT CONSTANTS
     private const CLIENT_ID = "webfish-kft";
     private const CLIENT_SECRET = "5yEvVd8qt1nAwyWhghoeEEfidpIWNVytd5sWmVC9v0";
-    private const CLIENT_SCOPE = "events:read metrics:read workouts:details workouts:read";
-    private const CLIENT_SCOPE_ARRAY = ["events:read", "metrics:read", "workouts:details", "workouts:read"];
-    public const COOKIE_TOKEN_NAME = 'tpToken';
+    private const CLIENT_SCOPE = "events:read metrics:read workouts:details workouts:read athlete:profile";
+    private const CLIENT_SCOPE_COACH = "events:read metrics:read workouts:details workouts:read coach:athletes";
 
     #TP OAUTH CONSTANTS TEST
     public const AUTHORIZE_URL_TEST = "https://oauth.sandbox.trainingpeaks.com/OAuth/Authorize";
@@ -56,13 +56,10 @@ class TrainingPeaksOAuthController extends AbstractController
 
     private $token;
     private $test;
-    private $session;
     private $tpService;
-    private $workoutDetailEndpoint;
 
-    public function __construct(SessionInterface $session, ParameterBagInterface $bag, TrainingPeaksService $tpService)
+    public function __construct(ParameterBagInterface $bag, TrainingPeaksService $tpService)
     {
-        $this->session = $session;
         $this->test = $bag->get('APP_ENV') === 'dev';
         $this->tpService = $tpService;
     }
@@ -72,13 +69,14 @@ class TrainingPeaksOAuthController extends AbstractController
      * @param Request $request
      * @return JsonResponse
      */
-    public function returnTrainingPeaksLoginUrl(Request $request): JsonResponse
+    public function returnTrainingPeaksLoginUrl(): JsonResponse
     {
         //$test = json_decode($request->request->get('test', false), true);
         $url = !$this->test ? self::AUTHORIZE_URL : self::AUTHORIZE_URL_TEST;
         $responseType = "code";
         $redirectUri = urlencode($this->getRedirectUri());
-        $url = sprintf("%s?response_type=%s&client_id=%s&scope=%s&redirect_uri=%s", $url, $responseType, self::CLIENT_ID, urlencode(self::CLIENT_SCOPE), $redirectUri);
+        $scopes = $this->isGranted('ROLE_TRAINER') ? self::CLIENT_SCOPE_COACH : self::CLIENT_SCOPE;
+        $url = sprintf("%s?response_type=%s&client_id=%s&scope=%s&redirect_uri=%s", $url, $responseType, self::CLIENT_ID, urlencode($scopes), $redirectUri);
         return new JsonResponse([
             'tpLoginUrl' => $url,
         ]);
@@ -101,6 +99,7 @@ class TrainingPeaksOAuthController extends AbstractController
      */
     public function trainingPeaksCallback(Request $request): RedirectResponse
     {
+        $token = null;
         $response = new RedirectResponse($this->generateUrl("home"));
         $code = $request->query->get('code');
         $route = $request->getPathInfo();
@@ -114,7 +113,14 @@ class TrainingPeaksOAuthController extends AbstractController
             //todo aszinkron kulccsal bekódolni a tokent és úgy mentjük bele a cookie-ba!!! Mindig kikódoljuk használat esetén!
             $response->headers->setCookie($this->createTpCookie($token));
             //$response->send();
+            //handle TP User Id
+            $tpUserId = $this->getTpUserId($this->getUser()->getRoles()[0], json_encode($token, true));
+            if ($this->getUser()->getTpUserId() === null or $this->getUser()->getTpUserId() != $tpUserId) {
+                $this->saveTpUserId($tpUserId);
+            }
         }
+
+
         return $response;
     }
 
@@ -125,7 +131,7 @@ class TrainingPeaksOAuthController extends AbstractController
     {
         $jsonResponse = new JsonResponse();
         $endpoint = $request->request->get('endpoint');
-        $token = json_decode($request->cookies->get(self::COOKIE_TOKEN_NAME), true);
+        $token = json_decode($request->cookies->get($this->getTokenName()), true);
         $response = $this->tpService->apiRequest($endpoint, $token, $this->test);
         if ($response['token'] !== $token) {
             $jsonResponse->headers->setCookie($this->createTpCookie($response['token']));
@@ -141,7 +147,7 @@ class TrainingPeaksOAuthController extends AbstractController
      */
     public function trainingPeaksDeauthorization(Request $request): JsonResponse
     {
-        $token = json_decode($request->cookies->get(self::COOKIE_TOKEN_NAME), true);
+        $token = json_decode($request->cookies->get($this->getTokenName()), true);
         $isRefreshTokenNeeded = \DateTime::__set_state($token['expires_at']) < new \DateTime('now');
         if ($token) {
             $refreshSuccessful = false;
@@ -157,9 +163,9 @@ class TrainingPeaksOAuthController extends AbstractController
             }
             //remove cookie anyway
             $response = new Response();
-            $response->headers->clearCookie($this->getParameter("cookieName"));
+            $response->headers->clearCookie($this->getTokenName());
             $response->send();
-            $request->cookies->remove(self::COOKIE_TOKEN_NAME);
+            $request->cookies->remove($this->getTokenName());
         }
         return new JsonResponse([
             "tokenAvailable" => false
@@ -173,7 +179,7 @@ class TrainingPeaksOAuthController extends AbstractController
      */
     public function startImport(ParameterBagInterface $parameterBag, Request $request): JsonResponse
     {
-        $token = $request->cookies->get(self::COOKIE_TOKEN_NAME);
+        $token = $request->cookies->get($this->getTokenName());
         $processes = ['workouts:last-year'];
         $processIndex = 1;
         $root = $parameterBag->get('kernel.project_dir');
@@ -208,29 +214,44 @@ class TrainingPeaksOAuthController extends AbstractController
     {
         $jsonResponse = new JsonResponse();
         $workoutRepo = $manager->getRepository(Workouts::class);
-        $this->token = json_decode($request->cookies->get(self::COOKIE_TOKEN_NAME), true);
+        $this->token = json_decode($request->cookies->get($this->getTokenName()), true);
 
+        $refreshByCoach = (bool)$request->request->get('refreshByCoach', false);
+        $userGuid = $request->request->get('userGuid', false);
+        $tpUserId = $request->request->get('tpUserId', false);
         $autoRefresh = $request->request->get('autoRefresh', false);
         $startDate = $request->request->get('start');
         $endDate = $request->request->get('end');
+
+        if($refreshByCoach) {
+            $user = $manager->getRepository(User::class)->findOneBy(['uuid' => $userGuid, 'tpUserId' => $tpUserId]);
+        } else {
+            $user = $this->getUser();
+        }
+
         $detailedRefresh = ($startDate and $endDate);
         if (!$detailedRefresh) {
             $startDate = date("Y-m-d", strtotime('now', strtotime(date('Y-m-d'))));
-            $endDate = date("Y-m-d", strtotime($workoutRepo->getLastInsertedWorkoutTime($this->getUser()), strtotime(date('Y-m-d'))));
+            $endDate = date("Y-m-d", strtotime($workoutRepo->getLastInsertedWorkoutTime($user), strtotime(date('Y-m-d'))));
         }
         $sameDay = $startDate === $endDate; //ez mindig az aznapit nézi csak
 
         $periods = $this->getWorkoutPeriods($startDate, $endDate);
         $test = [];
         foreach ($periods as $period) {
-            $endpoint = sprintf('v1/workouts/%s/%s', $period['end'], $period['start']);
-            $existingWorkouts = $workoutRepo->getWorkoutDays($this->getUser(), $period, false);
+            if($refreshByCoach) {
+                $endpoint = sprintf('v1/workouts/%s/%s/%s', $tpUserId, $period['end'], $period['start']);
+            } else {
+                $endpoint = sprintf('v1/workouts/%s/%s', $period['end'], $period['start']);
+            }
+           // $endpoint = sprintf('v1/workouts/%s/%s', $period['end'], $period['start']);
+            $existingWorkouts = $workoutRepo->getWorkoutDays($user, $period, false);
             $response = $this->tpService->apiRequest($endpoint, $this->token, $this->test);
             $workouts = $response['response'];
             $test[] = $workouts;
             $responseToken = $response['token'];
             if ($responseToken !== $this->token) {
-                $jsonResponse->headers->setCookie($this->tpService->createTpCookie($responseToken));
+                $jsonResponse->headers->setCookie($this->createTpCookie($responseToken)); //$this->tpService->createTpCookie($responseToken)
                 $this->token = $responseToken;
             }
             if (isset($workouts) and is_array($workouts)) {
@@ -245,16 +266,16 @@ class TrainingPeaksOAuthController extends AbstractController
                     }
                     if (!$isExist and $workoutData['Completed']) {
                         //dump($workoutData);
-                        $this->insertWorkout($manager, $messageBus, $workoutData);
+                        $this->insertWorkout($manager, $messageBus, $workoutData, $user);
                     } else if ($detailedRefresh and $isExist) {
-                        $this->updateWorkout($manager, $isExist, $workoutData);
+                        $this->updateWorkout($manager, $isExist, $workoutData, $user);
                     }
                 }
-               // if($this->workoutDetailEndpoint) {
+                // if($this->workoutDetailEndpoint) {
 //                    2266m 1db
 //                    6424ms 1db
-                    //$this->importWorkoutDetail($token);
-              //  }
+                //$this->importWorkoutDetail($token);
+                //  }
                 $this->deleteOrphanedWorkouts($manager, $existingWorkouts, $workouts);
             }
         }
@@ -262,6 +283,25 @@ class TrainingPeaksOAuthController extends AbstractController
             $request->getSession()->set('autoTpQuickRefresh', false);
         }
         $jsonResponse->setData($test);
+        return $jsonResponse;
+    }
+
+    /**
+     * @Route("/getCoachAthletes", name="getCoachAthletes", methods={"POST"})
+     */
+    public function getCoachAthletes(Request $request)
+    {
+        $jsonResponse = new JsonResponse();
+        $this->token = json_decode($request->cookies->get($this->getTokenName()), true);
+        $endpoint = 'v1/coach/athletes'; ///details
+        $response = $this->tpService->apiRequest($endpoint, $this->token, $this->test);
+        $coachAthletes = $response['response'];
+        $jsonResponse->setData($coachAthletes);
+        $responseToken = $response['token'];
+        if ($responseToken !== $this->token) {
+            $jsonResponse->headers->setCookie($this->tpService->createTpCookie($responseToken));
+            $this->token = $responseToken;
+        }
         return $jsonResponse;
     }
 
@@ -287,8 +327,7 @@ class TrainingPeaksOAuthController extends AbstractController
     /**
      * @return string
      */
-    private
-    function getRedirectUri(): string
+    private function getRedirectUri(): string
     {
         return $this->generateUrl("tpCallback", [], UrlGeneratorInterface::ABSOLUTE_URL);
     }
@@ -297,11 +336,10 @@ class TrainingPeaksOAuthController extends AbstractController
      * @param $token
      * @return Cookie
      */
-    private
-    function createTpCookie(array $token): Cookie
+    private function createTpCookie(array $token): Cookie
     {
-        return $cookie = new Cookie(
-            self::COOKIE_TOKEN_NAME,
+        return new Cookie(
+            $this->getTokenName(),
             json_encode($token, true),
             time() + (2 * 365 * 24 * 60 * 60)  // Expires 2 years.
         );
@@ -319,8 +357,7 @@ class TrainingPeaksOAuthController extends AbstractController
         return $token;
     }
 
-    private
-    function handleTpApiRequest(string $endpoint, string $token)
+    private function handleTpApiRequest(string $endpoint, string $token)
     {
         $curl = curl_init();
 
@@ -351,8 +388,7 @@ class TrainingPeaksOAuthController extends AbstractController
      * @param string|null $postfields
      * @param array $header
      */
-    private
-    function handleTpRequest(string $endpoint, ?string $postfields, array $header = [])
+    private function handleTpRequest(string $endpoint, ?string $postfields, array $header = [])
     {
         $postfields = !$postfields ? "" : $postfields;
         $curl = curl_init();
@@ -375,11 +411,10 @@ class TrainingPeaksOAuthController extends AbstractController
             die(curl_error($curl));
         }
         curl_close($curl);
-        return $response = json_decode($response, true);
+        return json_decode($response, true);
     }
 
-    private
-    function handleDeauth(string $endpoint, string $token)
+    private function handleDeauth(string $endpoint, string $token)
     {
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -414,8 +449,7 @@ class TrainingPeaksOAuthController extends AbstractController
      * @param array $token
      * @return array
      */
-    private
-    function setTokenExpiresAt(?array $token)
+    private function setTokenExpiresAt(?array $token)
     {
         if ($token) {
             $token['expires_at'] = new \DateTime(sprintf('now + %d seconds', $token['expires_in']));
@@ -423,36 +457,37 @@ class TrainingPeaksOAuthController extends AbstractController
         return $token;
     }
 
-    private function insertWorkout(EntityManagerInterface $manager, MessageBusInterface $messageBus, array $workoutData): void
+    private function insertWorkout(EntityManagerInterface $manager, MessageBusInterface $messageBus, array $workoutData, $user): void
     {
         /** @var Workouts $workout */
-        $workout = $this->constructWorkout($workoutData);
+        $workout = $this->constructWorkout($workoutData, $user);
         $manager->persist($workout);
         $manager->flush();
 
         //GET WORKOUT DETAIL
-        $message = new WorkoutDetailForDownload(
-            $workout->getId(),
-            sprintf('v1/workouts/id/%d/details', $workoutData['Id']),
-            $this->token,
-            $this->test
-        );
-        $messageBus->dispatch($message);
+//        $message = new WorkoutDetailForDownload(
+//            $workout->getId(),
+//            sprintf('v1/workouts/id/%d/details', $workoutData['Id']),
+//            $this->token,
+//            $this->test
+//        );
+        //todo ideiglenesen kikapcs
+        //$messageBus->dispatch($message);
 
         //$this->workoutDetailEndpoint[$workout->getId()] = sprintf('v1/workouts/id/%d/details', $workoutData['Id']);
     }
 
 
-    private function updateWorkout(EntityManagerInterface $manager, Workouts $existingWorkout, $workoutData): void
+    private function updateWorkout(EntityManagerInterface $manager, Workouts $existingWorkout, $workoutData, $user): void
     {
         if ($existingWorkout->getData()['LastModifiedDate'] < $workoutData['LastModifiedDate']) {
-            $workout = $this->constructWorkout($workoutData, $existingWorkout);
+            $workout = $this->constructWorkout($workoutData, $user, $existingWorkout);
             $manager->persist($workout);
             $manager->flush();
         }
     }
 
-    private function constructWorkout(array $workoutData, $existingWorkout = null): Workouts
+    private function constructWorkout(array $workoutData, $user, $existingWorkout = null): Workouts
     {
         $workoutId = $workoutData['Id'];
         $workoutDay = $workoutData['WorkoutDay'];
@@ -463,7 +498,7 @@ class TrainingPeaksOAuthController extends AbstractController
         $elevationGain = $workoutData['ElevationGain'];
         $workoutType = $workoutData['WorkoutType'];
         $workout = $existingWorkout ? $existingWorkout : new Workouts();
-        $workout->setUser($this->getUser())
+        $workout->setUser($user)
             ->setWorkoutId($workoutId)
             ->setWorkoutDay(new \DateTime(date("Y-m-d", strtotime($workoutDay))))
             ->setEnergy($energy)
@@ -490,12 +525,11 @@ class TrainingPeaksOAuthController extends AbstractController
         return $isExist;
     }
 
-    private function deleteOrphanedWorkouts(EntityManagerInterface $manager, array  $existingWorkouts, array $newWorkouts):void
+    private function deleteOrphanedWorkouts(EntityManagerInterface $manager, array $existingWorkouts, array $newWorkouts): void
     {
         /** @var Workouts $workout */
-        foreach ($existingWorkouts as $workout)
-        {
-            if($newWorkouts) {
+        foreach ($existingWorkouts as $workout) {
+            if ($newWorkouts) {
                 $index = 0;
                 $N = count($newWorkouts);
                 while ($index < $N && !($workout->getWorkoutId() == $newWorkouts[$index]['Id'])) {
@@ -505,51 +539,31 @@ class TrainingPeaksOAuthController extends AbstractController
             } else {
                 $delete = true;
             }
-            if($delete) {
+            if ($delete) {
                 $manager->remove($workout);
                 $manager->flush();
             }
         }
     }
 
-    private function importWorkoutDetail($token)
+    private function saveTpUserId($tpUserId)
     {
-//        $response = $this->tpService->apiRequest($endpoint, $token, $this->test);
-//        dd($response);
-//        $processes = ['import:workoutDetail'];
+        $user = $this->getDoctrine()->getRepository(User::class)->findOneBy(['id' => $this->getUser()->getId()]);
+        $user->setTpUserId($tpUserId);
+        $manager = $this->getDoctrine()->getManager();
+        $manager->persist($user);
+        $manager->flush();
+    }
 
-        //FILTER SUB-PROCESSES START
-        $processes = ['importworkoutDetail'];
-        //generating and starting processes
-        $processIndex = 1;
-        $root = $this->getParameter('kernel.project_dir'); #todo ezt törölhetem, ha elég a bin/console
-        $phpexec = (new PhpExecutableFinder)->find();
-
-        foreach ($processes as $process) {
-                ${'process' . $processIndex} = new Process([$phpexec, $root . '/bin/console', $process, json_encode($this->workoutDetailEndpoint, true), json_encode($token, true), $this->test]);
-                ${'process' . $processIndex}->setTimeout(null);
-//                ${'process' . $processIndex}->run();
-            ${'process' . $processIndex}->start();
-                ++$processIndex;
+    private function getTpUserId(string $role, $token)
+    {
+        $tpUserId = null;
+        $endpoint = sprintf('v1/%s/profile', ($role === "ROLE_USER" ? "athlete" : "coach"));
+        $userProfile = $this->tpService->apiRequest($endpoint, json_decode($token, true), $this->test);
+        if (is_array($userProfile) and count($userProfile) > 0) {
+            //dd($userProfile);
+            $tpUserId = $userProfile['response'][($role === "ROLE_USER" ? "Id" : "CoachId")];
         }
-//        for ($processNumber = 1; $processNumber < $processIndex; $processNumber++) {
-//            $isRunning = ${'process' . $processNumber}->isRunning() ? true : false;
-//            if ($isRunning) {
-//                // $output->writeln(sprintf('process %d is running...', $processNumber));
-//            }
-//        }
-//
-//        for ($processNumber = 1; $processNumber < $processIndex; $processNumber++) {
-//            ${'process' . $processNumber}->wait(
-//                function ($type, $buffer) {
-//                    if (Process::ERR === $type) {
-//                        echo 'ERR > ' . $buffer;
-//                    } else {
-//                        echo 'OUT > ' . $buffer;
-//                    }
-//                }
-//            );
-//        }
-
+        return $tpUserId;
     }
 }

@@ -10,7 +10,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { getUnit } from '@/components/helper';
+import { formatDecimalDuration, getUnit } from '@/components/helper';
 
 export default {
     name: 'WorkoutSummary',
@@ -34,7 +34,10 @@ export default {
             if (this.calendarFilter === 'distance') {
                 count /= 1000;
             }
-            if (!Number.isInteger(count)) {
+            if (this.calendarFilter === 'totalTime') {
+                count = formatDecimalDuration(count);
+            }
+            if (!Number.isInteger(count) && this.calendarFilter !== 'totalTime') {
                 count = count.toFixed(2);
             }
             count = `${count} ${getUnit(this.calendarFilter)}`;

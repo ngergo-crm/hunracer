@@ -41,12 +41,15 @@ class SaveWorkoutDetailHandler implements MessageHandlerInterface
 //        $str = print_r($response, true);
 //        file_put_contents("data_$id.txt", $str);
 
-        $test['test'] = 'test';
-        $test['response'] = $response;
+        if(is_array($response['response'])) {
+            $data = $response['response'];
+        } else {
+            $data[] =  $response;
+        }
 
         $workoutDetailForSave = new WorkoutDetail();
         $workoutDetailForSave->setWorkout($workout)
-            ->setData($test);
+            ->setData($data);
         $this->manager->persist($workoutDetailForSave);
         $this->manager->flush();
     }

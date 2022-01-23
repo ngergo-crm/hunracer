@@ -10,6 +10,8 @@ use ApiPlatform\Core\DataProvider\DenormalizedIdentifiersAwareItemDataProviderIn
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
 use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use App\Entity\User;
+use App\Repository\UserLogRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 
 /**
@@ -23,12 +25,14 @@ class UserDataProvider implements ContextAwareCollectionDataProviderInterface, D
     private $collectionDataProvider;
     private $security;
     private $itemDataProvider;
+    private $manager;
 
-    public function __construct(CollectionDataProviderInterface $collectionDataProvider, ItemDataProviderInterface $itemDataProvider, Security $security)
+    public function __construct(CollectionDataProviderInterface $collectionDataProvider, ItemDataProviderInterface $itemDataProvider, Security $security, EntityManagerInterface $manager)
     {
         $this->security = $security;
         $this->collectionDataProvider = $collectionDataProvider;
         $this->itemDataProvider = $itemDataProvider;
+        $this->manager = $manager;
     }
 
     /**
@@ -39,7 +43,6 @@ class UserDataProvider implements ContextAwareCollectionDataProviderInterface, D
         /** @var User $currentUser */
         $currentUser = $this->security->getUser();
         if (($context['collection_operation_name'] ?? null) === 'get_me') {
-            //$currentUser->setIsMe(true);
             return $currentUser;
         }
 
@@ -48,8 +51,11 @@ class UserDataProvider implements ContextAwareCollectionDataProviderInterface, D
 
         foreach ($users as $user) {
             $user->setIsMe($currentUser === $user);
+            if($currentUser->getRoles()[0] === 'ROLE_SUPER_ADMIN') {
+                $latestLogin = $this->getLatestLogin($user);
+                $user->setLogs(['latestLogin' => $latestLogin]);
+            }
         }
-
 
         return $users;
     }
@@ -72,5 +78,19 @@ class UserDataProvider implements ContextAwareCollectionDataProviderInterface, D
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
     {
         return $resourceClass === User::class;
+    }
+
+    private function getLatestLogin($user)
+    {
+        $query = $this->manager->createQuery("SELECT logs FROM App\Entity\Logs\UserLog logs WHERE logs INSTANCE OF App\Entity\Logs\SecurityLog AND logs.user = :userid ORDER BY logs.actionTime DESC")
+            ->setParameter('userid', $user)
+            ->setMaxResults(1);
+        $result = $query->getResult();
+        if(count($result) > 0) {
+            $result = $result[0];
+        } else {
+            $result = null;
+        }
+        return $result;
     }
 }

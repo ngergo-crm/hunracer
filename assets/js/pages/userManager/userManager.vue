@@ -147,6 +147,12 @@
                                     </div>
                                     <div
                                         v-if="formatUserRole(row.item.roleDescription) !== 'Szuperadmin'"
+                                        class="userManagerLogs"
+                                    >
+                                        Legutolsó bejelentkezés: {{ row.item.logs.latestLogin === null? 'a felhasználó még nem jelentkezett be egyszer sem' : formatLatestLogin(row.item.logs.latestLogin.actionTime) }}
+                                    </div>
+                                    <div
+                                        v-if="formatUserRole(row.item.roleDescription) !== 'Szuperadmin'"
                                         class="userManagerActions"
                                     >
                                         <div
@@ -155,7 +161,7 @@
                                             <div>
                                                 <b-button
                                                     variant="primary"
-                                                    style="width: 20%;margin-bottom: 1rem;float: right;"
+                                                    style="margin-bottom: 1rem;float: right;"
                                                     size="sm"
                                                     :href="`mailto:${row.item.email}`"
                                                 >
@@ -167,7 +173,7 @@
                                                     v-if="formatUserRole(row.item.roleDescription) !== 'Szuperadmin'"
                                                     variant="danger"
                                                     size="sm"
-                                                    style="width: 20%;float: right;
+                                                    style="float: right;
 "
                                                     @click="deleteUser(row.item, '')"
                                                 >
@@ -191,6 +197,7 @@ import { mapGetters } from 'vuex';
 import newUserComponent from '@/pages/userManager/newUser';
 import spinnerComponent from '@/pages/common/spinner';
 import { formatRole, getRoleByRoleDescription } from '@/components/helper';
+import moment from 'moment';
 
 export default {
     name: 'UserManager',
@@ -268,10 +275,16 @@ export default {
             return Math.ceil(this.totalRows / this.perPage);
         },
     },
+    watch: {
+        //after initialization of the users gets the right count for the paginator
+        users() {
+            this.totalRows = this.users.length;
+        },
+    },
     async created() {
         this.$store.dispatch('usermanager/loadUsers');
         this.loading = false;
-        this.totalRows = this.users.length;
+        //this.totalRows = this.users.length;
     },
     mounted() {
         this.$root.$on('registerTableEffect', () => {
@@ -279,6 +292,9 @@ export default {
         });
     },
     methods: {
+        formatLatestLogin(date) {
+            return moment(date).format('Y.MM.DD. HH:mm');
+        },
         newUserTableEffect() {
             this.totalRows += 1;
             this.currentPage = 1;
@@ -365,11 +381,7 @@ export default {
 .usermanagertable {
   margin-top: 1.5rem;
 }
-.usermanageraction {
-  display: flex;
-  float: inline-end;
-  flex-direction: column;
-}
+
 .paginator {
   max-width: 40%;
   float: right;
@@ -404,7 +416,7 @@ export default {
   flex-direction: row;
 }
 
-.userManagerModify, .userManagerActions {
+.userManagerModify, .userManagerActions, .userManagerLogs {
 
   display: flex;
   flex-direction: column;
@@ -414,8 +426,12 @@ export default {
   width: 30%;
 }
 
+.userManagerLogs {
+  width: 50%;
+}
+
 .userManagerActions {
-  width: 70%;
+  width: 20%;
 }
 
 </style>

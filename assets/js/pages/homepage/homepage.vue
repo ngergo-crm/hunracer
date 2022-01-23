@@ -2,14 +2,22 @@
     <div>
         <div class="contentpanel">
             <div class="contentcard">
-                <training-peaks-auth-component v-if="user.roleDescription === 'sportoló'" />
-                <trainer-user-selection-component v-if="user.roleDescription === 'edző'" />
+                <!--                 v-if="user.roleDescription === 'sportoló'"-->
+                <training-peaks-auth-component />
+                <div
+                    v-if="(user.roleDescription === 'edző' || user.roleDescription === 'admin' || user.roleDescription === 'szuperAdmin')"
+                    class="trainerUserSelector"
+                >
+                    <div class="workoutweekBanner">
+                        <h4>Edzéshetek elemzése</h4>
+                    </div>
+                    <trainer-user-selection-component />
+                </div>
                 <calendar-refresh-component v-if="tokenAvailable && user.roleDescription === 'sportoló'" />
-                <admin-panel v-if="user.roleDescription === 'admin' || user.roleDescription === 'szuperAdmin'" />
                 <calendar-component
-                    v-if="!(user.roleDescription === 'admin' || user.roleDescription === 'szuperAdmin')"
                     v-show="hasWorkouts"
                 />
+                <admin-panel v-if="user.roleDescription === 'admin' || user.roleDescription === 'szuperAdmin'" />
             </div>
         </div>
     </div>
@@ -57,8 +65,10 @@ export default {
         this.$store.dispatch('trainingPeaksHandler/checkAvailableToken').then(() => {
             if (!this.tokenAvailable) {
                 this.$store.dispatch('trainingPeaksHandler/getTrainingPeaksLoginLink');
-            } else if (this.tokenAvailable && this.autoRefresh && this.hasWorkouts) {
+            } else if (this.user.roleDescription === 'sportoló' && this.tokenAvailable && this.autoRefresh && this.hasWorkouts) {
                 this.$store.dispatch('trainingPeaksHandler/quickRefresh', { autoRefresh: this.autoRefresh });
+            } else if (this.user.roleDescription !== 'sportoló' && this.tokenAvailable) {
+                this.$store.dispatch('trainingPeaksHandler/getCoachAthletes');
             }
             if (this.hasWorkouts) {
                 this.getWorkoutWeek(moment());
@@ -86,18 +96,23 @@ export default {
                 }
             });
         },
-        // async getWorkoutPeriod2(start, end, init = false) {
-        //     await this.$store.dispatch('trainingPeaksHandler/getWorkoutPeriod', { start, end }).then(() => {
-        //         if (init) {
-        //             console.log('meg lett hivva');
-        //             this.$root.$emit('reloadCalendar3');
-        //         }
-        //     });
-        // },
+        async getWorkoutPeriod2(start, end, init = false) {
+            await this.$store.dispatch('trainingPeaksHandler/getWorkoutPeriod', { start, end }).then(() => {
+                if (init) {
+                    console.log('meg lett hivva');
+                    this.$root.$emit('reloadCalendar3');
+                }
+            });
+        },
     },
 };
 </script>
 
 <style scoped>
-
+.trainerUserSelector{
+  padding-top: 2rem;
+}
+.workoutweekBanner{
+  padding-bottom: 1rem;
+}
 </style>

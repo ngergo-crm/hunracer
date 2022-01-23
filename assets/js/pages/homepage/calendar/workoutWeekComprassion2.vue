@@ -97,7 +97,7 @@
 
 <script>
 import moment from 'moment';
-import { initialDate } from '@/components/helper';
+import { formatDecimalDuration, initialDate } from '@/components/helper';
 import { mapState } from 'vuex';
 
 export default {
@@ -173,7 +173,10 @@ export default {
                         count += workout[this.selectedFilter];
                     }
                 });
-                const labelCountFormatted = count === Math.floor(count) ? count : count.toFixed(2);
+                let labelCountFormatted = count === Math.floor(count) ? count : count.toFixed(2);
+                if (this.selectedFilter === 'totalTime') {
+                    labelCountFormatted = formatDecimalDuration(labelCountFormatted);
+                }
                 chartData.push([moment(period.start).format('MM.DD'), count, `${period.start.format('Y.MM.DD')} - ${period.end.format('Y.MM.DD')}: ${labelCountFormatted}`]);
             });
             this.chartData = chartData;

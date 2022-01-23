@@ -3,11 +3,7 @@
   grid-template-columns:  50% 50%;
 }
 
-.athleteMetrics {
-  display: grid;
-  grid-template-columns:  25% 30% 45%;
-  border: 1px solid black;
-}
+
 
 .headline {
   margin: 3rem 2rem 2rem 3rem;
@@ -30,5 +26,47 @@
   //padding-left: 1rem;
   margin-left: 1rem;
   margin-right: 10px;
-  width: 35%;
+  width: 40%;
+}
+
+.datasheetInput {
+  border: 1px solid black;
+}
+
+
+.athleteMetrics {
+  display: grid;
+  grid-template-columns:  25% 30% 45%;
+  border: 1px solid black;
+  grid-template-areas:
+    ". . reportDownload"
+    "datasheets antropomentria performance"
+}
+
+.antropomentria {
+  grid-area: antropomentria;
+}
+
+.performance {
+  grid-area: performance;
+}
+
+.datasheets {
+  grid-area: datasheets;
+}
+
+.reportDownload {
+  grid-area: reportDownload;
+  display: flex;
+  justify-content: flex-end;
+  margin: 1.5rem 2.5rem 0 0;
+}
+
+.downloadCharts{
+  padding-right: 1rem;
+}
+
+.pdf-header {
+  display: flex;
+  justify-content: center;
 }

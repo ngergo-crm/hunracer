@@ -1,2 +1,2 @@
 parameters:
-  cookieName: !php/const App\Controller\TrainingPeaksOAuthController::COOKIE_TOKEN_NAME
+  #cookieName: !php/const App\Controller\TrainingPeaksOAuthController::COOKIE_TOKEN_NAME

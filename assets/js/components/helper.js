@@ -61,7 +61,7 @@ export function getUnit(unit, axis = false) {
             measurement = 'Szintemelkedés (m)';
         }
     } else if (unit === 'totalTime') {
-        measurement = 'h';
+        measurement = '(óra:perc)';
         if (axis) {
             measurement = 'Idő (h)';
         }
@@ -155,4 +155,14 @@ export function getMetricTypeDescription(selectedMetricType) {
         description = `${description}/ ${selectedMetricType.Y.description}`;
     }
     return description;
+}
+
+//hours:minutes
+//10.890249252
+export function formatDecimalDuration(decimal) {
+    const beforePoint = decimal.toString().split('.')[0]; ///10
+    const afterPoint = Math.floor((decimal - beforePoint).toFixed(2) * 60); ///0,12
+    const beforePointFormat = beforePoint < 10 ? `0${beforePoint}` : beforePoint;
+    const afterPointFormat = afterPoint < 10 ? `0${afterPoint}` : afterPoint;
+    return `${beforePointFormat}:${afterPointFormat}`;
 }

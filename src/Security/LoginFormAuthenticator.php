@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\Logs\SecurityLog;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -96,6 +97,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        $user = $token->getUser();
+        $log = new SecurityLog($user);
+        $this->entityManager->persist($log);
+        $this->entityManager->flush();
         $request->getSession()->set('autoTpQuickRefresh', true );
 
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {

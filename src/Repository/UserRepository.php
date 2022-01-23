@@ -35,20 +35,24 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    public function getAthletesByTrainer(string $trainerCode)
+    public function getAthletesByTrainer(?string $trainerCode)
     {
-        return $this->createQueryBuilder('u')
-            ->select( 'u.uuid', 'u.name')
+        $qb = $this->createQueryBuilder('u');
+        $qb
+            ->select('u.uuid', 'u.name', 'u.tpUserId')
             ->andWhere('u.isEnabled = :enabled')
-            ->andWhere('u.trainerCode = :trainercode')
             ->andWhere('u.roles LIKE :role')
-           ->setParameter('role', '%ROLE_USER%')
-            ->setParameter('trainercode', $trainerCode)
+            ->setParameter('role', '%ROLE_USER%')
             ->setParameter('enabled', 1)
-            ->orderBy('u.name', 'ASC')
+            ->orderBy('u.name', 'ASC');
+        if ($trainerCode) {
+            $qb
+                ->andWhere('u.trainerCode = :trainercode')
+                ->setParameter('trainercode', $trainerCode);
+        }
+        return $qb
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
 

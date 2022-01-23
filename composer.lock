@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05de349b4e5a1fc08a74282374ed4807",
+    "content-hash": "2b850e3b6993ec70f0d3da4b66d2432f",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2321,6 +2321,53 @@
                 }
             ],
             "time": "2020-09-14T14:23:00+00:00"
+        },
+        {
+            "name": "mateuszblaszczyk/tcx-to-json",
+            "version": "0.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Zaszczyk/tcx-to-json.git",
+                "reference": "9f7d0dd41e49aa513f89c2bbe6dc4c1982622c71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Zaszczyk/tcx-to-json/zipball/9f7d0dd41e49aa513f89c2bbe6dc4c1982622c71",
+                "reference": "9f7d0dd41e49aa513f89c2bbe6dc4c1982622c71",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MateuszBlaszczyk\\TcxToJson\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mateusz Blaszczyk"
+                },
+                {
+                    "name": "Marcin Szymanski"
+                }
+            ],
+            "description": "It parses .tcx file to JSON",
+            "keywords": [
+                "json",
+                "parser",
+                "tcx"
+            ],
+            "support": {
+                "issues": "https://github.com/Zaszczyk/tcx-to-json/issues",
+                "source": "https://github.com/Zaszczyk/tcx-to-json/tree/master"
+            },
+            "time": "2017-05-08T12:14:51+00:00"
         },
         {
             "name": "monolog/monolog",

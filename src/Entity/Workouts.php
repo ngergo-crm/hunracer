@@ -51,6 +51,7 @@ class Workouts
 
     /**
      * @ORM\Column(type="json", nullable=true)
+     * @Groups({"workouts:read"})
      */
     private $data = [];
 

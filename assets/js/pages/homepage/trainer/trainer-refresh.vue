@@ -9,7 +9,7 @@
             aria-controls="refresh-collapse"
             @click="collapseVisible"
         >
-            Adatok szinkronizálása
+            Adatok frissítése
         </b-button>
         <b-collapse
             id="refresh-collapse"
@@ -19,7 +19,7 @@
             <b-card>
                 <b-form
                     class="detailedRefreshForm"
-                    @submit="workoutSync"
+                    @submit="workoutTrainerSync"
                 >
                     <b-form-group
                         label="Válaszd ki a frissítés kezdődátumát:"
@@ -89,12 +89,16 @@ import moment from 'moment';
 import { mapState } from 'vuex';
 
 export default {
-    name: 'RefreshRange',
+    name: 'TrainerRefresh',
     props: {
         hasWorkouts: {
             type: Boolean,
             required: true,
         },
+        // hasWorkouts: {
+        //   type: Boolean,
+        //   required: true,
+        // },
     },
     data() {
         return {
@@ -108,6 +112,7 @@ export default {
     },
     computed: {
         ...mapState({
+            selectedAthlete: (state) => state.trainingPeaksHandler.selectedAthlete,
             selectedTime: (state) => state.trainingPeaksHandler.selectedTime,
         }),
         formValid() {
@@ -121,10 +126,12 @@ export default {
         },
     },
     methods: {
-        workoutSync(event) {
+        workoutTrainerSync(event) {
             event.preventDefault();
             this.detailedRefreshWorking = true;
-            this.$store.dispatch('trainingPeaksHandler/detailedRefresh', { start: this.startDate, end: this.endDate }).then(() => {
+            this.$store.dispatch('trainingPeaksHandler/detailedRefreshByCoach', {
+                userGuid: this.selectedAthlete.uuid, tpUserId: this.selectedAthlete.tpUserId, start: this.startDate, end: this.endDate,
+            }).then(() => {
                 this.$root.$emit('getWorkoutWeek', moment(this.selectedTime));
                 this.$root.$emit('getWorkoutPeriod', { start: null, end: null });
                 this.detailedRefreshWorking = false;

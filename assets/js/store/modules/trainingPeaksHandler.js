@@ -25,6 +25,7 @@ const state = () => ({
     workoutPeriodEnd: '',
     athletes: '',
     selectedAthlete: {},
+    coachAthletes: [],
 });
 
 const getters = {
@@ -35,6 +36,11 @@ const getters = {
 };
 
 const actions = {
+    getCoachAthletes({ commit }) {
+        Axios.post('/getCoachAthletes').then((res) => {
+            commit('setCoachAthletes', res.data);
+        });
+    },
     startImport() {
         Axios.post('/startImport');
     },
@@ -51,6 +57,23 @@ const actions = {
     },
     async detailedRefresh({ commit, state }, { start, end }) {
         const params = new URLSearchParams();
+        params.append('start', start);
+        params.append('end', end);
+        await Axios.post('/workout_refresh', params).then((res) => {
+            if (!state.hasWorkouts && res.data.length > 0) {
+                commit('setHasWorkouts', true);
+            }
+        });
+    },
+    async detailedRefreshByCoach({ commit, state }, {
+        userGuid, tpUserId, start, end,
+    }) {
+        // $refreshByCoach = $request->request->get('refreshByCoach', false);
+        // $tpUserId = $request->request->get('tpUserId', false);
+        const params = new URLSearchParams();
+        params.append('refreshByCoach', 'true');
+        params.append('userGuid', userGuid);
+        params.append('tpUserId', tpUserId);
         params.append('start', start);
         params.append('end', end);
         await Axios.post('/workout_refresh', params).then((res) => {
@@ -90,7 +113,7 @@ const actions = {
     },
     async getWorkoutWeek({ commit, state }, { time }) {
         let { id } = state.user;
-        if (state.user.roleDescription === 'edző') {
+        if (state.user.roleDescription === 'edző' || state.user.roleDescription === 'admin' || state.user.roleDescription === 'szuperAdmin') {
             id = state.selectedAthlete.uuid;
         }
         const start = time.startOf('isoWeek').format(DATE_FORMAT);
@@ -107,7 +130,7 @@ const actions = {
     },
     async getWorkoutPeriod({ commit, state }, { start, end }) {
         let { id } = state.user;
-        if (state.user.roleDescription === 'edző') {
+        if (state.user.roleDescription === 'edző' || state.user.roleDescription === 'admin' || state.user.roleDescription === 'szuperAdmin') {
             id = state.selectedAthlete.uuid;
         }
         const endPeriod = end ? moment(end).format(DATE_FORMAT) : moment().format(DATE_FORMAT);
@@ -126,7 +149,7 @@ const actions = {
     },
     async getWorkoutDays({ commit, state }, { time }) {
         let { id } = state.user;
-        if (state.user.roleDescription === 'edző') {
+        if (state.user.roleDescription === 'edző' || state.user.roleDescription === 'admin' || state.user.roleDescription === 'szuperAdmin') {
             id = state.selectedAthlete.uuid;
         }
         commit('setSelectedTime', time);
@@ -234,6 +257,9 @@ const mutations = {
     },
     setSelectedAthlete(state, payload) {
         state.selectedAthlete = state.athletes.filter(({ uuid }) => uuid === payload)[0];
+    },
+    setCoachAthletes(state, payload) {
+        state.coachAthletes = payload;
     },
 };
 

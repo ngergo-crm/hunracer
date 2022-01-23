@@ -23,6 +23,14 @@
         </div>
         <no-athletes-component v-else />
         <div
+            v-if="refreshmentAvailable && tokenAvailable"
+            class="trainerRefreshment"
+        >
+            <trainer-refresh
+                :has-workouts="refreshmentAvailable"
+            />
+        </div>
+        <div
             v-if="athletes.length > 0 && !hasWorkouts"
             class="noWorkoutsForUser"
         >
@@ -35,10 +43,12 @@
 import { mapGetters, mapState } from 'vuex';
 import moment from 'moment';
 import NoAthletesComponent from '@/pages/homepage/trainer/noAthletes';
+import TrainerRefresh from '@/pages/homepage/trainer/trainer-refresh';
+import { containsObject } from '@/components/helper';
 
 export default {
     name: 'TrainerUserSelection',
-    components: { NoAthletesComponent },
+    components: { TrainerRefresh, NoAthletesComponent },
     data() {
         return {
             //selected: this.athletes[0]['value'],
@@ -49,11 +59,13 @@ export default {
             athletes: 'trainingPeaksHandler/getAthleteSelection',
         }),
         ...mapState({
+            tokenAvailable: (state) => state.trainingPeaksHandler.tokenAvailable,
             athleteList: (state) => state.trainingPeaksHandler.athletes,
             selectedTime: (state) => state.trainingPeaksHandler.selectedTime,
             workoutPeriodStart: (state) => state.trainingPeaksHandler.workoutPeriodStart,
             workoutPeriodEnd: (state) => state.trainingPeaksHandler.workoutPeriodEnd,
             hasWorkouts: (state) => state.trainingPeaksHandler.hasWorkouts,
+            coachAthletes: (state) => state.trainingPeaksHandler.coachAthletes,
         }),
         selectedAthlete: {
             get() {
@@ -62,6 +74,14 @@ export default {
             set(value) {
                 this.$store.commit('trainingPeaksHandler/setSelectedAthlete', value);
             },
+        },
+        refreshmentAvailable() {
+            let refreshmentAvailable = false;
+            const athleteObject = this.athleteList.filter(({ uuid }) => uuid === this.selectedAthlete)[0];
+            if (athleteObject.tpUserId) {
+                refreshmentAvailable = containsObject(this.coachAthletes, 'Id', parseInt(athleteObject.tpUserId));
+            }
+            return refreshmentAvailable;
         },
     },
     methods: {
@@ -87,6 +107,9 @@ export default {
 </script>
 
 <style scoped>
+.trainerRefreshment{
+  padding-top: 1.5rem;
+}
 .atheteSelect {
   max-width: 100%;
   display: flex;

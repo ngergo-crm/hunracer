@@ -75,12 +75,23 @@
             </div>
             <div class="chart">
                 <GChart
+                    ref="workoutWeek"
                     type="ColumnChart"
                     :data="chartData"
                     :options="chartOptions"
+                    :events="chartEvents"
                 />
             </div>
         </div>
+        <b-modal
+            id="workoutDetailModal"
+            :title="`Részletes adatok (${formattedWorkoutDay})`"
+            scrollable
+            size="md"
+            hide-footer
+        >
+            <workout-details :workouts="selectedWorkouts" />
+        </b-modal>
     </div>
 </template>
 
@@ -89,12 +100,19 @@ import { calendarMaxDate, getUnit, initialDate } from '@/components/helper';
 import moment from 'moment';
 import { mapState } from 'vuex';
 import WorkoutSummaryComponent from '@/pages/homepage/calendar/workoutSummary';
+import WorkoutDetails from '@/pages/homepage/calendar/workoutDetails';
 
 export default {
     name: 'WorkoutWeek',
-    components: { WorkoutSummaryComponent },
+    components: { WorkoutDetails, WorkoutSummaryComponent },
     data() {
         return {
+            chartEvents: {
+                select: () => {
+                    this.showWorkoutDetails();
+                },
+            },
+            selectedWorkouts: [],
             calendarMaxDate: calendarMaxDate(),
             initialDate: initialDate(),
             selectedDay: moment().format('YYYY-MM-DD'),
@@ -119,6 +137,7 @@ export default {
                 },
                 tooltip: { isHtml: true },
             },
+
         };
     },
     computed: {
@@ -128,6 +147,9 @@ export default {
             workoutDays: (state) => state.trainingPeaksHandler.workoutDays,
             workoutWeekPeriod: (state) => state.trainingPeaksHandler.workoutWeekPeriod,
         }),
+        formattedWorkoutDay() {
+            return moment(this.selectedDay).locale('hu').format('YYYY. MM. DD., dddd');
+        },
     },
     mounted() {
         this.$root.$on('reloadCalendar', () => {
@@ -141,6 +163,24 @@ export default {
         });
     },
     methods: {
+        showWorkoutDetails() {
+            this.selectedWorkouts = [];
+            const table = this.$refs.workoutWeek.chartObject;
+            const selection = table.getSelection();
+            const selectionIndex = selection.length !== 0 ? selection[0] : null;
+            if (selectionIndex) {
+                const selectedDay = this.chartData[selectionIndex.row + 1][0];
+                this.workoutWeek.forEach((workout) => {
+                    const workoutDay = this.capitalizeFirstLetter(moment(workout.workoutDay).locale('hu').format('dd'));
+                    if (workoutDay === selectedDay) {
+                        this.selectedWorkouts.push(workout);
+                    }
+                });
+                this.$bvModal.show('workoutDetailModal');
+                table.setSelection([]);
+            }
+            //alert(onSelectionMeaasge);
+        },
         startImport() {
             this.$store.dispatch('trainingPeaksHandler/startImport');
         },

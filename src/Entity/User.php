@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use App\Entity\Logs\UserLog;
 use App\Repository\UserRepository;
 use App\Validator\CheckOldPasswordBeforeChange;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -219,12 +220,33 @@ class User implements UserInterface, TimestampableInterface
      */
     private $metricRecords;
 
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     * @Groups({"user:read", "user:write"})
+     * "owner:read"
+     */
+    private $tpUserId;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Logs\UserLog", mappedBy="user", orphanRemoval=true)
+     */
+    private $userLogs;
+
+    /**
+     * Returns a custom dataset from UserLog table
+     *
+     * @SerializedName("logs")
+     * @Groups({"user:read"})
+     */
+    private $logs = [];
+
     public function __construct(UuidInterface $uuid = null)
     {
         $this->uuid = $uuid ?: Uuid::uuid4();
         $this->workouts = new ArrayCollection();
         $this->sections = new ArrayCollection();
         $this->metricRecords = new ArrayCollection();
+        $this->userLogs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -574,5 +596,56 @@ class User implements UserInterface, TimestampableInterface
         }
 
         return $this;
+    }
+
+    public function getTpUserId(): ?string
+    {
+        return $this->tpUserId;
+    }
+
+    public function setTpUserId(?string $tpUserId): self
+    {
+        $this->tpUserId = $tpUserId;
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserLog[]
+     */
+    public function getUserLogs(): Collection
+    {
+        return $this->userLogs;
+    }
+
+    public function addUserLog(UserLog $userLog): self
+    {
+        if (!$this->userLogs->contains($userLog)) {
+            $this->userLogs[] = $userLog;
+            $userLog->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserLog(UserLog $userLog): self
+    {
+        if ($this->userLogs->removeElement($userLog)) {
+            // set the owning side to null (unless already changed)
+            if ($userLog->getUser() === $this) {
+                $userLog->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLogs(): array
+    {
+        return $this->logs;
+    }
+
+    public function setLogs(array $logs)
+    {
+        $this->logs = $logs;
     }
 }

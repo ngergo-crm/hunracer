@@ -2,14 +2,6 @@
     <div>
         <div class="contentpanel">
             <div class="contentcard">
-                <div>
-                    <b-button
-                        style="float: right"
-                        @click="generateReport"
-                    >
-                        Adatlap letöltése
-                    </b-button>
-                </div>
                 <div class="usertablecontenthead">
                     <h2 class="cardtitle">
                         Adatlap
@@ -43,7 +35,27 @@
                         </div>
                     </div>
                     <div class="athleteMetrics">
-                        <div style="margin-right: 2.5rem; margin-left: 2.5rem">
+                        <div class="reportDownload">
+                            <div class="downloadCharts">
+                                <b-button
+                                    @click="generateChartReport"
+                                >
+                                    Grafikonok letöltése
+                                </b-button>
+                            </div>
+                            <div class="downloadDatasheet">
+                                <b-button
+                                    :disabled="!selectedDatasheet"
+                                    @click="generateReport"
+                                >
+                                    Adatlap letöltése
+                                </b-button>
+                            </div>
+                        </div>
+                        <div
+                            class="datasheets"
+                            style="margin-right: 2.5rem; margin-left: 2.5rem"
+                        >
                             <h4 class="headline">
                                 Adatlapok
                             </h4>
@@ -52,6 +64,7 @@
                                     <p>Kiválasztott dátum</p>
                                     <b-form-datepicker
                                         v-model="selectedDatasheet"
+                                        class="datasheetInput"
                                         label-no-date-selected="Dátum választása"
                                     />
                                 </div>
@@ -80,6 +93,7 @@
                                     <b-form-select
                                         id="datasheets"
                                         v-model="selectedDatasheet"
+                                        class="datasheetInput"
                                         :options="datasheetOtions"
                                     />
                                 </div>
@@ -94,7 +108,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div class="antropomentria">
                             <h4 class="headline">
                                 Antropometria
                             </h4>
@@ -109,7 +123,7 @@
                                     <div style="display: flex">
                                         <b-input
                                             v-model="metrics.height"
-                                            class="antopoinput"
+                                            class="antopoinput datasheetInput"
                                             type="number"
                                             :disabled="!this.selectedDatasheet"
                                         />
@@ -126,7 +140,7 @@
                                     <div style="display: flex">
                                         <b-input
                                             v-model="metrics.weight"
-                                            class="antopoinput"
+                                            class="antopoinput datasheetInput"
                                             type="number"
                                             :disabled="!this.selectedDatasheet"
                                         />
@@ -143,7 +157,7 @@
                                     <div style="display: flex">
                                         <b-input
                                             v-model="metrics.bodyfat"
-                                            class="antopoinput"
+                                            class="antopoinput datasheetInput"
                                             type="number"
                                             :disabled="!this.selectedDatasheet"
                                         />
@@ -152,7 +166,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="margin-right: 2.5rem">
+                        <div
+                            class="performance"
+                            style="margin-right: 2.5rem"
+                        >
                             <h4 class="headline">
                                 Teljesítményadatok
                             </h4>
@@ -174,6 +191,7 @@
                                     <template #cell(pulse)="data">
                                         <b-form-input
                                             v-model="data.value"
+                                            class="datasheetInput"
                                             type="number"
                                             :disabled="!selectedDatasheet"
                                             @input="setPerformanceValue(data)"
@@ -184,6 +202,7 @@
                                     >
                                         <b-form-input
                                             v-model="data.value"
+                                            class="datasheetInput"
                                             type="number"
                                             :disabled="!selectedDatasheet"
                                             @input="setPerformanceValue(data)"
@@ -194,6 +213,7 @@
                                     >
                                         <b-form-input
                                             v-model="data.value"
+                                            class="datasheetInput"
                                             type="number"
                                             :disabled="!selectedDatasheet"
                                             @input="setPerformanceValue(data)"
@@ -212,7 +232,7 @@
                                     <div style="display: flex">
                                         <b-input
                                             v-model="metrics.vo2max"
-                                            class="antopoinput"
+                                            class="antopoinput datasheetInput"
                                             type="number"
                                             :disabled="!this.selectedDatasheet"
                                         />
@@ -222,134 +242,207 @@
                             </div>
                         </div>
                     </div>
-                    <!--                    <div class="athleteMetrics">-->
-                    <!--                        <div style="margin-right: 2.5rem">-->
-                    <!--                            <h4 class="headline">-->
-                    <!--                                Antropometria-->
-                    <!--                            </h4>-->
-                    <!--                            <div>-->
-                    <!--                                <p-->
-                    <!--                                    v-for="(type, key) in metricRecords"-->
-                    <!--                                    v-if="type[0][Object.keys(type[0])[0]].X.metricGroup.description === 'Antropometria'"-->
-                    <!--                                    :id="type.name"-->
-                    <!--                                    :key="key"-->
-                    <!--                                >-->
-                    <!--                                    <b-link @click="openMetricModal2(type[0][Object.keys(type[0])[0]])">-->
-                    <!--                                        <b>{{ Object.keys(type[0])[0] }}</b>-->
-                    <!--                                    </b-link>-->
-                    <!--                                    <GChart-->
-                    <!--                                        type="LineChart"-->
-                    <!--                                        :data="chartData[Object.keys(type[0])[0]]"-->
-                    <!--                                        :options="chartOptions"-->
-                    <!--                                    />-->
-                    <!--                                </p>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                        <div style="margin-left: 2.5rem">-->
-                    <!--                            <h4 class="headline">-->
-                    <!--                                Teljesítményadatok-->
-                    <!--                            </h4>-->
-                    <!--                            <div>-->
-                    <!--                                <p-->
-                    <!--                                    v-for="(type, key) in metricRecords"-->
-                    <!--                                    v-if="type[0][Object.keys(type[0])[0]].X.metricGroup.description === 'Teljesítményadatok'"-->
-                    <!--                                    :id="type.name"-->
-                    <!--                                    :key="key"-->
-                    <!--                                >-->
-                    <!--                                    <b-link @click="openMetricModal2(type[0][Object.keys(type[0])[0]])">-->
-                    <!--                                        <b>{{ Object.keys(type[0])[0] }}</b>-->
-                    <!--                                    </b-link>-->
-                    <!--                                    <GChart-->
-                    <!--                                        type="LineChart"-->
-                    <!--                                        :data="chartData[Object.keys(type[0])[0]]"-->
-                    <!--                                        :options="chartOptions"-->
-                    <!--                                    />-->
-                    <!--                                </p>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
                 </div>
             </div>
         </div>
-        <!--      v-if="selectedMetricTypes"-->
         <metric-editor-modal
             ref="athleteMetricEdit"
             :chart-data="chartData"
         />
+        <vue-html2pdf
+            ref="html2PdfChart"
+            :show-layout="false"
+            :float-layout="true"
+            :enable-download="false"
+            :preview-modal="false"
+            :paginate-elements-by-height="1100"
+            :pdf-quality="1"
+            :manual-pagination="true"
+            pdf-orientation="portrait"
+            pdf-content-width="100%"
+            @beforeDownload="beforeDownloadChart($event)"
+        >
+            <section slot="pdf-content">
+                <!--                <div>{{ Object.keys(chartData) }}</div>-->
+                <div class="pdf-header">
+                    <h3>Mérési adatok</h3>
+                </div>
+                <div>
+                    <span style="float: right">Letöltve: {{ getTime }}</span>
+                </div>
+                <div style="margin-top: 2rem">
+                    <p><b>Sportoló neve:</b> {{ athlete.name }} <span>(szül.: {{ formatBirthday }})</span></p>
+                </div>
+                <div style="width: 50%">
+                    <div
+                        v-for="(data, key) in chartData"
+                        :key="key"
+                    >
+                        <span>{{ findChartDataIndex(key) }}.</span>
+                        <span>{{ key }}</span>
+                        <GChart
+                            style="margin-bottom: 3rem"
+                            type="LineChart"
+                            :data="data"
+                        />
+                        <div
+                            v-if="findChartDataIndex(key) % 3 === 0"
+                            class="html2pdf__page-break"
+                        />
+                    </div>
+                </div>
+            </section>
+        </vue-html2pdf>
         <!--        <datasheet-report />-->
         <!--      @progress="onProgress($event)"-->
         <!--      @hasStartedGeneration="hasStartedGeneration()"-->
         <!--      @hasGenerated="hasGenerated($event)"-->
         <!--      https://www.npmjs.com/package/vue-html2pdf-->
         <!--      https://github.com/kempsteven/vue-html2pdf#getting-started-->
-
         <vue-html2pdf
             ref="html2Pdf"
             :show-layout="false"
             :float-layout="true"
-            :enable-download="true"
+            :enable-download="false"
             :preview-modal="false"
             :paginate-elements-by-height="1400"
             filename="hee hee"
-            :pdf-quality="2"
+            :pdf-quality="1"
             :manual-pagination="false"
             pdf-format="a4"
             pdf-orientation="landscape"
-            pdf-content-width="800px"
+            pdf-content-width="100%"
+            @beforeDownload="beforeDownload($event)"
         >
             <section slot="pdf-content">
                 <!-- PDF Content Here -->
-                <p>test content</p>
-                <GChart
-                    type="LineChart"
-                    :data="chartDataTest"
-                    :options="chartOptionsTest"
-                />
-                <datasheet-report />
-                <b-table
-                    hover
-                    :items="metrics.tableRecords"
-                    :fields="metricTableFields"
-                    v-bind="{selectedDatasheet}"
-                >
-                    <template #cell(description)="data">
-                        <b-link
-                            :disabled="isModalLinkEnabled"
-                            @click="openMetricModal(data.value)"
-                        >
-                            {{ data.value }}
-                        </b-link>
-                    </template>
-                    <template #cell(pulse)="data">
-                        <b-form-input
-                            v-model="data.value"
-                            type="number"
-                            :disabled="!selectedDatasheet"
-                            @input="setPerformanceValue(data)"
-                        />
-                    </template>
-                    <template
-                        #cell(wattkg)="data"
-                    >
-                        <b-form-input
-                            v-model="data.value"
-                            type="number"
-                            :disabled="!selectedDatasheet"
-                            @input="setPerformanceValue(data)"
-                        />
-                    </template>
-                    <template
-                        #cell(lactate)="data"
-                    >
-                        <b-form-input
-                            v-model="data.value"
-                            type="number"
-                            :disabled="!selectedDatasheet"
-                            @input="setPerformanceValue(data)"
-                        />
-                    </template>
-                </b-table>
-                <!--                </datasheet-report>-->
+                <div class="pdf-header">
+                    <h3>Sportolói adatlap</h3>
+                </div>
+                <div>
+                    <span style="float: right">Letöltve: {{ getTime }}</span>
+                </div>
+                <div>
+                    <p><b>Sportoló neve:</b> {{ athlete.name }} <span>(szül.: {{ formatBirthday }})</span></p>
+                    <p><b>Adatfelvétel időpontja:</b> <span>{{ getSelectedDatasheetForPdf }}</span></p>
+                </div>
+                <div style="display: flex">
+                    <div>
+                        <h5 class="headline">
+                            Antropometria
+                        </h5>
+                        <div class="antropofields">
+                            <div class="antropofield">
+                                <span>
+                                    Magasság
+                                </span>
+                                <div style="display: flex">
+                                    <b-input
+                                        v-model="metrics.height"
+                                        class="antopoinput datasheetInput"
+                                        type="number"
+                                        :disabled="!this.selectedDatasheet"
+                                    />
+                                    <span>cm</span>
+                                </div>
+                            </div>
+                            <div class="antropofield">
+                                <span>
+                                    Testsúly
+                                </span>
+                                <div style="display: flex">
+                                    <b-input
+                                        v-model="metrics.weight"
+                                        class="antopoinput datasheetInput"
+                                        type="number"
+                                        :disabled="!this.selectedDatasheet"
+                                    />
+                                    <span>kg</span>
+                                </div>
+                            </div>
+                            <div class="antropofield">
+                                <span>
+                                    Testzsír
+                                </span>
+                                <div style="display: flex">
+                                    <b-input
+                                        v-model="metrics.bodyfat"
+                                        class="antopoinput datasheetInput"
+                                        type="number"
+                                        :disabled="!this.selectedDatasheet"
+                                    />
+                                    <span>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="headline">
+                            Teljesítményadatok
+                        </h5>
+                        <div>
+                            <b-table
+                                hover
+                                :items="metrics.tableRecords"
+                                :fields="metricTableFields"
+                                v-bind="{selectedDatasheet}"
+                            >
+                                <template #cell(description)="data">
+                                    <span>
+                                        {{ data.value }}
+                                    </span>
+                                </template>
+                                <template #cell(pulse)="data">
+                                    <b-form-input
+                                        v-model="data.value"
+                                        class="datasheetInput"
+                                        type="number"
+                                        :disabled="!selectedDatasheet"
+                                        @input="setPerformanceValue(data)"
+                                    />
+                                </template>
+                                <template
+                                    #cell(wattkg)="data"
+                                >
+                                    <b-form-input
+                                        v-model="data.value"
+                                        class="datasheetInput"
+                                        type="number"
+                                        :disabled="!selectedDatasheet"
+                                        @input="setPerformanceValue(data)"
+                                    />
+                                </template>
+                                <template
+                                    #cell(lactate)="data"
+                                >
+                                    <b-form-input
+                                        v-model="data.value"
+                                        class="datasheetInput"
+                                        type="number"
+                                        :disabled="!selectedDatasheet"
+                                        @input="setPerformanceValue(data)"
+                                    />
+                                </template>
+                            </b-table>
+                        </div>
+                        <div>
+                            <div style="display: flex; width: 100%">
+                                <span>
+                                    Vo2max
+                                </span>
+                                <div style="display: flex">
+                                    <b-input
+                                        v-model="metrics.vo2max"
+                                        class="antopoinput datasheetInput"
+                                        type="number"
+                                        :disabled="!this.selectedDatasheet"
+                                    />
+                                    <span>ml/ttkg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </vue-html2pdf>
     </div>
@@ -364,27 +457,41 @@ import {
     containsDate, findDateIndex, findObjectIndex, getMetricTypeDescription,
 } from '@/components/helper';
 import DatasheetReport from '@/pages/athleteDataSheet/datasheetReport';
+import Sections from '@/pages/sections/sections';
 
 export default {
     name: 'AthleteDataSheet',
     components: {
+        Sections,
         DatasheetReport,
         MetricEditorModal,
         VueHtml2pdf,
     },
     data() {
         return {
-            chartDataTest: [
-                ['Year', 'Sales', 'Expenses', 'Profit'],
-                ['2014', 1000, 400, 200],
-                ['2015', 1170, 460, 250],
-                ['2016', 660, 1120, 300],
-                ['2017', 1030, 540, 350],
-            ],
-            chartOptionsTest: {
-                chart: {
-                    title: 'Company Performance',
-                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+            htmlToPdfOptions: {
+                margin: [15, 15, 15, 15],
+                filename: 'adatlap',
+                jsPDF: {
+                    format: 'a4',
+                    orientation: 'landscape',
+                },
+            },
+            htmlToPdfOptionsChart: {
+                margin: [15, 15, 15, 15],
+                filename: 'meresek',
+                //image: { type: 'jpeg', quality: 0.98 },
+                // html2canvas: {
+                //     scale: 2,
+                //     bottom: 20,
+                // },
+                // pagebreak: {
+                //     mode: '', before: '.before', after: '.after', avoid: '.avoid',
+                // },
+                jsPDF: {
+                    format: 'a4',
+                    //unit: 'mm',
+                    orientation: 'portrait',
                 },
             },
             datasheetRequestSent: false,
@@ -455,6 +562,15 @@ export default {
             //datasheetDates: (state) => state.athleteDataSheet.datasheetDates,
             // startWorkoutYear: (state) => state.settings.workoutYearStart.settingValue,
         }),
+        getTime() {
+            return moment().format('YYYY.MM.DD. HH:mm');
+        },
+        getSelectedDatasheetForPdf() {
+            if (this.selectedDatasheet) {
+                return moment(this.selectedDatasheet).format('YYYY.MM.DD.');
+            }
+            return 'nincs kiválasztva';
+        },
         nextDatasheetEnabled() {
             if (!this.datasheetRequestSent) {
                 if (this.datasheetOtions.length > 0 && this.selectedDatasheet) {
@@ -478,7 +594,7 @@ export default {
             return true;
         },
         formatBirthday() {
-            return moment(this.athlete.birthday).format('YYYY. MM. DD.');
+            return moment(this.athlete.birthday).format('YYYY.MM.DD.');
         },
         imgUrl() {
             return `/getSource/${this.athlete.photo}`;
@@ -504,6 +620,10 @@ export default {
         },
         isModalLinkEnabled() {
             return this.metricTypes.length === 0;
+        },
+        getChartPdfFilename() {
+            const prefix = `meresek-${moment.format('Y-MM-DD')}`;
+            return prefix;
         },
     },
     watch: {
@@ -682,6 +802,40 @@ export default {
         },
         generateReport() {
             this.$refs.html2Pdf.generatePdf();
+        },
+        generateChartReport() {
+            this.$refs.html2PdfChart.generatePdf();
+        },
+        async beforeDownload({ html2pdf, options, pdfContent }) {
+            await html2pdf().set(this.htmlToPdfOptions).from(pdfContent).toPdf()
+                .get('pdf')
+                .then((pdf) => {
+                    // const totalPages = pdf.internal.getNumberOfPages();
+                    // for (let i = 1; i <= totalPages; i++) {
+                    //     pdf.setPage(i);
+                    //     pdf.setFontSize(10);
+                    //     pdf.setTextColor(150);
+                    //     pdf.text(`Page ${i} of ${totalPages}`, (pdf.internal.pageSize.getWidth() * 0.88), (pdf.internal.pageSize.getHeight() - 0.3));
+                    // }
+                })
+                .save();
+        },
+        async beforeDownloadChart({ html2pdf, options, pdfContent }) {
+            await html2pdf().set(this.htmlToPdfOptionsChart).from(pdfContent).toPdf()
+                .get('pdf')
+                .then((pdf) => {
+                    // const totalPages = pdf.internal.getNumberOfPages();
+                    // for (let i = 1; i <= totalPages; i++) {
+                    //     pdf.setPage(i);
+                    //     pdf.setFontSize(10);
+                    //     pdf.setTextColor(150);
+                    //     pdf.text(`Page ${i} of ${totalPages}`, (pdf.internal.pageSize.getWidth() * 0.88), (pdf.internal.pageSize.getHeight() - 0.3));
+                    // }
+                })
+                .save();
+        },
+        findChartDataIndex(value) {
+            return Object.keys(this.chartData).findIndex((o) => o === value) + 1;
         },
     },
 };
