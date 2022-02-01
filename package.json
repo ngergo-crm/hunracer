@@ -49,5 +49,8 @@
         "popper.js": "^1.16.1",
         "sass-loader": "^8.0.0",
         "url-loader": "^4.1.1"
+    },
+    "engines": {
+        "node": "12.18.3"
     }
 }
