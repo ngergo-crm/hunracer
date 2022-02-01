@@ -345,16 +345,20 @@ class TrainingPeaksOAuthController extends BaseController
         );
     }
 
-    private
-    function refreshTpToken(array $token)
+    private function refreshTpToken(array $token)
     {
+        $newToken = null;
+        //"{"error":"invalid_grant","expires_at":{"date":"2022-01-23 17:46:00.849059","timezone_type":3,"timezone":"Europe\/Budapest"}}"
         $tokenExchangeUrl = !$this->test ? self::TOKENEXCHANGE_URL : self::TOKENEXCHANGE_URL_TEST;
         $grantType = 'refresh_token';
-        $refreshToken = $token['refresh_token'];
-        $postfield = sprintf('client_id=%s&grant_type=%s&refresh_token=%s&client_secret=%s', self::CLIENT_ID, $grantType, $refreshToken, self::CLIENT_SECRET);
-        $token = $this->handleTpRequest($tokenExchangeUrl, $postfield);
-        $token = !isset($token['error']) ? $this->setTokenExpiresAt($token) : null;
-        return $token;
+        //dd($token['error']);
+        $refreshToken = isset($token['refresh_token']) ? $token['refresh_token'] : 'error';
+        if($refreshToken !== 'error') {
+            $postfield = sprintf('client_id=%s&grant_type=%s&refresh_token=%s&client_secret=%s', self::CLIENT_ID, $grantType, $refreshToken, self::CLIENT_SECRET);
+            $newToken = $this->handleTpRequest($tokenExchangeUrl, $postfield);
+            $newToken = !isset($newToken['error']) ? $this->setTokenExpiresAt($newToken) : null;
+        }
+        return $newToken;
     }
 
     private function handleTpApiRequest(string $endpoint, string $token)
@@ -400,6 +404,7 @@ class TrainingPeaksOAuthController extends BaseController
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_USERAGENT => 'hunracer',
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => $postfields,
             CURLOPT_HEADER => $header

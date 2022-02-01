@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Config;
 use App\Entity\User;
+use App\Entity\Workouts;
 use App\Repository\WorkoutsRepository;
-use App\Services\TcxParser\Parser;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,24 +17,14 @@ class HomeController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function homepage(ParameterBagInterface $parameterBag, Request $request, WorkoutsRepository $workoutsRepository): Response
+    public function homepage(Request $request, WorkoutsRepository $workoutsRepository): Response
     {
-//        $document = new \DOMDocument();
-//        $document->loadXml(file_get_contents($parameterBag->get('kernel.project_dir').'\public\tcxtest.tcx'));
-//         //dd($document->saveHTML());
-//         $test = new Parser($document->saveHTML());
-//
-        //dd($test->getJson());
-//        dd( $parameterBag->get('kernel.project_dir').'\public\tcxtest.tcx');
-        //new Parser()
-
         if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
             return $this->redirectToRoute('app_login');
         }
         /** @var User $user */
         $user = $this->getUser();
         $athletes = [];
-        // $isTrainer = $this->getUser()->getRoles()[0] === 'ROLE_TRAINER'?? false;
         if ($this->isGranted('ROLE_TRAINER') /*and !$this->isGranted('ROLE_ADMIN')*/) {
             if(!$this->isGranted('ROLE_ADMIN')) {
                 $athletes = $this->getAthletesByTrainercode($user->getTrainerCode());
@@ -46,8 +35,10 @@ class HomeController extends BaseController
             $user = $defaultAthlete ? $this->getDoctrine()->getRepository(User::class)->findOneBy(['uuid' => $defaultAthlete]) : null;
         }
         $athleteHasWorkout = $workoutsRepository->findOneBy(['user' => $user]);
+      //  dd($this->getDoctrine()->getRepository(Workouts::class));
         $workoutYearStart = $this->getDoctrine()->getRepository(Config::class)->findOneBy(["settingKey" => 'workoutYearStart']);
-
+      //  dd($workoutYearStart);
+        //dd($workoutYearStart, $workoutYearStart->getSettingValue());
         //dd($request->cookies);
         //dd($request->getSession()->get('autoTpQuickRefresh'), (bool)$athleteHasWorkout);
         return $this->render('home/homepage.html.twig', [

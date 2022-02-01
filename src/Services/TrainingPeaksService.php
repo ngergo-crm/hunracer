@@ -12,8 +12,8 @@ class TrainingPeaksService
     #CLIENT CONSTANTS
     private const CLIENT_ID = "webfish-kft";
     private const CLIENT_SECRET = "5yEvVd8qt1nAwyWhghoeEEfidpIWNVytd5sWmVC9v0";
-    private const CLIENT_SCOPE = "events:read metrics:read workouts:details workouts:read";
-    private const CLIENT_SCOPE_ARRAY = ["events:read", "metrics:read", "workouts:details", "workouts:read"];
+//    private const CLIENT_SCOPE = "events:read metrics:read workouts:details workouts:read";
+//    private const CLIENT_SCOPE_ARRAY = ["events:read", "metrics:read", "workouts:details", "workouts:read"];
     public const COOKIE_TOKEN_NAME = 'tpToken';
 
     #TP OAUTH CONSTANTS TEST
@@ -24,9 +24,9 @@ class TrainingPeaksService
 
 
     #TP OAUTH CONSTANTS PROD
-    public const AUTHORIZE_URL = "https://oauth.trainingpeaks.com/OAuth/Authorize";
+//    public const AUTHORIZE_URL = "https://oauth.trainingpeaks.com/OAuth/Authorize";
     public const TOKENEXCHANGE_URL = "https://oauth.trainingpeaks.com/oauth/token";
-    public const DEAUTHORIZE_URL = "https://oauth.trainingpeaks.com/oauth/deauthorize";
+//    public const DEAUTHORIZE_URL = "https://oauth.trainingpeaks.com/oauth/deauthorize";
     public const API_HOST = "https://api.trainingpeaks.com/";
 
     private $test;
@@ -38,6 +38,7 @@ class TrainingPeaksService
         $this->test = $test;
         if (is_object($token['expires_at'])) {
             $token['expires_at'] = json_decode($token['expires_at'], true);
+            dump('1');
         }
         $isRefreshTokenNeeded = \DateTime::__set_state($token['expires_at']) < new \DateTime('now');
         if ($token and $endpoint) {
@@ -136,12 +137,12 @@ class TrainingPeaksService
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_USERAGENT => 'hunracer',
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
                 "Authorization: Bearer $token"
             ),
         ));
-
         $response = curl_exec($curl);
         if ($response === FALSE) {
             die(curl_error($curl));

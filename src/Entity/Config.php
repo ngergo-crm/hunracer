@@ -8,20 +8,22 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @ORM\Entity(repositoryClass=ConfigRepository::class)
  * @ApiResource(
- *     accessControl="is_granted('ROLE_USER')",
+ *     accessControl="is_granted('IS_AUTHENTICATED_FULLY')",
  *     collectionOperations={
  *          "get"={
- *              "access_control"="is_granted('ROLE_USER')",
- *              "normalizationContext"={"groups"={"config:read"}}
+ *              "normalization_context"={"groups"={"config:read"}}
  *          }
  *     },
  *     itemOperations={
  *          "get",
- *          "put"={"access_control"="is_granted('ROLE_SUPER_ADMIN')"}
+ *          "put"={
+ *              "access_control"="is_granted('ROLE_SUPER_ADMIN')"
+ *          }
  *     }
  * )
- * @ORM\Entity(repositoryClass=ConfigRepository::class)
+ *
  */
 class Config
 {
