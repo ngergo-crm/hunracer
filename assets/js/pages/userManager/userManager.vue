@@ -149,7 +149,7 @@
                                         v-if="formatUserRole(row.item.roleDescription) !== 'Szuperadmin'"
                                         class="userManagerLogs"
                                     >
-                                        Legutolsó bejelentkezés: {{ row.item.logs.latestLogin === null? 'a felhasználó még nem jelentkezett be egyszer sem' : formatLatestLogin(row.item.logs.latestLogin.actionTime) }}
+                                        Legutolsó bejelentkezés: {{ getLatestLogin(row.item) }}
                                     </div>
                                     <div
                                         v-if="formatUserRole(row.item.roleDescription) !== 'Szuperadmin'"
@@ -292,6 +292,15 @@ export default {
         });
     },
     methods: {
+        getLatestLogin(item) {
+            let result = 'a felhasználó még nem jelentkezett be egyszer sem';
+            if (item.logs.length !== 0) {
+                if (item.logs.latestLogin !== null) {
+                    result = this.formatLatestLogin(item.logs.latestLogin.actionTime);
+                }
+            }
+            return result;
+        },
         formatLatestLogin(date) {
             return moment(date).format('Y.MM.DD. HH:mm');
         },

@@ -96,8 +96,6 @@ export function calculateURating(birthdate, noURation = 'nincs') {
     //workoutYearStart should be sent by controller
     let workoutYearBegins = window.workoutYearStart ? window.workoutYearStart : '2020-11-01';
     workoutYearBegins = `YYYY-${moment(workoutYearBegins).format('MM-DD').toString()}`;
-    console.log(window.workoutYearStart);
-    console.log(workoutYearBegins);
     let URating;
     if (moment(birthdate).format('YYYY-MM-DD') === 'Invalid date') {
         URating = noURation;

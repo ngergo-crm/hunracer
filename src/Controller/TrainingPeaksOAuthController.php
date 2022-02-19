@@ -296,11 +296,13 @@ class TrainingPeaksOAuthController extends BaseController
         $endpoint = 'v1/coach/athletes'; ///details
         $response = $this->tpService->apiRequest($endpoint, $this->token, $this->test);
         $coachAthletes = $response['response'];
-        $jsonResponse->setData($coachAthletes);
-        $responseToken = $response['token'];
-        if ($responseToken !== $this->token) {
-            $jsonResponse->headers->setCookie($this->tpService->createTpCookie($responseToken));
-            $this->token = $responseToken;
+        if($coachAthletes !== null) {
+            $jsonResponse->setData($coachAthletes);
+            $responseToken = $response['token'];
+            if ($responseToken !== $this->token) {
+                $jsonResponse->headers->setCookie($this->tpService->createTpCookie($responseToken));
+                $this->token = $responseToken;
+            }
         }
         return $jsonResponse;
     }

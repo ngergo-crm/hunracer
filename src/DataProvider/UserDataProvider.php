@@ -43,7 +43,7 @@ class UserDataProvider implements ContextAwareCollectionDataProviderInterface, D
         /** @var User $currentUser */
         $currentUser = $this->security->getUser();
         if (($context['collection_operation_name'] ?? null) === 'get_me') {
-            return $currentUser;
+            return [$currentUser];
         }
 
         /** @var User[] $users */

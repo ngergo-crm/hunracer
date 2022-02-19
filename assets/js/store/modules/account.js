@@ -27,7 +27,7 @@ const getters = {
 const actions = {
     async initializeUser({ commit, state }) {
         Axios.get('/api/users/me').then((res) => {
-            commit('setUser', res.data);
+            commit('setUser', res.data['hydra:member'][0]);
             commit('setTrainerCode', state.user.trainerCode);
         });
         Axios.get('/api/sections').then((res) => {

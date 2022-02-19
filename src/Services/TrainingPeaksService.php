@@ -38,7 +38,6 @@ class TrainingPeaksService
         $this->test = $test;
         if (is_object($token['expires_at'])) {
             $token['expires_at'] = json_decode($token['expires_at'], true);
-            dump('1');
         }
         $isRefreshTokenNeeded = \DateTime::__set_state($token['expires_at']) < new \DateTime('now');
         if ($token and $endpoint) {
